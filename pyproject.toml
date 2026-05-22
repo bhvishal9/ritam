@@ -10,15 +10,16 @@ requires-python = ">=3.14"
 dependencies = [
   "contextvars>=2.4",
   "fastapi>=0.136.1",
-  "google-genai>=1.73.1",
+  "google-genai>=2.3.0",
   "protobuf>=7.34.1",
-  "pydantic>=2.13.3",
-  "pydantic-settings>=2.14.0",
+  "pydantic>=2.13.4",
+  "pydantic-settings>=2.14.1",
   "pytest-mock>=3.15.1",
-  "ruff>=0.15.12",
+  "qdrant-client>=1.18.0",
+  "ruff>=0.15.13",
   "starlette>=1.0.0",
-  "typer>=0.25.0",
-  "uvicorn[standard]>=0.46.0",
+  "typer>=0.25.1",
+  "uvicorn[standard]>=0.47.0",
 ]
 
 [project.scripts]
@@ -32,7 +33,7 @@ build-backend = "uv_build"
 dev = [
   "httpx>=0.28.1",
   "import-linter>=2.1",
-  "mypy>=1.20.2",
+  "mypy>=2.1.0",
   "pytest>=9.0.3",
   "pytest-cov>=7.1.0",
 ]

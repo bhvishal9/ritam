@@ -12,6 +12,7 @@ class TestRagService:
 
         result = rag_service.answer_question(
             dataset="test_dataset",
+            embedding_model="test_model",
             query="nonsense query that should match nothing",
             top_k=3,
         )

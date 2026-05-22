@@ -67,12 +67,14 @@ def query(
     dataset: Annotated[str, typer.Option(help="Dataset to query")],
 ) -> None:
     typer.echo("Loading the index...")
+    settings = get_settings()
     llm_client = create_llm_client()
     retriever = Retriever(llm_client, create_vector_store_client())
     rag_service = RagService(llm_client, retriever)
     query_text = take_user_input()
     result = rag_service.answer_question(
         dataset=dataset,
+        embedding_model=settings.llm_embedding_model,
         query=query_text,
         top_k=3,
     )

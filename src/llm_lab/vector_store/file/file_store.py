@@ -90,11 +90,6 @@ class FileStoreClient(VectorStoreClient):
     def __init__(self, dest_dir: Path = DEFAULT_DESTINATION_DIR) -> None:
         self.dest_dir = dest_dir
 
-    def get_embedding_model(self, dataset: str) -> str:
-        """Get the embedding model used for the dataset."""
-        manifest_path = self.dest_dir / dataset / "manifest.json"
-        return _load_manifest(manifest_path).embedding_model
-
     def store(
         self,
         indexed_chunks: list[IndexedChunk],
@@ -137,7 +132,13 @@ class FileStoreClient(VectorStoreClient):
         )
         manifest_file.write_text(manifest.model_dump_json(indent=2))
 
-    def query(self, dataset: str, query_embedding: list[float]) -> list[ScoredChunk]:
+    def query(
+        self,
+        dataset: str,
+        embedding_model: str,
+        query_embedding: list[float],
+        limit: int,
+    ) -> list[ScoredChunk]:
         """Query the vector store and return a list of the top_k most relevant chunks."""
         manifest_file = self.dest_dir / dataset / "manifest.json"
         index_creation_dir = self.dest_dir / dataset / "indexes"
@@ -151,4 +152,7 @@ class FileStoreClient(VectorStoreClient):
                     indexed_chunk=chunk,
                 )
             )
-        return scored_chunks
+        sorted_chunks = sorted(scored_chunks, key=lambda x: x.score, reverse=True)[
+            :limit
+        ]
+        return sorted_chunks

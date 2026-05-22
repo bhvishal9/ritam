@@ -36,7 +36,7 @@ class TestRetriever:
         ]
 
         retriever = Retriever(fake_llm_client, FakeVectorStoreClient(scored_chunks))
-        result = retriever.search("test_dataset", "query", top_k=2)
+        result = retriever.search("test_dataset", "test_model", "query", top_k=2)
 
         assert len(result) == 2
         texts = {sc.indexed_chunk.text for sc in result}

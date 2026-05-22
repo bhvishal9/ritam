@@ -77,6 +77,49 @@ uvicorn src.llm_lab.api.main:app --reload
 
 ## Usage
 
+### CLI Commands
+
+The project includes a CLI for indexing documents and querying the RAG service directly (without the API server).
+
+#### Index
+
+Index a directory of documents into a named dataset:
+
+```bash
+uv run python -m llm_lab.naive_rag index --dataset <dataset-name>
+```
+
+Options:
+
+| Option | Default | Description |
+|---|---|---|
+| `--dataset` | *(required)* | Name of the dataset to create |
+| `--source-dir` | `assets/docs` | Directory containing documents to index |
+| `--chunk-size` | `10000` | Chunk size in characters |
+| `--chunk-separator` | `\n\n` | String used to split chunks |
+
+Example:
+
+```bash
+uv run python -m llm_lab.naive_rag index --dataset my-docs --source-dir ./assets/docs --chunk-size 5000
+```
+
+#### Query
+
+Interactively query a previously indexed dataset:
+
+```bash
+uv run python -m llm_lab.naive_rag query --dataset <dataset-name>
+```
+
+You will be prompted to enter a question. The command retrieves the top 3 relevant chunks and returns a generated answer along with the sources used.
+
+Example:
+
+```bash
+uv run python -m llm_lab.naive_rag query --dataset my-docs
+```
+
 ### API Endpoints
 
 The following API endpoints are available:

@@ -44,12 +44,13 @@ class RagService:
     def answer_question(
         self,
         dataset: str,
+        embedding_model: str,
         query: str,
         top_k: int,
     ) -> QueryResult:
         """Answer a question using a simple RAG pipeline."""
 
-        top_chunks = self.retriever.search(dataset, query, top_k)
+        top_chunks = self.retriever.search(dataset, embedding_model, query, top_k)
         if not top_chunks:
             return QueryResult(
                 answer="No relevant information found to answer the question.",

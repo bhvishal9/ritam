@@ -18,4 +18,6 @@ terraform.tfstate.backup
 
 dest/
 CLAUDE.md
+.claude
 ROADMAP.md
+qdrant_storage

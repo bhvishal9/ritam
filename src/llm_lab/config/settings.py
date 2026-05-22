@@ -6,12 +6,14 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 DEFAULT_EMBEDDING_MODEL_NAME = "gemini-embedding-001"
 DEFAULT_MODEL_NAME = "gemini-3.1-flash-lite-preview"
+DEFAULT_QDRANT_CLIENT_URL = "http://localhost:6333"
 
 
 class VectorStoreType(enum.StrEnum):
     """Vector store types."""
 
     FILE = "file"
+    QDRANT = "qdrant"
 
 
 class Settings(BaseSettings):
@@ -32,9 +34,14 @@ class Settings(BaseSettings):
         default=DEFAULT_EMBEDDING_MODEL_NAME,
     )
     vector_store: VectorStoreType = Field(
-        default=VectorStoreType.FILE,
+        default=VectorStoreType.QDRANT,
         validation_alias="VECTOR_STORE",
         description="Vector store to use.",
+    )
+    qdrant_client_url: str = Field(
+        default=DEFAULT_QDRANT_CLIENT_URL,
+        validation_alias="QDRANT_URL",
+        description="Qdrant client URL.",
     )
 
 

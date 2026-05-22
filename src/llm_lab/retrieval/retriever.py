@@ -26,23 +26,23 @@ class Retriever:
         self.llm_client = llm_client
         self.vector_store_client = vector_store_client
 
-    def search(self, dataset: str, query: str, top_k: int) -> list[ScoredChunk]:
+    def search(
+        self, dataset: str, embedding_model: str, query: str, top_k: int
+    ) -> list[ScoredChunk]:
         candidate_k = min(top_k * CANDIDATE_MULTIPLIER, MAX_CANDIDATES)
         candidate_k_context_var.set(candidate_k)
-        embedding_model = self.vector_store_client.get_embedding_model(dataset)
         embedding_start_time = time.perf_counter()
         query_embedding = self.llm_client.embed_text(query, embedding_model)
         embedding_time = round((time.perf_counter() - embedding_start_time) * 1000, 3)
         embed_ms_context_var.set(embedding_time)
         retrieve_start_time = time.perf_counter()
-        scored_chunks = self.vector_store_client.query(dataset, query_embedding)
+        scored_chunks = self.vector_store_client.query(
+            dataset, embedding_model, query_embedding, candidate_k
+        )
         retrieve_time = round((time.perf_counter() - retrieve_start_time) * 1000, 3)
         retrieve_ms_context_var.set(retrieve_time)
-        sorted_chunks = sorted(scored_chunks, key=lambda x: x.score, reverse=True)[
-            :candidate_k
-        ]
         selected_chunks = [
-            sc for sc in sorted_chunks if sc.score >= SIMILARITY_SCORE_THRESHOLD
+            sc for sc in scored_chunks if sc.score >= SIMILARITY_SCORE_THRESHOLD
         ][:top_k]
         chunks_return_context_var.set(len(selected_chunks))
         return selected_chunks

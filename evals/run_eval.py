@@ -9,6 +9,7 @@ from typing import Annotated
 import typer
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
+from llm_lab.config.settings import get_settings
 from llm_lab.core.factories import create_llm_client, create_vector_store_client
 from llm_lab.core.rag_service import RagService
 from llm_lab.llm.errors import (
@@ -94,10 +95,12 @@ def generate_eval_output(
     example: EvalInputConfig,
     rag_service: RagService,
     top_k: int,
+    embedding_model: str,
 ) -> EvalOutputConfig:
     try:
         result = rag_service.answer_question(
             dataset=example.dataset,
+            embedding_model=embedding_model,
             query=example.query,
             top_k=top_k,
         )
@@ -273,6 +276,7 @@ def run_eval(
     if not input_file.is_absolute():
         input_file = Path(__file__).parent / input_file
     eval_input_config = load_dataset_json(input_file)
+    settings = get_settings()
     llm_client = create_llm_client()
     rag_service = RagService(
         llm_client,
@@ -281,7 +285,9 @@ def run_eval(
     eval_output_config = []
     for config in eval_input_config:
         example_top_k = config.top_k if config.top_k is not None else top_k
-        eval_output = generate_eval_output(config, rag_service, example_top_k)
+        eval_output = generate_eval_output(
+            config, rag_service, example_top_k, settings.llm_embedding_model
+        )
         eval_output_config.append(eval_output)
 
     save_eval_output(eval_output_config)
