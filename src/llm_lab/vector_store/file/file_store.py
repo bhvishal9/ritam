@@ -156,3 +156,7 @@ class FileStoreClient(VectorStoreClient):
             :limit
         ]
         return sorted_chunks
+
+    def delete(self, dataset: str, embedding_model: str, doc_path: str) -> None:
+        """Not implemented — FileStoreClient is deprecated in favour of Qdrant."""
+        raise NotImplementedError("FileStoreClient does not support delete")

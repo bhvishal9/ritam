@@ -1,8 +1,8 @@
 [project]
 name = "llm-lab"
 version = "0.1.0"
-description = "Add your description here"
-#readme = "README.md"
+description = "LLM lab project"
+readme = "README.md"
 authors = [
   { name = "Vishal Bhargava", email = "vish.bhargava91@gmail.com" }
 ]
@@ -10,14 +10,14 @@ requires-python = ">=3.14"
 dependencies = [
   "contextvars>=2.4",
   "fastapi>=0.136.1",
-  "google-genai>=2.3.0",
-  "protobuf>=7.34.1",
+  "google-genai>=2.6.0",
   "pydantic>=2.13.4",
   "pydantic-settings>=2.14.1",
   "pytest-mock>=3.15.1",
   "qdrant-client>=1.18.0",
-  "ruff>=0.15.13",
-  "starlette>=1.0.0",
+  "sqlalchemy>=2.0.49",
+  "sqlmodel>=0.0.38",
+  "starlette>=1.0.1",
   "typer>=0.25.1",
   "uvicorn[standard]>=0.47.0",
 ]
@@ -33,6 +33,7 @@ build-backend = "uv_build"
 dev = [
   "httpx>=0.28.1",
   "import-linter>=2.1",
+  "ruff>=0.15.14",
   "mypy>=2.1.0",
   "pytest>=9.0.3",
   "pytest-cov>=7.1.0",

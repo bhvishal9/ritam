@@ -68,6 +68,26 @@ class QdrantStoreClient(VectorStoreClient):
             )
         self.client.upsert(collection_name=collection_name, points=points)
 
+    def delete(self, dataset: str, embedding_model: str, doc_path: str) -> None:
+        collection_name = _build_collection_name(embedding_model)
+        self.client.delete(
+            collection_name=collection_name,
+            points_selector=models.FilterSelector(
+                filter=models.Filter(
+                    must=[
+                        models.FieldCondition(
+                            key="dataset",
+                            match=models.MatchValue(value=dataset),
+                        ),
+                        models.FieldCondition(
+                            key="doc_path",
+                            match=models.MatchValue(value=doc_path),
+                        ),
+                    ]
+                )
+            ),
+        )
+
     def query(
         self,
         dataset: str,

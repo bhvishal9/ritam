@@ -7,6 +7,7 @@ import typer
 from llm_lab.config.paths import DEFAULT_DOCS_DIR
 from llm_lab.config.settings import get_settings
 from llm_lab.core.factories import create_llm_client, create_vector_store_client
+from llm_lab.core.ingestion_service import IngestionService
 from llm_lab.core.rag_service import RagService
 from llm_lab.llm.errors import (
     LlmAuthenticationError,
@@ -15,7 +16,6 @@ from llm_lab.llm.errors import (
     LlmRateLimitError,
     LlmUnavailableError,
 )
-from llm_lab.retrieval.indexing import Indexer
 from llm_lab.retrieval.retriever import Retriever
 from llm_lab.retrieval.types import ChunkingConfig
 
@@ -52,13 +52,14 @@ def index(
         chunk_size=chunk_size,
         chunk_separator=chunk_separator,
     )
-    indexer = Indexer(
-        source_dir, settings.llm_embedding_model, dataset, chunking_config
+    ingestion_service = IngestionService(
+        chunking_config, source_dir, dataset, settings.llm_embedding_model
     )
-    indexed_chunks, docs_count = indexer.run(llm_client)
-    vector_store_client = create_vector_store_client()
-    vector_store_client.store(
-        indexed_chunks, dataset, settings.llm_embedding_model, docs_count
+    result = ingestion_service.process_docs(llm_client)
+    typer.echo(
+        f"Ingestion complete: {result.new_docs} new, {result.updated_docs} updated, "
+        f"{result.unchanged_docs} unchanged, {result.deleted_docs} deleted, "
+        f"{result.embedded_chunks} chunks embedded."
     )
 
 

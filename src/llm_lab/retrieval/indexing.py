@@ -52,37 +52,21 @@ class Indexer:
 
     def __init__(
         self,
-        source_dir: Path,
         embedding_model: str,
-        dataset: str,
         chunking_config: ChunkingConfig,
     ) -> None:
-        self.source_dir = source_dir
         self.embedding_model = embedding_model
-        self.dataset = dataset
         self.chunking_config = chunking_config
 
-    def load_docs(self) -> list[Path]:
-        """Load all Markdown files from the source directory."""
-        if not self.source_dir.exists():
-            raise ValueError(f"Directory {self.source_dir} does not exist")
-        files = list(self.source_dir.glob("**/*.md"))
-        if not files:
-            raise ValueError(f"No Markdown files found in directory {self.source_dir}")
-        return files
-
-    def build_index(
-        self, llm_client: LlmClient, docs: list[Path]
-    ) -> list[IndexedChunk]:
+    def build_index(self, llm_client: LlmClient, docs: list[str]) -> list[IndexedChunk]:
         """Build index by creating embeddings for document chunks."""
         indexed_chunks = []
         for doc in docs:
-            file_content = _read_file(doc)
-            doc_path = doc.relative_to(BASE_DIR)
-            chunks = _create_chunks(file_content, doc_path, self.chunking_config)
+            file_content = _read_file(BASE_DIR / doc)
+            chunks = _create_chunks(file_content, BASE_DIR / doc, self.chunking_config)
             for chunk_id, chunk in enumerate(chunks):
                 embedding = llm_client.embed_text(chunk.text, self.embedding_model)
-                source = f"{doc_path}#chunk-{chunk_id}"
+                source = f"{doc}#chunk-{chunk_id}"
                 indexed_chunk = IndexedChunk(
                     text=chunk.text,
                     doc_path=chunk.doc_path,
@@ -92,9 +76,3 @@ class Indexer:
                 )
                 indexed_chunks.append(indexed_chunk)
         return indexed_chunks
-
-    def run(self, llm_client: LlmClient) -> tuple[list[IndexedChunk], int]:
-        """Run the indexing process."""
-        docs = self.load_docs()
-        indexed_chunks = self.build_index(llm_client, docs)
-        return indexed_chunks, len(docs)

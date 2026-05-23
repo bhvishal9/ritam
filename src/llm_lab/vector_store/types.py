@@ -45,3 +45,7 @@ class VectorStoreClient(Protocol):
     ) -> list[ScoredChunk]:
         """Query the vector store and return a list of the top_k most relevant IndexedChunks."""
         ...
+
+    def delete(self, dataset: str, embedding_model: str, doc_path: str) -> None:
+        """Delete chunks from the vector store based on dataset, embedding model, and document path."""
+        ...

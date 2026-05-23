@@ -61,37 +61,25 @@ class TestIndexer:
         monkeypatch.setattr(indexing, "BASE_DIR", tmp_path)
 
         indexer = Indexer(
-            source_dir=source_dir,
-            chunking_config=ChunkingConfig(chunk_size=50, chunk_separator=". "),
             embedding_model="models/embedding-001",
-            dataset="test_dataset",
+            chunking_config=ChunkingConfig(chunk_size=50, chunk_separator=". "),
         )
 
-        indexed_chunks, docs_count = indexer.run(fake_llm_client)
-        assert docs_count == 1
+        indexed_chunks = indexer.build_index(fake_llm_client, ["source/test.md"])
         assert len(indexed_chunks) == 1
 
-    def test_indexer_no_markdown_files_returns_error(
+    def test_indexer_missing_file_raises_error(
         self,
         tmp_path: Path,
         monkeypatch: MonkeyPatch,
         fake_llm_client: FakeLlmClient,
     ) -> None:
-        source_dir = tmp_path / "source"
-        source_dir.mkdir()
-
         monkeypatch.setattr(indexing, "BASE_DIR", tmp_path)
 
         indexer = Indexer(
-            source_dir=source_dir,
-            chunking_config=ChunkingConfig(chunk_size=50, chunk_separator=". "),
             embedding_model="models/embedding-001",
-            dataset="test_dataset",
+            chunking_config=ChunkingConfig(chunk_size=50, chunk_separator=". "),
         )
 
-        with pytest.raises(ValueError) as excinfo:
-            indexer.run(fake_llm_client)
-
-        assert (
-            str(excinfo.value) == f"No Markdown files found in directory {source_dir}"
-        )
+        with pytest.raises(ValueError, match="not found"):
+            indexer.build_index(fake_llm_client, ["nonexistent/doc.md"])

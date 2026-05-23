@@ -21,3 +21,4 @@ CLAUDE.md
 .claude
 ROADMAP.md
 qdrant_storage
+dataset_store.db
