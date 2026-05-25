@@ -1,11 +1,14 @@
+import logging
 import time
 
 from pydantic import BaseModel
 
 from llm_lab.llm.types import LlmClient
-from llm_lab.observability.context import generate_ms_context_var
+from llm_lab.observability.context import generate_ms_context_var, stage
 from llm_lab.retrieval.retriever import Retriever
 from llm_lab.vector_store.types import ScoredChunk
+
+logger = logging.getLogger(__name__)
 
 
 def build_prompt(question: str, chunks: list[ScoredChunk]) -> str:
@@ -52,15 +55,17 @@ class RagService:
 
         top_chunks = self.retriever.search(dataset, embedding_model, query, top_k)
         if not top_chunks:
+            logger.info("empty_retrieval", extra={"fields": {"abstained": True}})
             return QueryResult(
                 answer="No relevant information found to answer the question.",
                 chunks=top_chunks,
             )
         prompt = build_prompt(query, top_chunks)
-        start_time = time.perf_counter()
-        response = self.llm_client.generate_response(prompt)
-        generate_ms = round(((time.perf_counter() - start_time) * 1000), 3)
-        generate_ms_context_var.set(generate_ms)
+        with stage("generate"):
+            start_time = time.perf_counter()
+            response = self.llm_client.generate_response(prompt)
+            generate_ms = round(((time.perf_counter() - start_time) * 1000), 3)
+            generate_ms_context_var.set(generate_ms)
         return QueryResult(
             answer=response,
             chunks=top_chunks,

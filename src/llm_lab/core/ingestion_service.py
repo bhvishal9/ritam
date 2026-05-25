@@ -1,4 +1,5 @@
 import hashlib
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
@@ -9,6 +10,7 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select
 from llm_lab.config.paths import BASE_DIR, DEFAULT_SQLITE_DB_PATH
 from llm_lab.core.factories import create_vector_store_client
 from llm_lab.llm.types import LlmClient
+from llm_lab.observability.context import stage
 from llm_lab.retrieval.indexing import Indexer
 from llm_lab.retrieval.types import ChunkingConfig
 
@@ -73,6 +75,7 @@ class IngestionService:
         self.source_dir = source_dir
         self.dataset = dataset
         self.embedding_model = embedding_model
+        self.logger = logging.getLogger(__name__)
 
     def get_current_records(self) -> list[IngestionSchema]:
         """Get the current records from the database."""
@@ -139,11 +142,33 @@ class IngestionService:
 
     def process_docs(self, llm_client: LlmClient) -> IngestionResult:
         """Process all the documents in the source directory."""
+        self.logger.info(
+            "ingest_start",
+            extra={
+                "fields": {
+                    "dataset": self.dataset,
+                    "embedding_model": self.embedding_model,
+                    "source_dir": str(self.source_dir),
+                }
+            },
+        )
         ingestion_diff = self.ingest_docs()
+        self.logger.info(
+            "ingest_diff",
+            extra={
+                "fields": {
+                    "new": len(ingestion_diff.new_docs),
+                    "updated": len(ingestion_diff.updated_docs),
+                    "unchanged": len(ingestion_diff.unchanged_docs),
+                    "deleted": len(ingestion_diff.deleted_docs),
+                }
+            },
+        )
         indexer = Indexer(self.embedding_model, self.chunking_config)
         vector_store_client = create_vector_store_client()
         indexing_docs = ingestion_diff.new_docs + ingestion_diff.updated_docs
-        chunks = indexer.build_index(llm_client, indexing_docs)
+        with stage("index"):
+            chunks = indexer.build_index(llm_client, indexing_docs)
         for doc in ingestion_diff.updated_docs + ingestion_diff.deleted_docs:
             vector_store_client.delete(self.dataset, self.embedding_model, str(doc))
         if len(chunks) > 0:
@@ -173,10 +198,25 @@ class IngestionService:
                 record = session.exec(result).one()
                 session.delete(record)
             session.commit()
-        return IngestionResult(
+        ingest_result = IngestionResult(
             new_docs=len(ingestion_diff.new_docs),
             updated_docs=len(ingestion_diff.updated_docs),
             unchanged_docs=len(ingestion_diff.unchanged_docs),
             deleted_docs=len(ingestion_diff.deleted_docs),
             embedded_chunks=len(chunks),
         )
+        self.logger.info(
+            "ingest_complete",
+            extra={
+                "fields": {
+                    "dataset": self.dataset,
+                    "embedding_model": self.embedding_model,
+                    "new_docs": ingest_result.new_docs,
+                    "updated_docs": ingest_result.updated_docs,
+                    "unchanged_docs": ingest_result.unchanged_docs,
+                    "deleted_docs": ingest_result.deleted_docs,
+                    "embedded_chunks": ingest_result.embedded_chunks,
+                }
+            },
+        )
+        return ingest_result

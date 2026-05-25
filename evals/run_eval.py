@@ -1,5 +1,6 @@
 import csv
 import json
+import logging
 import sys
 from collections import Counter
 from json import JSONDecodeError
@@ -17,7 +18,11 @@ from llm_lab.llm.errors import (
     LlmError,
     LlmRateLimitError,
 )
+from llm_lab.observability.context import request_scope
+from llm_lab.observability.setup import setup_logging
 from llm_lab.retrieval.retriever import Retriever
+
+logger = logging.getLogger(__name__)
 
 
 class EvalInputConfig(BaseModel):
@@ -92,6 +97,18 @@ def load_dataset_json(path: Path) -> list[EvalInputConfig]:
 
 
 def generate_eval_output(
+    example: EvalInputConfig,
+    rag_service: RagService,
+    top_k: int,
+    embedding_model: str,
+) -> EvalOutputConfig:
+    with request_scope(
+        request_id=f"eval-{example.id}", dataset=example.dataset, top_k=top_k
+    ):
+        return _run_example(example, rag_service, top_k, embedding_model)
+
+
+def _run_example(
     example: EvalInputConfig,
     rag_service: RagService,
     top_k: int,
@@ -277,6 +294,17 @@ def run_eval(
         input_file = Path(__file__).parent / input_file
     eval_input_config = load_dataset_json(input_file)
     settings = get_settings()
+    logger.info(
+        "eval_run_start",
+        extra={
+            "fields": {
+                "dataset_file": str(input_file),
+                "examples": len(eval_input_config),
+                "default_top_k": top_k,
+                "embedding_model": settings.llm_embedding_model,
+            }
+        },
+    )
     llm_client = create_llm_client()
     rag_service = RagService(
         llm_client,
@@ -290,12 +318,25 @@ def run_eval(
         )
         eval_output_config.append(eval_output)
 
+    errored = sum(1 for o in eval_output_config if o.error is not None)
+    matched = sum(1 for o in eval_output_config if o.matched)
+    logger.info(
+        "eval_run_complete",
+        extra={
+            "fields": {
+                "examples": len(eval_output_config),
+                "matched": matched,
+                "errored": errored,
+            }
+        },
+    )
     save_eval_output(eval_output_config)
     print_eval_output(top_k, eval_output_config)
 
 
 def main() -> int:
     try:
+        setup_logging()
         app()
     except (ValueError, OSError) as err:
         typer.echo(f"Error: {err}", err=True)

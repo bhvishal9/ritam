@@ -1,3 +1,4 @@
+import logging
 import typing
 
 from google import genai
@@ -13,20 +14,34 @@ from llm_lab.llm.errors import (
 )
 from llm_lab.llm.types import LlmClient
 
+logger = logging.getLogger(__name__)
+
 
 def _map_gemini_error(err: ClientError) -> LlmError:
     """Map Google Gemini ClientError to custom LlmError."""
     error_code = int(err.code)
     if error_code == 400:
-        return LlmInvalidRequestError(str(err))
+        mapped: LlmError = LlmInvalidRequestError(str(err))
     elif error_code in [401, 403]:
-        return LlmAuthenticationError(str(err))
+        mapped = LlmAuthenticationError(str(err))
     elif error_code == 429:
-        return LlmRateLimitError(str(err))
+        mapped = LlmRateLimitError(str(err))
     elif 500 <= error_code < 600:
-        return LlmUnavailableError(str(err))
+        mapped = LlmUnavailableError(str(err))
     else:
-        return LlmError(str(err))
+        mapped = LlmError(str(err))
+    logger.warning(
+        "upstream_error",
+        extra={
+            "fields": {
+                "provider": "gemini",
+                "error_class": mapped.__class__.__name__,
+                "upstream_status": error_code,
+                "retryable": mapped.retryable,
+            }
+        },
+    )
+    return mapped
 
 
 class GeminiClient(LlmClient):

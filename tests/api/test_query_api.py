@@ -4,12 +4,12 @@ import uuid
 from collections.abc import Generator
 
 import pytest
-from _pytest.logging import LogCaptureFixture
 from fastapi.testclient import TestClient
 
 from llm_lab.api.dependencies import get_llm_client, get_retriever_client
 from llm_lab.llm.errors import LlmUnavailableError
 from llm_lab.main import app
+from llm_lab.observability.logging import JsonFormatter
 from llm_lab.vector_store.types import IndexedChunk, ScoredChunk
 from tests.fakes import FakeLlmClient, FakeRetriever
 
@@ -128,33 +128,87 @@ class TestQueryApi:
         assert response.status_code == 502
         assert response.json() == {"error": "Fake client unavailable"}
 
-    def test_query_log_fields_exists(
-        self, client: TestClient, caplog: LogCaptureFixture
-    ) -> None:
-        caplog.set_level(logging.INFO, logger="llm_lab.api")
-        app.dependency_overrides[get_retriever_client] = lambda: FakeRetriever(
-            chunks=_make_fake_chunks()[:1]
-        )
-        app.dependency_overrides[get_llm_client] = lambda: FakeLlmClient(
-            response="fake answer from LLM"
-        )
+    def test_middleware_logs_when_handler_raises(self) -> None:
+        # Use raise_server_exceptions=False so Starlette converts the unhandled
+        # exception into a 500 response (as it would in production) rather than
+        # re-raising into the test. The middleware's finally block must still
+        # emit request_complete with status_code=500.
+        emitted: list[str] = []
 
-        client.post(
-            "/query",
-            json={
-                "query": "What is a Kubernetes pod?",
-                "top_k": 1,
-                "dataset": "test_dataset",
-            },
-        )
+        class CaptureHandler(logging.Handler):
+            def emit(self, record: logging.LogRecord) -> None:
+                if record.name == "llm_lab.api.middleware":
+                    emitted.append(self.format(record))
 
-        api_records = [r for r in caplog.records if r.name == "llm_lab.api"]
-        assert len(api_records) == 1, (
-            f"Expected 1 API log record, got: {caplog.messages}"
-        )
-        logs = json.loads(api_records[0].message)
+        handler = CaptureHandler()
+        handler.setFormatter(JsonFormatter())
+        logging.getLogger().addHandler(handler)
+        try:
+            app.dependency_overrides[get_retriever_client] = lambda: FakeRetriever(
+                error=RuntimeError("boom")
+            )
+            app.dependency_overrides[get_llm_client] = lambda: FakeLlmClient()
+            with TestClient(app, raise_server_exceptions=False) as local_client:
+                response = local_client.post(
+                    "/query",
+                    json={
+                        "query": "What is a Kubernetes pod?",
+                        "top_k": 1,
+                        "dataset": "test_dataset",
+                    },
+                )
+        finally:
+            logging.getLogger().removeHandler(handler)
+
+        assert response.status_code == 500
+        assert len(emitted) == 1, f"Expected 1 API log record, got: {emitted}"
+        logs = json.loads(emitted[0])
+        assert logs["message"] == "request_complete"
+        assert logs["status_code"] == 500
+        # error_type is set only when the exception propagates past Starlette's
+        # error middleware into ours. Starlette converts to a 500 response
+        # first, so we don't see the raise here — but we DO see status_code=500
+        # via wrapped_send, which is the primary guarantee that matters.
+
+    def test_query_log_fields_exists(self, client: TestClient) -> None:
+        # Capture formatted JSON output at emit time. Reformatting later won't
+        # work because contextvars (request_id, top_k, dataset) are reset once
+        # the request task ends.
+        emitted: list[str] = []
+
+        class CaptureHandler(logging.Handler):
+            def emit(self, record: logging.LogRecord) -> None:
+                if record.name == "llm_lab.api.middleware":
+                    emitted.append(self.format(record))
+
+        handler = CaptureHandler()
+        handler.setFormatter(JsonFormatter())
+        logging.getLogger().addHandler(handler)
+        try:
+            app.dependency_overrides[get_retriever_client] = lambda: FakeRetriever(
+                chunks=_make_fake_chunks()[:1]
+            )
+            app.dependency_overrides[get_llm_client] = lambda: FakeLlmClient(
+                response="fake answer from LLM"
+            )
+
+            client.post(
+                "/query",
+                json={
+                    "query": "What is a Kubernetes pod?",
+                    "top_k": 1,
+                    "dataset": "test_dataset",
+                },
+            )
+        finally:
+            logging.getLogger().removeHandler(handler)
+
+        assert len(emitted) == 1, f"Expected 1 API log record, got: {emitted}"
+        logs = json.loads(emitted[0])
+        assert logs["message"] == "request_complete"
         assert logs["request_id"] != ""
-        assert logs["request_id"] != "uuid-not-set"
+        assert logs["request_id"] != "not-set"
         uuid.UUID(logs["request_id"])
         assert logs["top_k"] == 1
         assert logs["dataset"] == "test_dataset"
+        assert logs["status_code"] == 200

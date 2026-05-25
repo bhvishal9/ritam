@@ -1,4 +1,5 @@
 import sys
+import uuid
 from pathlib import Path
 from typing import Annotated
 
@@ -16,6 +17,8 @@ from llm_lab.llm.errors import (
     LlmRateLimitError,
     LlmUnavailableError,
 )
+from llm_lab.observability.context import request_id_context_var
+from llm_lab.observability.setup import setup_logging
 from llm_lab.retrieval.retriever import Retriever
 from llm_lab.retrieval.types import ChunkingConfig
 
@@ -87,6 +90,8 @@ def query(
 
 def main() -> int:
     try:
+        setup_logging()
+        request_id_context_var.set(f"cli-{uuid.uuid4()}")
         app()
     except (ValueError, OSError) as err:
         typer.echo(f"Error: {err}", err=True)
