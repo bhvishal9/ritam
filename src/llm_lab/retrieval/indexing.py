@@ -28,7 +28,7 @@ def _create_chunks(
         if chunk_text:
             chunk = Chunk(
                 text=chunk_text,
-                doc_path=str(file_name),
+                doc_path=str(file_name.relative_to(BASE_DIR)),
             )
             chunks.append(chunk)
         start = end
