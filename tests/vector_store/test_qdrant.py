@@ -4,6 +4,7 @@ from unittest.mock import patch
 import pytest
 from qdrant_client import QdrantClient
 
+from llm_lab.vector_store.errors import IndexNotFoundError
 from llm_lab.vector_store.qdrant import (
     QdrantStoreClient,
     _build_collection_name,
@@ -182,7 +183,7 @@ class TestQdrantStoreClientQuery:
     def test_query_raises_when_collection_missing(
         self, store_client: QdrantStoreClient
     ) -> None:
-        with pytest.raises(ValueError, match="does not exist"):
+        with pytest.raises(IndexNotFoundError, match="No index found"):
             store_client.query(
                 dataset="ds",
                 embedding_model="nonexistent-model",

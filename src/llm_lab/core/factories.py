@@ -1,4 +1,8 @@
+from urllib.parse import urlparse
+
 from llm_lab.config.settings import VectorStoreType, get_settings
+from llm_lab.document_source.local_document_source import LocalDocumentSource
+from llm_lab.document_source.types import DocumentSource
 from llm_lab.llm.gemini_client import GeminiClient
 from llm_lab.llm.types import LlmClient
 from llm_lab.vector_store.file.file_store import FileStoreClient
@@ -22,3 +26,12 @@ def create_vector_store_client() -> VectorStoreClient:
     elif settings.vector_store == VectorStoreType.QDRANT:
         return QdrantStoreClient(settings.qdrant_client_url)
     raise NotImplementedError(f"Unsupported vector store type: {settings.vector_store}")
+
+
+def create_document_source_client() -> DocumentSource:
+    settings = get_settings()
+    source_uri = settings.source_uri
+    parsed = urlparse(source_uri)
+    if parsed.scheme == "file":
+        return LocalDocumentSource(source_uri)
+    raise NotImplementedError(f"Unsupported source uri: {source_uri}")

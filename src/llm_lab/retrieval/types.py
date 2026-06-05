@@ -10,3 +10,8 @@ class ChunkingConfig(BaseModel):
         description="The separator string used to delineate chunks.",
         min_length=1,
     )
+
+
+class IndexerInput(BaseModel):
+    doc_path: str
+    doc_content: str

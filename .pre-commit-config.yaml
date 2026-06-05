@@ -5,20 +5,14 @@ repos:
       - id: ruff
       - id: ruff-format
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.18.2
+  - repo: local
     hooks:
       - id: mypy
-        additional_dependencies:
-          # Packages with bundled stubs — mypy needs them installed to type-check
-          # callers. Starlette, FastAPI, Pydantic all ship py.typed markers.
-          - fastapi
-          - pydantic
-          - pydantic-settings
-          - pytest
-          - starlette
-          - typer
-          - types-requests
+        name: mypy
+        entry: uv run mypy src/
+        language: system
+        types: [ python ]
+        pass_filenames: false
 
   - repo: local
     hooks:

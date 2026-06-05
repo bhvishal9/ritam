@@ -12,6 +12,7 @@ from llm_lab.llm.errors import (
     LlmUnavailableError,
 )
 from llm_lab.observability.setup import setup_logging
+from llm_lab.vector_store.errors import IndexNotFoundError, VectorStoreError
 
 app = FastAPI(title="llm_lab", version="0.0.1")
 setup_logging()
@@ -24,6 +25,26 @@ async def custom_exception_handler(
     return JSONResponse(
         status_code=exc.status_code,
         content={"error": exc.message},
+    )
+
+
+@app.exception_handler(IndexNotFoundError)
+async def index_not_found_exception_handler(
+    request: Request, exc: IndexNotFoundError
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=404,
+        content={"error": str(exc)},
+    )
+
+
+@app.exception_handler(VectorStoreError)
+async def vector_store_exception_handler(
+    request: Request, exc: VectorStoreError
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=500,
+        content={"error": str(exc)},
     )
 
 

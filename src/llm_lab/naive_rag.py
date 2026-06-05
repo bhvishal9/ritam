@@ -1,13 +1,15 @@
 import sys
 import uuid
-from pathlib import Path
 from typing import Annotated
 
 import typer
 
-from llm_lab.config.paths import DEFAULT_DOCS_DIR
 from llm_lab.config.settings import get_settings
-from llm_lab.core.factories import create_llm_client, create_vector_store_client
+from llm_lab.core.factories import (
+    create_document_source_client,
+    create_llm_client,
+    create_vector_store_client,
+)
 from llm_lab.core.ingestion_service import IngestionService
 from llm_lab.core.rag_service import RagService
 from llm_lab.llm.errors import (
@@ -21,6 +23,7 @@ from llm_lab.observability.context import request_id_context_var
 from llm_lab.observability.setup import setup_logging
 from llm_lab.retrieval.retriever import Retriever
 from llm_lab.retrieval.types import ChunkingConfig
+from llm_lab.vector_store.errors import VectorStoreError
 
 app = typer.Typer()
 
@@ -40,25 +43,28 @@ def take_user_input() -> str:
 @app.command()
 def index(
     dataset: Annotated[str, typer.Option(help="Dataset to index")],
-    source_dir: Annotated[
-        Path, typer.Option(help="Source directory")
-    ] = DEFAULT_DOCS_DIR,
     chunk_size: Annotated[int, typer.Option(help="Chunk size in characters")] = 10000,
     chunk_separator: Annotated[
         str, typer.Option(help="Chunk separator string")
     ] = "\n\n",
 ) -> None:
-    typer.echo(f"Indexing dataset '{dataset}' from {source_dir}")
+    typer.echo(
+        f"Indexing dataset '{dataset}' with chunk size {chunk_size} and separator '{chunk_separator}'..."
+    )
     settings = get_settings()
     llm_client = create_llm_client()
     chunking_config = ChunkingConfig(
         chunk_size=chunk_size,
         chunk_separator=chunk_separator,
     )
+    document_source = create_document_source_client()
     ingestion_service = IngestionService(
-        chunking_config, source_dir, dataset, settings.llm_embedding_model
+        chunking_config,
+        dataset,
+        settings.llm_embedding_model,
+        document_source=document_source,
     )
-    result = ingestion_service.process_docs(llm_client)
+    result = ingestion_service.process_docs(llm_client, create_vector_store_client())
     typer.echo(
         f"Ingestion complete: {result.new_docs} new, {result.updated_docs} updated, "
         f"{result.unchanged_docs} unchanged, {result.deleted_docs} deleted, "
@@ -111,6 +117,9 @@ def main() -> int:
     except LlmError as err:
         typer.echo(f"LLM Error: {err}", err=True)
         return 6
+    except VectorStoreError as err:
+        typer.echo(f"Vector Store Error: {err}", err=True)
+        return 7
     return 0
 
 

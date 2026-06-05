@@ -71,8 +71,8 @@ The `id` is the only place difficulty is encoded. The script does not parse it, 
 Example rows:
 
 ```json
-{"id":"f_easy_bubble_shield","dataset":"ducks","query":"What is the Bubble Shield?","expected_docs":["assets/docs/duck_technology.md"],"query_type":"factual","top_k":3}
-{"id":"m_waddles_birth_and_role","dataset":"ducks","query":"Where was Commodore Waddles born, and what was his decisive contribution at the Loofah Line?","expected_docs":["assets/docs/isoprene_planetary_survey.md","assets/docs/duck_wars_extended_history.md"],"query_type":"multi_hop","top_k":3}
+{"id":"f_easy_bubble_shield","dataset":"ducks","query":"What is the Bubble Shield?","expected_docs":["assets/ducks/duck_technology.md"],"query_type":"factual","top_k":3}
+{"id":"m_waddles_birth_and_role","dataset":"ducks","query":"Where was Commodore Waddles born, and what was his decisive contribution at the Loofah Line?","expected_docs":["assets/ducks/isoprene_planetary_survey.md","assets/ducks/duck_wars_extended_history.md"],"query_type":"multi_hop","top_k":3}
 {"id":"o_hydromarch_salary","dataset":"ducks","query":"What is the annual salary of the Hydromarch?","expected_docs":[],"query_type":"out_of_scope","top_k":3}
 ```
 

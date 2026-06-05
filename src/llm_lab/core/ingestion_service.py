@@ -7,15 +7,16 @@ from typing import cast
 from sqlalchemy import Engine
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 
-from llm_lab.config.paths import BASE_DIR, DEFAULT_SQLITE_DB_PATH
-from llm_lab.core.factories import create_vector_store_client
+from llm_lab.config.paths import DEFAULT_SQLITE_DB_PATH
+from llm_lab.document_source.types import DocumentSource
 from llm_lab.llm.types import LlmClient
 from llm_lab.observability.context import stage
 from llm_lab.retrieval.indexing import Indexer
-from llm_lab.retrieval.types import ChunkingConfig
+from llm_lab.retrieval.types import ChunkingConfig, IndexerInput
+from llm_lab.vector_store.types import VectorStoreClient
 
 
-class IngestionSchema(SQLModel, table=True):  # type: ignore[misc, call-arg]
+class IngestionSchema(SQLModel, table=True):
     doc_path: str = Field(primary_key=True)
     dataset: str = Field(primary_key=True)
     embedding_model: str = Field(primary_key=True)
@@ -23,12 +24,13 @@ class IngestionSchema(SQLModel, table=True):  # type: ignore[misc, call-arg]
 
 
 @dataclass
-class IngestionDiff:
+class IngestionPlan:
     new_docs: list[str]
     updated_docs: list[str]
     unchanged_docs: list[str]
     deleted_docs: list[str]
     source_by_path: dict[str, IngestionSchema]
+    content_by_path: dict[str, str]
 
 
 @dataclass
@@ -50,32 +52,22 @@ def create_db_and_tables(db_path: Path) -> Engine:
         raise RuntimeError(f"Error creating sqlite database: {err}") from err
 
 
-def load_docs(source_dir: Path) -> list[Path]:
-    """Load all Markdown files from the source directory."""
-    if not source_dir.exists():
-        raise ValueError(f"Directory {source_dir} does not exist")
-    files = list(source_dir.glob("**/*.md"))
-    if not files:
-        raise ValueError(f"No Markdown files found in directory {source_dir}")
-    return files
-
-
 class IngestionService:
     def __init__(
         self,
         chunking_config: ChunkingConfig,
-        source_dir: Path,
         dataset: str,
         embedding_model: str,
+        document_source: DocumentSource,
         db_path: Path = DEFAULT_SQLITE_DB_PATH,
     ):
         self.chunking_config = chunking_config
         self.db_path = db_path
         self.engine = create_db_and_tables(db_path=db_path)
-        self.source_dir = source_dir
         self.dataset = dataset
         self.embedding_model = embedding_model
         self.logger = logging.getLogger(__name__)
+        self.document_source = document_source
 
     def get_current_records(self) -> list[IngestionSchema]:
         """Get the current records from the database."""
@@ -91,24 +83,26 @@ class IngestionService:
         except Exception as err:
             raise RuntimeError(f"Error querying sqlite database: {err}") from err
 
-    def ingest_docs(self) -> IngestionDiff:
+    def ingest_docs(self) -> IngestionPlan:
         """Ingest all Markdown files in the source directory."""
         source_records: list[IngestionSchema] = []
+        content_by_path = {}
         current_records = self.get_current_records()
-        source_docs = load_docs(self.source_dir)
+        source_docs = self.document_source.load(self.dataset)
         for doc in source_docs:
-            doc_path = str(doc.relative_to(BASE_DIR))
-            doc_content = doc.read_text(encoding="utf-8")
+            doc_path = doc.doc_path
+            doc_content = doc.doc_content
             hash_input = f"{self.chunking_config.chunk_size}-{self.chunking_config.chunk_separator}-{doc_content}"
             index_fingerprint = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()
             source_records.append(
                 IngestionSchema(
-                    index_fingerprint=index_fingerprint,
                     doc_path=doc_path,
                     dataset=self.dataset,
                     embedding_model=self.embedding_model,
+                    index_fingerprint=index_fingerprint,
                 )
             )
+            content_by_path[doc_path] = doc_content
         source_by_path = {r.doc_path: r for r in source_records}
         current_by_path = {r.doc_path: r for r in current_records}
         source_paths = {r.doc_path for r in source_records}
@@ -132,15 +126,18 @@ class IngestionService:
         deleted_docs = [
             r.doc_path for r in current_records if r.doc_path not in source_paths
         ]
-        return IngestionDiff(
+        return IngestionPlan(
             new_docs=new_docs,
             updated_docs=updated_docs,
             unchanged_docs=unchanged_docs,
             deleted_docs=deleted_docs,
             source_by_path=source_by_path,
+            content_by_path=content_by_path,
         )
 
-    def process_docs(self, llm_client: LlmClient) -> IngestionResult:
+    def process_docs(
+        self, llm_client: LlmClient, vector_store_client: VectorStoreClient
+    ) -> IngestionResult:
         """Process all the documents in the source directory."""
         self.logger.info(
             "ingest_start",
@@ -148,48 +145,50 @@ class IngestionService:
                 "fields": {
                     "dataset": self.dataset,
                     "embedding_model": self.embedding_model,
-                    "source_dir": str(self.source_dir),
                 }
             },
         )
-        ingestion_diff = self.ingest_docs()
+        ingestion_plan = self.ingest_docs()
         self.logger.info(
             "ingest_diff",
             extra={
                 "fields": {
-                    "new": len(ingestion_diff.new_docs),
-                    "updated": len(ingestion_diff.updated_docs),
-                    "unchanged": len(ingestion_diff.unchanged_docs),
-                    "deleted": len(ingestion_diff.deleted_docs),
+                    "new": len(ingestion_plan.new_docs),
+                    "updated": len(ingestion_plan.updated_docs),
+                    "unchanged": len(ingestion_plan.unchanged_docs),
+                    "deleted": len(ingestion_plan.deleted_docs),
                 }
             },
         )
         indexer = Indexer(self.embedding_model, self.chunking_config)
-        vector_store_client = create_vector_store_client()
-        indexing_docs = ingestion_diff.new_docs + ingestion_diff.updated_docs
+        indexing_docs = ingestion_plan.new_docs + ingestion_plan.updated_docs
+        docs_to_index = [
+            IndexerInput(doc_path=doc, doc_content=ingestion_plan.content_by_path[doc])
+            for doc in indexing_docs
+        ]
         with stage("index"):
-            chunks = indexer.build_index(llm_client, indexing_docs)
-        for doc in ingestion_diff.updated_docs + ingestion_diff.deleted_docs:
+            chunks = indexer.build_index(llm_client, docs_to_index)
+        for doc in ingestion_plan.updated_docs + ingestion_plan.deleted_docs:
             vector_store_client.delete(self.dataset, self.embedding_model, str(doc))
         if len(chunks) > 0:
             vector_store_client.store(
                 chunks, self.dataset, self.embedding_model, len(chunks)
             )
         with Session(self.engine) as session:
-            for doc in ingestion_diff.new_docs:
-                session.add(ingestion_diff.source_by_path[doc])
-            for doc in ingestion_diff.updated_docs:
+            for doc in ingestion_plan.new_docs:
+                session.add(ingestion_plan.source_by_path[doc])
+            for doc in ingestion_plan.updated_docs:
                 result = select(IngestionSchema).where(
                     IngestionSchema.dataset == self.dataset,
                     IngestionSchema.embedding_model == self.embedding_model,
                     IngestionSchema.doc_path == doc,
                 )
                 record = session.exec(result).one()
-                record.index_fingerprint = ingestion_diff.source_by_path[
+                record.index_fingerprint = ingestion_plan.source_by_path[
                     doc
                 ].index_fingerprint
                 session.add(record)
-            for doc in ingestion_diff.deleted_docs:
+            for doc in ingestion_plan.deleted_docs:
                 result = select(IngestionSchema).where(
                     IngestionSchema.dataset == self.dataset,
                     IngestionSchema.embedding_model == self.embedding_model,
@@ -199,10 +198,10 @@ class IngestionService:
                 session.delete(record)
             session.commit()
         ingest_result = IngestionResult(
-            new_docs=len(ingestion_diff.new_docs),
-            updated_docs=len(ingestion_diff.updated_docs),
-            unchanged_docs=len(ingestion_diff.unchanged_docs),
-            deleted_docs=len(ingestion_diff.deleted_docs),
+            new_docs=len(ingestion_plan.new_docs),
+            updated_docs=len(ingestion_plan.updated_docs),
+            unchanged_docs=len(ingestion_plan.unchanged_docs),
+            deleted_docs=len(ingestion_plan.deleted_docs),
             embedded_chunks=len(chunks),
         )
         self.logger.info(

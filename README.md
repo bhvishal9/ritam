@@ -101,7 +101,7 @@ Options:
 Example:
 
 ```bash
-uv run python -m llm_lab.naive_rag index --dataset my-docs --source-dir ./assets/docs --chunk-size 5000
+uv run python -m llm_lab.naive_rag index --dataset my-ducks --source-dir ./assets/ducks --chunk-size 5000
 ```
 
 #### Query
@@ -117,7 +117,7 @@ You will be prompted to enter a question. The command retrieves the top 3 releva
 Example:
 
 ```bash
-uv run python -m llm_lab.naive_rag query --dataset my-docs
+uv run python -m llm_lab.naive_rag query --dataset my-ducks
 ```
 
 ### API Endpoints

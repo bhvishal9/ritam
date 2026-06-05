@@ -3,6 +3,7 @@ import uuid
 
 from qdrant_client import QdrantClient, models
 
+from llm_lab.vector_store.errors import IndexNotFoundError, VectorStorePayloadError
 from llm_lab.vector_store.types import IndexedChunk, ScoredChunk, VectorStoreClient
 
 
@@ -97,7 +98,10 @@ class QdrantStoreClient(VectorStoreClient):
     ) -> list[ScoredChunk]:
         collection_name = _build_collection_name(embedding_model)
         if not self.client.collection_exists(collection_name):
-            raise ValueError(f"Collection {collection_name} does not exist in Qdrant.")
+            raise IndexNotFoundError(
+                f"No index found for embedding model '{embedding_model}'; "
+                "run the index command for this dataset first."
+            )
         search_results = self.client.query_points(
             collection_name=collection_name,
             query=query_embedding,
@@ -115,14 +119,19 @@ class QdrantStoreClient(VectorStoreClient):
         ).points
         scored_chunks = []
         for point in search_results:
+            payload = point.payload
+            if payload is None:
+                raise VectorStorePayloadError(
+                    f"Qdrant point {point.id} is missing its payload"
+                )
             scored_chunks.append(
                 ScoredChunk(
                     score=point.score,
                     indexed_chunk=IndexedChunk(
-                        text=point.payload["text"],
-                        source=point.payload["source"],
-                        chunk_id=point.payload["chunk_id"],
-                        doc_path=point.payload["doc_path"],
+                        text=payload["text"],
+                        source=payload["source"],
+                        chunk_id=payload["chunk_id"],
+                        doc_path=payload["doc_path"],
                         embedding=point.vector,
                     ),
                 )

@@ -10,6 +10,7 @@ from llm_lab.api.dependencies import get_llm_client, get_retriever_client
 from llm_lab.llm.errors import LlmUnavailableError
 from llm_lab.main import app
 from llm_lab.observability.logging import JsonFormatter
+from llm_lab.vector_store.errors import IndexNotFoundError
 from llm_lab.vector_store.types import IndexedChunk, ScoredChunk
 from tests.fakes import FakeLlmClient, FakeRetriever
 
@@ -60,6 +61,7 @@ class TestQueryApi:
                 "dataset": "test_dataset",
                 "query": "What is a Kubernetes pod?",
                 "top_k": 1,
+                "embedding_model": "test-embed",
             },
         )
 
@@ -78,7 +80,13 @@ class TestQueryApi:
         app.dependency_overrides[get_llm_client] = lambda: FakeLlmClient()
 
         response = client.post(
-            "/query", json={"query": "", "top_k": 1, "dataset": "test_dataset"}
+            "/query",
+            json={
+                "query": "",
+                "top_k": 1,
+                "dataset": "test_dataset",
+                "embedding_model": "test-embed",
+            },
         )
         assert response.status_code == 400
         assert response.json() == {"error": "Question must be a non-empty string"}
@@ -89,27 +97,39 @@ class TestQueryApi:
 
         response = client.post(
             "/query",
-            json={"query": "Test Query", "top_k": 0, "dataset": "test_dataset"},
+            json={
+                "query": "Test Query",
+                "top_k": 0,
+                "dataset": "test_dataset",
+                "embedding_model": "test-embed",
+            },
         )
         assert response.status_code == 400
         assert response.json() == {"error": "top_k must be between 1 and 10"}
 
-    def test_query_missing_index_returns_500(self, client: TestClient) -> None:
+    def test_query_missing_index_returns_404(self, client: TestClient) -> None:
         app.dependency_overrides[get_retriever_client] = lambda: FakeRetriever(
-            error=ValueError(
-                "Dataset test_dataset not found, make sure to run the index command first"
+            error=IndexNotFoundError(
+                "No index found for embedding model 'test-embed'; "
+                "run the index command for this dataset first."
             )
         )
         app.dependency_overrides[get_llm_client] = lambda: FakeLlmClient()
 
         response = client.post(
             "/query",
-            json={"query": "Test Query", "top_k": 1, "dataset": "test_dataset"},
+            json={
+                "query": "Test Query",
+                "top_k": 1,
+                "dataset": "test_dataset",
+                "embedding_model": "test-embed",
+            },
         )
 
-        assert response.status_code == 500
+        assert response.status_code == 404
         assert response.json() == {
-            "error": "Dataset test_dataset not found, make sure to run the index command first"
+            "error": "No index found for embedding model 'test-embed'; "
+            "run the index command for this dataset first."
         }
 
     def test_query_llm_unavailable_returns_502(self, client: TestClient) -> None:
@@ -122,7 +142,12 @@ class TestQueryApi:
 
         response = client.post(
             "/query",
-            json={"query": "Test Query", "top_k": 1, "dataset": "test_dataset"},
+            json={
+                "query": "Test Query",
+                "top_k": 1,
+                "dataset": "test_dataset",
+                "embedding_model": "test-embed",
+            },
         )
 
         assert response.status_code == 502
@@ -155,6 +180,7 @@ class TestQueryApi:
                         "query": "What is a Kubernetes pod?",
                         "top_k": 1,
                         "dataset": "test_dataset",
+                        "embedding_model": "test-embed",
                     },
                 )
         finally:
@@ -198,6 +224,7 @@ class TestQueryApi:
                     "query": "What is a Kubernetes pod?",
                     "top_k": 1,
                     "dataset": "test_dataset",
+                    "embedding_model": "test-embed",
                 },
             )
         finally:
