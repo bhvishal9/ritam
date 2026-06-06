@@ -24,7 +24,9 @@ def create_vector_store_client() -> VectorStoreClient:
     if settings.vector_store == VectorStoreType.FILE:
         return FileStoreClient()
     elif settings.vector_store == VectorStoreType.QDRANT:
-        return QdrantStoreClient(settings.qdrant_client_url)
+        if settings.qdrant_client_url is None:
+            raise ValueError("QDRANT_URL is required for the Qdrant vector store")
+        return QdrantStoreClient(settings.qdrant_client_url, settings.qdrant_api_key)
     raise NotImplementedError(f"Unsupported vector store type: {settings.vector_store}")
 
 

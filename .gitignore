@@ -10,7 +10,7 @@ wheels/
 .coverage
 # Virtual environments
 .venv
-
+.env
 
 terraform.tfstate
 terraform.tfstate.backup

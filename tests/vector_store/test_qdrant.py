@@ -47,7 +47,7 @@ def store_client(in_memory_qdrant: QdrantClient) -> QdrantStoreClient:
     with patch(
         "llm_lab.vector_store.qdrant.QdrantClient", return_value=in_memory_qdrant
     ):
-        client = QdrantStoreClient(client_url="http://unused")
+        client = QdrantStoreClient(client_url="http://unused", api_key="api_key")
     return client
 
 

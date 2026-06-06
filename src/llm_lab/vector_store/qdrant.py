@@ -37,8 +37,8 @@ def _create_collection(
 
 
 class QdrantStoreClient(VectorStoreClient):
-    def __init__(self, client_url: str) -> None:
-        self.client = QdrantClient(url=client_url)
+    def __init__(self, client_url: str, api_key: str | None) -> None:
+        self.client = QdrantClient(url=client_url, api_key=api_key)
 
     def store(
         self,
