@@ -1,5 +1,5 @@
-from llm_lab.retrieval.retriever import Retriever
-from llm_lab.vector_store.types import IndexedChunk, ScoredChunk
+from ritam.retrieval.retriever import Retriever
+from ritam.vector_store.types import IndexedChunk, ScoredChunk
 from tests.fakes import FakeLlmClient, FakeVectorStoreClient
 
 

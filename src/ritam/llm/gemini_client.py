@@ -4,14 +4,14 @@ from google import genai
 from google.genai import types
 from google.genai.errors import ClientError
 
-from llm_lab.llm.errors import (
+from ritam.llm.errors import (
     LlmAuthenticationError,
     LlmError,
     LlmInvalidRequestError,
     LlmRateLimitError,
     LlmUnavailableError,
 )
-from llm_lab.llm.types import LlmClient
+from ritam.llm.types import LlmClient
 
 logger = logging.getLogger(__name__)
 

@@ -103,7 +103,7 @@ The high-level data flow looks like this:
 
 ### Offline Indexing(CLI)
 
-- I provide an offline CLI command `index` implemented with Typer in `llm_lab.naive_rag`.
+- I provide an offline CLI command `index` implemented with Typer in `ritam.naive_rag`.
 - The command reads Markdown documents from a configurable directory, which in v1 defaults to `assets/docs/`.
 - For each `.md` file, I:
   - validate that the directory exists and that the file is not empty,
@@ -130,7 +130,7 @@ The high-level data flow looks like this:
   
 ### RAG core
 
-- The RAG core logic is implemented in a separate module (`llm_lab.rag_core`) so it can be reused by both:
+- The RAG core logic is implemented in a separate module (`ritam.rag_core`) so it can be reused by both:
   - the offline CLI (`naive_rag.py`), and
   - the FastAPI service (`/query` endpoint),
   without knowing anything about HTTP, FastAPI, or Cloud Run.
@@ -178,7 +178,7 @@ The high-level data flow looks like this:
 
 ### FastAPI Service
 
-- The FastAPI service is implemented in `llm_lab.main` and is designed to run on Google Cloud Run. It provides a RESTful API for querying the RAG system.
+- The FastAPI service is implemented in `ritam.main` and is designed to run on Google Cloud Run. It provides a RESTful API for querying the RAG system.
 - The service exposes a simple `/health` endpoint for health checks, returning a 200 OK status with a JSON message.
 - There is also an `/echo` endpoint that echoes back any JSON payload sent to it, useful for testing and debugging.
 - The main functionality is provided by the `/query` endpoint, which accepts POST requests with a JSON containing:
@@ -210,7 +210,7 @@ The high-level data flow looks like this:
 - It uses the official Python 3.14 slim base image to minimize the image size while ensuring compatibility with the required Python packages.
 - The Dockerfile performs the following steps:
   - Copies `uv` from the upstream image to use as the entrypoint for running the FastAPI application.
-  - Creates a non-root user `llm_lab` for security best practices and switches to this user.
+  - Creates a non-root user `ritam` for security best practices and switches to this user.
   - Sets the working directory to `/app`.
   - Installs packages required for building and running the application with `uv sync`.
   - Copies the application code and the precomputed indexed chunks JSON file into the container.
@@ -239,7 +239,7 @@ The high-level data flow looks like this:
 
 ### Offline Indexing Flow
 
-1. Indexing CLI is run (e.g. uv run python -m llm_lab.naive_rag index) with a valid LLM_API_KEY and embedding model configured via env vars.
+1. Indexing CLI is run (e.g. uv run python -m ritam.naive_rag index) with a valid LLM_API_KEY and embedding model configured via env vars.
 2. The CLI reads Markdown files from the `assets/docs/` directory, splits them into chunks, and generates embeddings for each chunk using the specified embedding model.
 3. The indexed chunks, along with their embeddings and metadata, are saved to a JSON file (`assets/indexed_chunks.json`).
 4. This JSON file is then baked into the Docker image for use by the FastAPI service.

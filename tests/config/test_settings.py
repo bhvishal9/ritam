@@ -2,7 +2,7 @@ import pytest
 from _pytest.monkeypatch import MonkeyPatch
 from pydantic import ValidationError
 
-from llm_lab.config.settings import Settings, VectorStoreType, _is_local
+from ritam.config.settings import Settings, VectorStoreType, _is_local
 
 _QDRANT_ENV = ["VECTOR_STORE", "QDRANT_URL", "QDRANT_API_KEY"]
 
@@ -30,30 +30,30 @@ class TestIsLocal:
 class TestSettingsValidation:
     def test_file_store_needs_no_qdrant_config(self, monkeypatch: MonkeyPatch) -> None:
         monkeypatch.setenv("VECTOR_STORE", "file")
-        settings = Settings()
+        settings = Settings(_env_file=None)
         assert settings.vector_store == VectorStoreType.FILE
         assert settings.qdrant_client_url is None
 
     def test_qdrant_without_url_raises(self, monkeypatch: MonkeyPatch) -> None:
         monkeypatch.setenv("VECTOR_STORE", "qdrant")
         with pytest.raises(ValidationError, match="QDRANT_URL"):
-            Settings()
+            Settings(_env_file=None)
 
     def test_qdrant_local_needs_no_key(self, monkeypatch: MonkeyPatch) -> None:
         monkeypatch.setenv("VECTOR_STORE", "qdrant")
         monkeypatch.setenv("QDRANT_URL", "http://localhost:6333")
-        settings = Settings()
+        settings = Settings(_env_file=None)
         assert settings.qdrant_api_key is None
 
     def test_qdrant_remote_without_key_raises(self, monkeypatch: MonkeyPatch) -> None:
         monkeypatch.setenv("VECTOR_STORE", "qdrant")
         monkeypatch.setenv("QDRANT_URL", "https://abc.cloud.qdrant.io:6333")
         with pytest.raises(ValidationError, match="QDRANT_API_KEY"):
-            Settings()
+            Settings(_env_file=None)
 
     def test_qdrant_remote_with_key_ok(self, monkeypatch: MonkeyPatch) -> None:
         monkeypatch.setenv("VECTOR_STORE", "qdrant")
         monkeypatch.setenv("QDRANT_URL", "https://abc.cloud.qdrant.io:6333")
         monkeypatch.setenv("QDRANT_API_KEY", "secret")
-        settings = Settings()
+        settings = Settings(_env_file=None)
         assert settings.qdrant_api_key == "secret"

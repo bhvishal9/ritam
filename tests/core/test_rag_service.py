@@ -1,5 +1,5 @@
-from llm_lab.core.rag_service import RagService
-from llm_lab.retrieval.retriever import Retriever
+from ritam.core.rag_service import RagService
+from ritam.retrieval.retriever import Retriever
 from tests.fakes import FakeVectorStoreClient, NoCallLlmClient
 
 

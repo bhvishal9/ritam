@@ -1,5 +1,5 @@
-from llm_lab.retrieval.indexing import Indexer, _create_chunks
-from llm_lab.retrieval.types import ChunkingConfig, IndexerInput
+from ritam.retrieval.indexing import Indexer, _create_chunks
+from ritam.retrieval.types import ChunkingConfig, IndexerInput
 from tests.fakes import FakeLlmClient
 
 

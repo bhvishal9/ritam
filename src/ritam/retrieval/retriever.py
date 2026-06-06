@@ -1,20 +1,20 @@
 import logging
 import time
 
-from llm_lab.config.variables import (
+from ritam.config.variables import (
     CANDIDATE_MULTIPLIER,
     MAX_CANDIDATES,
     SIMILARITY_SCORE_THRESHOLD,
 )
-from llm_lab.llm.types import LlmClient
-from llm_lab.observability.context import (
+from ritam.llm.types import LlmClient
+from ritam.observability.context import (
     candidate_k_context_var,
     chunks_return_context_var,
     embed_ms_context_var,
     retrieve_ms_context_var,
     stage,
 )
-from llm_lab.vector_store.types import ScoredChunk, VectorStoreClient
+from ritam.vector_store.types import ScoredChunk, VectorStoreClient
 
 logger = logging.getLogger(__name__)
 

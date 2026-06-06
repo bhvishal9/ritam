@@ -1,9 +1,9 @@
 import sys
 
-from llm_lab.config.settings import get_settings
-from llm_lab.llm.errors import LlmError
-from llm_lab.llm.gemini_client import GeminiClient
-from llm_lab.llm.types import LlmClient
+from ritam.config.settings import get_settings
+from ritam.llm.errors import LlmError
+from ritam.llm.gemini_client import GeminiClient
+from ritam.llm.types import LlmClient
 
 
 def print_exit() -> None:

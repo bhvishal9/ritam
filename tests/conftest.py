@@ -4,7 +4,7 @@ from typing import Any
 import pytest
 from fastapi.testclient import TestClient
 
-from llm_lab.main import app
+from ritam.main import app
 from tests.fakes import FakeLlmClient, NoCallLlmClient
 
 

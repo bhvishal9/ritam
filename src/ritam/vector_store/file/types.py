@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-from llm_lab.vector_store.types import IndexedChunk
+from ritam.vector_store.types import IndexedChunk
 
 
 class IndexFile(BaseModel):

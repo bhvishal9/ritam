@@ -3,11 +3,11 @@ from pathlib import Path
 
 import pytest
 
-from llm_lab.vector_store.file.file_store import (
+from ritam.vector_store.file.file_store import (
     MAX_CHUNKS_PER_INDEX_FILE,
     FileStoreClient,
 )
-from llm_lab.vector_store.types import IndexedChunk
+from ritam.vector_store.types import IndexedChunk
 
 
 def _make_chunk(chunk_id: int, embedding: list[float]) -> IndexedChunk:

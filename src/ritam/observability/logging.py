@@ -2,7 +2,7 @@ import json
 import logging
 from datetime import UTC, datetime
 
-from llm_lab.observability.context import (
+from ritam.observability.context import (
     candidate_k_context_var,
     chunks_return_context_var,
     dataset_context_var,

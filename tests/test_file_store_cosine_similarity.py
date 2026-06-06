@@ -1,6 +1,6 @@
 import pytest
 
-from llm_lab.vector_store.file.file_store import _cosine_similarity
+from ritam.vector_store.file.file_store import _cosine_similarity
 
 
 def test_core_cosine_similarity_error() -> None:

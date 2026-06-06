@@ -32,7 +32,7 @@ jobs:
         if: steps.cache-index.outputs.cache-hit != 'true'
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-        run: uv run python src/llm_lab/naive_rag.py index --dataset ducks
+        run: uv run python src/ritam/naive_rag.py index --dataset ducks
 
       - name: Run eval
         env:

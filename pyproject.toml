@@ -1,7 +1,7 @@
 [project]
-name = "llm-lab"
+name = "ritam"
 version = "0.1.0"
-description = "LLM lab project"
+description = "Cost-aware Retrieval-Augmented Generation service for measuring and controlling LLM inference spend."
 readme = "README.md"
 authors = [
   { name = "Vishal Bhargava", email = "vish.bhargava91@gmail.com" }
@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 [project.scripts]
-llm-lab = "llm_lab:main"
+ritam = "ritam:main"
 
 [build-system]
 requires = ["uv_build>=0.9.12,<0.10.0"]
@@ -66,7 +66,7 @@ ignore = [
 max-complexity = 10
 
 [tool.ruff.lint.isort]
-known-first-party = ["llm_lab"]
+known-first-party = ["ritam"]
 
 # ---------------------------------------------------------------------------
 # Mypy
@@ -86,14 +86,14 @@ ignore_missing_imports = true
 # Pytest
 # ---------------------------------------------------------------------------
 [tool.pytest.ini_options]
-addopts = "--cov=src/llm_lab --cov-report=term-missing"
+addopts = "--cov=src/ritam --cov-report=term-missing"
 testpaths = ["tests"]
 
 # ---------------------------------------------------------------------------
 # import-linter
 # ---------------------------------------------------------------------------
 [tool.importlinter]
-root_package = "llm_lab"
+root_package = "ritam"
 source_paths = ["src"]
 
 [[tool.importlinter.contracts]]
@@ -102,11 +102,11 @@ type = "layers"
 # Each line is one layer. A module may only import from layers below it.
 # Modules on the same line (separated by |) are independent of each other.
 layers = [
-  "llm_lab.api",
-  "llm_lab.core",
-  "llm_lab.document_source",
-  "llm_lab.retrieval",
-  "llm_lab.vector_store",
-  "llm_lab.llm",
-  "llm_lab.observability | llm_lab.config",
+  "ritam.api",
+  "ritam.core",
+  "ritam.document_source",
+  "ritam.retrieval",
+  "ritam.vector_store",
+  "ritam.llm",
+  "ritam.observability | ritam.config",
 ]

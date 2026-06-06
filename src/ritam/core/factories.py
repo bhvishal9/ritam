@@ -1,13 +1,13 @@
 from urllib.parse import urlparse
 
-from llm_lab.config.settings import VectorStoreType, get_settings
-from llm_lab.document_source.local_document_source import LocalDocumentSource
-from llm_lab.document_source.types import DocumentSource
-from llm_lab.llm.gemini_client import GeminiClient
-from llm_lab.llm.types import LlmClient
-from llm_lab.vector_store.file.file_store import FileStoreClient
-from llm_lab.vector_store.qdrant import QdrantStoreClient
-from llm_lab.vector_store.types import VectorStoreClient
+from ritam.config.settings import VectorStoreType, get_settings
+from ritam.document_source.local_document_source import LocalDocumentSource
+from ritam.document_source.types import DocumentSource
+from ritam.llm.gemini_client import GeminiClient
+from ritam.llm.types import LlmClient
+from ritam.vector_store.file.file_store import FileStoreClient
+from ritam.vector_store.qdrant import QdrantStoreClient
+from ritam.vector_store.types import VectorStoreClient
 
 
 def create_llm_client() -> LlmClient:

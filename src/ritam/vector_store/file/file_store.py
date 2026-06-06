@@ -6,9 +6,9 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from llm_lab.config.paths import DEFAULT_DESTINATION_DIR
-from llm_lab.vector_store.file.types import IndexFile, ManifestFile, ManifestIndexFile
-from llm_lab.vector_store.types import IndexedChunk, ScoredChunk, VectorStoreClient
+from ritam.config.paths import DEFAULT_DESTINATION_DIR
+from ritam.vector_store.file.types import IndexFile, ManifestFile, ManifestIndexFile
+from ritam.vector_store.types import IndexedChunk, ScoredChunk, VectorStoreClient
 
 MAX_CHUNKS_PER_INDEX_FILE = 10
 

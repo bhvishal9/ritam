@@ -2,9 +2,9 @@ from pathlib import Path
 
 from sqlmodel import Session
 
-from llm_lab.core.ingestion_service import IngestionService
-from llm_lab.document_source.local_document_source import LocalDocumentSource
-from llm_lab.retrieval.types import ChunkingConfig
+from ritam.core.ingestion_service import IngestionService
+from ritam.document_source.local_document_source import LocalDocumentSource
+from ritam.retrieval.types import ChunkingConfig
 
 
 class TestIngestionService:

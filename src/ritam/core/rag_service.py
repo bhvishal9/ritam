@@ -3,10 +3,10 @@ import time
 
 from pydantic import BaseModel
 
-from llm_lab.llm.types import LlmClient
-from llm_lab.observability.context import generate_ms_context_var, stage
-from llm_lab.retrieval.retriever import Retriever
-from llm_lab.vector_store.types import ScoredChunk
+from ritam.llm.types import LlmClient
+from ritam.observability.context import generate_ms_context_var, stage
+from ritam.retrieval.retriever import Retriever
+from ritam.vector_store.types import ScoredChunk
 
 logger = logging.getLogger(__name__)
 

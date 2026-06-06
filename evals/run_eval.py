@@ -10,17 +10,17 @@ from typing import Annotated
 import typer
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
-from llm_lab.config.settings import get_settings
-from llm_lab.core.factories import create_llm_client, create_vector_store_client
-from llm_lab.core.rag_service import RagService
-from llm_lab.llm.errors import (
+from ritam.config.settings import get_settings
+from ritam.core.factories import create_llm_client, create_vector_store_client
+from ritam.core.rag_service import RagService
+from ritam.llm.errors import (
     LlmAuthenticationError,
     LlmError,
     LlmRateLimitError,
 )
-from llm_lab.observability.context import request_scope
-from llm_lab.observability.setup import setup_logging
-from llm_lab.retrieval.retriever import Retriever
+from ritam.observability.context import request_scope
+from ritam.observability.setup import setup_logging
+from ritam.retrieval.retriever import Retriever
 
 logger = logging.getLogger(__name__)
 

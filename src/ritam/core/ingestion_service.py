@@ -7,13 +7,13 @@ from typing import cast
 from sqlalchemy import Engine
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 
-from llm_lab.config.paths import DEFAULT_SQLITE_DB_PATH
-from llm_lab.document_source.types import DocumentSource
-from llm_lab.llm.types import LlmClient
-from llm_lab.observability.context import stage
-from llm_lab.retrieval.indexing import Indexer
-from llm_lab.retrieval.types import ChunkingConfig, IndexerInput
-from llm_lab.vector_store.types import VectorStoreClient
+from ritam.config.paths import DEFAULT_SQLITE_DB_PATH
+from ritam.document_source.types import DocumentSource
+from ritam.llm.types import LlmClient
+from ritam.observability.context import stage
+from ritam.retrieval.indexing import Indexer
+from ritam.retrieval.types import ChunkingConfig, IndexerInput
+from ritam.vector_store.types import VectorStoreClient
 
 
 class IngestionSchema(SQLModel, table=True):

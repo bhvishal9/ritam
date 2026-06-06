@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, ConfigDict, Field
 
-from llm_lab.api.dependencies import get_llm_client, get_retriever_client
-from llm_lab.api.exceptions import CustomException
-from llm_lab.core.rag_service import RagService
-from llm_lab.llm.types import LlmClient
-from llm_lab.observability.context import dataset_context_var, top_k_context_var
-from llm_lab.retrieval.retriever import Retriever
-from llm_lab.vector_store.types import ScoredChunk
+from ritam.api.dependencies import get_llm_client, get_retriever_client
+from ritam.api.exceptions import CustomException
+from ritam.core.rag_service import RagService
+from ritam.llm.types import LlmClient
+from ritam.observability.context import dataset_context_var, top_k_context_var
+from ritam.retrieval.retriever import Retriever
+from ritam.vector_store.types import ScoredChunk
 
 
 class QueryRequest(BaseModel):

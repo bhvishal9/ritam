@@ -2,7 +2,7 @@ import logging
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
-from llm_lab.document_source.types import DocumentSource, DocumentSourceOutput
+from ritam.document_source.types import DocumentSource, DocumentSourceOutput
 
 
 class LocalDocumentSource(DocumentSource):

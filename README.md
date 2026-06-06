@@ -1,4 +1,4 @@
-# llm-lab
+# ritam
 
 A FastAPI application that provides a RAG (Retrieval-Augmented Generation) service using a Google Gemini LLM.
 
@@ -12,7 +12,7 @@ which can answer questions based on a provided dataset. The core of the RAG serv
 
 I wrote up the architecture, trade-offs, and what I learned here:
 
-- https://vbhargava.org/writing/llm-lab-rag-v1/
+- https://vbhargava.org/writing/ritam-rag-v1/
 
 ## Features
 
@@ -52,7 +52,7 @@ The application is composed of the following components:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/bhvishal9/llm-lab.git
+   git clone https://github.com/bhvishal9/ritam.git
    ```
 2. Install the dependencies:
    ```bash
@@ -72,7 +72,7 @@ export LLM_API_KEY="your-api-key"
 To run the FastAPI server, you can use the following command:
 
 ```bash
-uvicorn src.llm_lab.api.main:app --reload
+uvicorn src.ritam.api.main:app --reload
 ```
 
 ## Usage
@@ -86,7 +86,7 @@ The project includes a CLI for indexing documents and querying the RAG service d
 Index a directory of documents into a named dataset:
 
 ```bash
-uv run python -m llm_lab.naive_rag index --dataset <dataset-name>
+uv run python -m ritam.naive_rag index --dataset <dataset-name>
 ```
 
 Options:
@@ -101,7 +101,7 @@ Options:
 Example:
 
 ```bash
-uv run python -m llm_lab.naive_rag index --dataset my-ducks --source-dir ./assets/ducks --chunk-size 5000
+uv run python -m ritam.naive_rag index --dataset my-ducks --source-dir ./assets/ducks --chunk-size 5000
 ```
 
 #### Query
@@ -109,7 +109,7 @@ uv run python -m llm_lab.naive_rag index --dataset my-ducks --source-dir ./asset
 Interactively query a previously indexed dataset:
 
 ```bash
-uv run python -m llm_lab.naive_rag query --dataset <dataset-name>
+uv run python -m ritam.naive_rag query --dataset <dataset-name>
 ```
 
 You will be prompted to enter a question. The command retrieves the top 3 relevant chunks and returns a generated answer along with the sources used.
@@ -117,7 +117,7 @@ You will be prompted to enter a question. The command retrieves the top 3 releva
 Example:
 
 ```bash
-uv run python -m llm_lab.naive_rag query --dataset my-ducks
+uv run python -m ritam.naive_rag query --dataset my-ducks
 ```
 
 ### API Endpoints

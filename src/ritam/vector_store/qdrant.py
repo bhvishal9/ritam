@@ -3,8 +3,8 @@ import uuid
 
 from qdrant_client import QdrantClient, models
 
-from llm_lab.vector_store.errors import IndexNotFoundError, VectorStorePayloadError
-from llm_lab.vector_store.types import IndexedChunk, ScoredChunk, VectorStoreClient
+from ritam.vector_store.errors import IndexNotFoundError, VectorStorePayloadError
+from ritam.vector_store.types import IndexedChunk, ScoredChunk, VectorStoreClient
 
 
 def _build_collection_name(collection_name: str) -> str:

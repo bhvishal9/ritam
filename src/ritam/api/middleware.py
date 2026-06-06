@@ -5,7 +5,7 @@ import uuid
 
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
-from llm_lab.observability.context import request_id_context_var
+from ritam.observability.context import request_id_context_var
 
 
 class LoggingMiddleware:

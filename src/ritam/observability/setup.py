@@ -1,6 +1,6 @@
 import logging
 
-from llm_lab.observability.logging import JsonFormatter
+from ritam.observability.logging import JsonFormatter
 
 NOISY_LIBRARIES = ("httpx", "httpcore", "google_genai", "watchfiles", "uvicorn.access")
 

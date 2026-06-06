@@ -1,6 +1,6 @@
-from llm_lab.llm.types import LlmClient
-from llm_lab.retrieval.types import ChunkingConfig, IndexerInput
-from llm_lab.vector_store.types import Chunk, IndexedChunk
+from ritam.llm.types import LlmClient
+from ritam.retrieval.types import ChunkingConfig, IndexerInput
+from ritam.vector_store.types import Chunk, IndexedChunk
 
 
 def _create_chunks(

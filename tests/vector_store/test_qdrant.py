@@ -4,13 +4,13 @@ from unittest.mock import patch
 import pytest
 from qdrant_client import QdrantClient
 
-from llm_lab.vector_store.errors import IndexNotFoundError
-from llm_lab.vector_store.qdrant import (
+from ritam.vector_store.errors import IndexNotFoundError
+from ritam.vector_store.qdrant import (
     QdrantStoreClient,
     _build_collection_name,
     _create_collection,
 )
-from llm_lab.vector_store.types import IndexedChunk
+from ritam.vector_store.types import IndexedChunk
 
 # Helpers
 # ---------------------------------------------------------------------------
@@ -44,9 +44,7 @@ def in_memory_qdrant() -> QdrantClient:
 @pytest.fixture
 def store_client(in_memory_qdrant: QdrantClient) -> QdrantStoreClient:
     """QdrantStoreClient wired to the in-memory QdrantClient."""
-    with patch(
-        "llm_lab.vector_store.qdrant.QdrantClient", return_value=in_memory_qdrant
-    ):
+    with patch("ritam.vector_store.qdrant.QdrantClient", return_value=in_memory_qdrant):
         client = QdrantStoreClient(client_url="http://unused", api_key="api_key")
     return client
 

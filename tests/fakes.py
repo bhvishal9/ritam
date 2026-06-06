@@ -1,4 +1,4 @@
-from llm_lab.vector_store.types import IndexedChunk, ScoredChunk, VectorStoreClient
+from ritam.vector_store.types import IndexedChunk, ScoredChunk, VectorStoreClient
 
 
 class FakeLlmClient:

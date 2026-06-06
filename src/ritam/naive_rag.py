@@ -4,26 +4,26 @@ from typing import Annotated
 
 import typer
 
-from llm_lab.config.settings import get_settings
-from llm_lab.core.factories import (
+from ritam.config.settings import get_settings
+from ritam.core.factories import (
     create_document_source_client,
     create_llm_client,
     create_vector_store_client,
 )
-from llm_lab.core.ingestion_service import IngestionService
-from llm_lab.core.rag_service import RagService
-from llm_lab.llm.errors import (
+from ritam.core.ingestion_service import IngestionService
+from ritam.core.rag_service import RagService
+from ritam.llm.errors import (
     LlmAuthenticationError,
     LlmError,
     LlmInvalidRequestError,
     LlmRateLimitError,
     LlmUnavailableError,
 )
-from llm_lab.observability.context import request_id_context_var
-from llm_lab.observability.setup import setup_logging
-from llm_lab.retrieval.retriever import Retriever
-from llm_lab.retrieval.types import ChunkingConfig
-from llm_lab.vector_store.errors import VectorStoreError
+from ritam.observability.context import request_id_context_var
+from ritam.observability.setup import setup_logging
+from ritam.retrieval.retriever import Retriever
+from ritam.retrieval.types import ChunkingConfig
+from ritam.vector_store.errors import VectorStoreError
 
 app = typer.Typer()
 

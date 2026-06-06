@@ -1,7 +1,7 @@
-resource "google_artifact_registry_repository" "llm_lab" {
+resource "google_artifact_registry_repository" "ritam" {
   location      = var.region
   repository_id = "${var.app_name}-repo"
-  description   = "Repository for LLM Lab Docker images"
+  description   = "Repository for Ritam Docker images"
   format        = "DOCKER"
 
   docker_config {
@@ -10,7 +10,7 @@ resource "google_artifact_registry_repository" "llm_lab" {
   }
 }
 
-resource "google_cloud_run_v2_service" "llm_lab" {
+resource "google_cloud_run_v2_service" "ritam" {
   name                 = var.app_name
   location             = var.region
   ingress              = "INGRESS_TRAFFIC_ALL"
@@ -18,7 +18,7 @@ resource "google_cloud_run_v2_service" "llm_lab" {
   deletion_protection  = false
   template {
     containers {
-      image = "${google_artifact_registry_repository.llm_lab.registry_uri}/llm-lab:latest"
+      image = "${google_artifact_registry_repository.ritam.registry_uri}/ritam:latest"
       ports {
         container_port = 8000
       }

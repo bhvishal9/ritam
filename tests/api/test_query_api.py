@@ -6,12 +6,12 @@ from collections.abc import Generator
 import pytest
 from fastapi.testclient import TestClient
 
-from llm_lab.api.dependencies import get_llm_client, get_retriever_client
-from llm_lab.llm.errors import LlmUnavailableError
-from llm_lab.main import app
-from llm_lab.observability.logging import JsonFormatter
-from llm_lab.vector_store.errors import IndexNotFoundError
-from llm_lab.vector_store.types import IndexedChunk, ScoredChunk
+from ritam.api.dependencies import get_llm_client, get_retriever_client
+from ritam.llm.errors import LlmUnavailableError
+from ritam.main import app
+from ritam.observability.logging import JsonFormatter
+from ritam.vector_store.errors import IndexNotFoundError
+from ritam.vector_store.types import IndexedChunk, ScoredChunk
 from tests.fakes import FakeLlmClient, FakeRetriever
 
 
@@ -162,7 +162,7 @@ class TestQueryApi:
 
         class CaptureHandler(logging.Handler):
             def emit(self, record: logging.LogRecord) -> None:
-                if record.name == "llm_lab.api.middleware":
+                if record.name == "ritam.api.middleware":
                     emitted.append(self.format(record))
 
         handler = CaptureHandler()
@@ -204,7 +204,7 @@ class TestQueryApi:
 
         class CaptureHandler(logging.Handler):
             def emit(self, record: logging.LogRecord) -> None:
-                if record.name == "llm_lab.api.middleware":
+                if record.name == "ritam.api.middleware":
                     emitted.append(self.format(record))
 
         handler = CaptureHandler()

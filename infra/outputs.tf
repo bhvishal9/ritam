@@ -1,7 +1,7 @@
 output "artifact_registry_uri" {
-  value = google_artifact_registry_repository.llm_lab.registry_uri
+  value = google_artifact_registry_repository.ritam.registry_uri
 }
 
 output "cloud_run_service_url" {
-  value = google_cloud_run_v2_service.llm_lab.uri
+  value = google_cloud_run_v2_service.ritam.uri
 }

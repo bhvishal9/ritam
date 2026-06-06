@@ -1,20 +1,20 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-from llm_lab.api.exceptions import CustomException
-from llm_lab.api.middleware import LoggingMiddleware
-from llm_lab.api.routers import echo, health, query
-from llm_lab.llm.errors import (
+from ritam.api.exceptions import CustomException
+from ritam.api.middleware import LoggingMiddleware
+from ritam.api.routers import echo, health, query
+from ritam.llm.errors import (
     LlmAuthenticationError,
     LlmError,
     LlmInvalidRequestError,
     LlmRateLimitError,
     LlmUnavailableError,
 )
-from llm_lab.observability.setup import setup_logging
-from llm_lab.vector_store.errors import IndexNotFoundError, VectorStoreError
+from ritam.observability.setup import setup_logging
+from ritam.vector_store.errors import IndexNotFoundError, VectorStoreError
 
-app = FastAPI(title="llm_lab", version="0.0.1")
+app = FastAPI(title="ritam", version="0.0.1")
 setup_logging()
 
 
