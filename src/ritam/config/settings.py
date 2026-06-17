@@ -43,7 +43,8 @@ class Settings(BaseSettings):
         default="gemini-3.1-flash-lite-preview",
         description="LLM model name.",
     )
-    source_uri: str = Field(
+    source_uri: str | None = Field(
+        default=None,
         description="Source URI where documents are stored.",
     )
     vector_store: VectorStoreType = Field(

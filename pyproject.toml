@@ -3,6 +3,7 @@ name = "ritam"
 version = "0.1.0"
 description = "Cost-aware Retrieval-Augmented Generation service for measuring and controlling LLM inference spend."
 readme = "README.md"
+license = "Apache-2.0"
 authors = [
   { name = "Vishal Bhargava", email = "vish.bhargava91@gmail.com" }
 ]

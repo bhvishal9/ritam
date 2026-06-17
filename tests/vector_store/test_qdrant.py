@@ -189,6 +189,26 @@ class TestQdrantStoreClientQuery:
                 limit=5,
             )
 
+    def test_query_raises_when_dataset_not_indexed(
+        self, store_client: QdrantStoreClient
+    ) -> None:
+        # Collection exists (dataset_a was indexed) but dataset_b never was, so
+        # the empty result is "not indexed", not "nothing relevant".
+        store_client.store(
+            [_make_chunk(0, [1.0, 0.0])],
+            dataset="dataset_a",
+            embedding_model="test-model",
+            docs_count=1,
+        )
+
+        with pytest.raises(IndexNotFoundError, match="has not been indexed"):
+            store_client.query(
+                dataset="dataset_b",
+                embedding_model="test-model",
+                query_embedding=[1.0, 0.0],
+                limit=5,
+            )
+
     def test_query_returns_results_sorted_by_score(
         self, store_client: QdrantStoreClient
     ) -> None:

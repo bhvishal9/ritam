@@ -33,6 +33,8 @@ def create_vector_store_client() -> VectorStoreClient:
 def create_document_source_client() -> DocumentSource:
     settings = get_settings()
     source_uri = settings.source_uri
+    if source_uri is None:
+        raise ValueError("SOURCE_URI is required for indexing")
     parsed = urlparse(source_uri)
     if parsed.scheme == "file":
         return LocalDocumentSource(source_uri)

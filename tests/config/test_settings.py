@@ -57,3 +57,10 @@ class TestSettingsValidation:
         monkeypatch.setenv("QDRANT_API_KEY", "secret")
         settings = Settings(_env_file=None)
         assert settings.qdrant_api_key == "secret"
+
+    def test_source_uri_optional_for_serving(self, monkeypatch: MonkeyPatch) -> None:
+        # The serving path never reads SOURCE_URI, so settings must load without it.
+        monkeypatch.setenv("VECTOR_STORE", "file")
+        monkeypatch.delenv("SOURCE_URI", raising=False)
+        settings = Settings(_env_file=None)
+        assert settings.source_uri is None

@@ -100,23 +100,40 @@ class QdrantStoreClient(VectorStoreClient):
         if not self.client.collection_exists(collection_name):
             raise IndexNotFoundError(
                 f"No index found for embedding model '{embedding_model}'; "
-                "run the index command for this dataset first."
+                "run the index command first."
             )
+        dataset_filter = models.Filter(
+            must=[
+                models.FieldCondition(
+                    key="dataset",
+                    match=models.MatchValue(value=dataset),
+                )
+            ]
+        )
         search_results = self.client.query_points(
             collection_name=collection_name,
             query=query_embedding,
-            query_filter=models.Filter(
-                must=[
-                    models.FieldCondition(
-                        key="dataset",
-                        match=models.MatchValue(value=dataset),
-                    )
-                ]
-            ),
+            query_filter=dataset_filter,
             limit=limit,
             with_payload=True,
             with_vectors=True,
         ).points
+        if not search_results:
+            # The collection exists but this query returned nothing. Distinguish
+            # "this dataset was never indexed" (caller error → surfaces as 404)
+            # from "indexed, but nothing matched" (a valid empty answer). Pay for
+            # this extra round-trip only on the empty branch, never on the hot
+            # success path.
+            dataset_count = self.client.count(
+                collection_name=collection_name,
+                count_filter=dataset_filter,
+                exact=True,
+            ).count
+            if dataset_count == 0:
+                raise IndexNotFoundError(
+                    f"Dataset '{dataset}' has not been indexed for embedding "
+                    f"model '{embedding_model}'; run the index command for it first."
+                )
         scored_chunks = []
         for point in search_results:
             payload = point.payload

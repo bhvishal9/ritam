@@ -1,4 +1,4 @@
 provider "google" {
-  project = "llm-lab-infra-vishal"
-  region  = "europe-west3"
+  project = "ritam-vishal"
+  region  = var.region
 }

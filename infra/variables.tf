@@ -1,9 +1,3 @@
-variable "llm_api_key" {
-  description = "API key for LLM_API_KEY env var"
-  type        = string
-  sensitive   = true
-}
-
 variable "region" {
   description = "GCP region to deploy resources"
   type        = string
@@ -14,4 +8,9 @@ variable "app_name" {
   description = "Name of the application"
   type        = string
   default     = "ritam"
+}
+
+variable "app_version" {
+  description = "Version of the application"
+  type        = string
 }
