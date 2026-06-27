@@ -1,3 +1,5 @@
+from ritam.cost.types import TokenUsage
+from ritam.llm.types import Response
 from ritam.vector_store.types import IndexedChunk, ScoredChunk, VectorStoreClient
 
 
@@ -13,19 +15,23 @@ class FakeLlmClient:
     def embed_text(self, text: str, embedding_model: str | None = None) -> list[float]:
         return [0.1, 0.2, 0.3]
 
-    def generate_response(self, prompt: str, model: str | None = None) -> str:
+    def generate_response(self, prompt: str, model: str | None = None) -> Response:
         if self._generate_error is not None:
             raise self._generate_error
         if self._response is None:
             raise NotImplementedError
-        return self._response
+        return Response(
+            response_text=self._response,
+            token_usage=TokenUsage(),
+            model_name=model or "fake-model",
+        )
 
 
 class NoCallLlmClient:
     def embed_text(self, text: str, embedding_model: str | None = None) -> list[float]:
         return [1.0, 0.0]
 
-    def generate_response(self, prompt: str, model: str | None = None) -> str:
+    def generate_response(self, prompt: str, model: str | None = None) -> Response:
         raise AssertionError(
             "generate_response should not be called when no chunks are returned."
         )

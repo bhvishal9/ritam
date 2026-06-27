@@ -4,6 +4,7 @@ from google import genai
 from google.genai import types
 from google.genai.errors import ClientError
 
+from ritam.cost.types import TokenUsage
 from ritam.llm.errors import (
     LlmAuthenticationError,
     LlmError,
@@ -11,7 +12,7 @@ from ritam.llm.errors import (
     LlmRateLimitError,
     LlmUnavailableError,
 )
-from ritam.llm.types import LlmClient
+from ritam.llm.types import LlmClient, Response
 
 logger = logging.getLogger(__name__)
 
@@ -68,8 +69,9 @@ class GeminiClient(LlmClient):
             raise LlmError("Received empty embedding from Gemini")
         return embedding_value
 
-    def generate_response(self, prompt: str, model: str | None = None) -> str:
+    def generate_response(self, prompt: str, model: str | None = None) -> Response:
         """Generate a response for the given prompt. If model is provided, use that; otherwise use the client's default"""
+        token_usage = TokenUsage()
         try:
             response = self.client.models.generate_content(
                 model=model or self.model,
@@ -80,4 +82,16 @@ class GeminiClient(LlmClient):
             raise _map_gemini_error(err) from err
         if response_text is None:
             raise LlmError("Received empty response from Gemini")
-        return response_text
+        if response.usage_metadata is not None:
+            usage_metadata = response.usage_metadata
+            if (
+                usage_metadata.candidates_token_count is not None
+                and usage_metadata.prompt_token_count is not None
+            ):
+                token_usage.output_tokens = usage_metadata.candidates_token_count
+                token_usage.input_tokens = usage_metadata.prompt_token_count
+        return Response(
+            response_text=response_text,
+            token_usage=token_usage,
+            model_name=model or self.model,
+        )

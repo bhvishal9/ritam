@@ -8,10 +8,16 @@ from ritam.observability.context import (
     dataset_context_var,
     embed_ms_context_var,
     generate_ms_context_var,
+    input_cost_usd_context_var,
+    input_tokens_context_var,
+    model_context_var,
+    output_cost_usd_context_var,
+    output_tokens_context_var,
     request_id_context_var,
     retrieve_ms_context_var,
     stage_context_var,
     top_k_context_var,
+    total_cost_usd_context_var,
 )
 
 
@@ -26,6 +32,12 @@ def _snapshot_contextvars() -> dict[str, object]:
         "retrieve_ms": retrieve_ms_context_var.get(),
         "stage": stage_context_var.get(),
         "top_k": top_k_context_var.get(),
+        "model": model_context_var.get(),
+        "input_tokens": input_tokens_context_var.get(),
+        "input_cost_usd": input_cost_usd_context_var.get(),
+        "output_tokens": output_tokens_context_var.get(),
+        "output_cost_usd": output_cost_usd_context_var.get(),
+        "total_cost_usd": total_cost_usd_context_var.get(),
     }
     return {k: v for k, v in raw.items() if v is not None and v != "not-set"}
 

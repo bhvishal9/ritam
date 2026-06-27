@@ -40,7 +40,7 @@ class Settings(BaseSettings):
     )
     llm_model: str = Field(
         validation_alias="LLM_MODEL_NAME",
-        default="gemini-3.1-flash-lite-preview",
+        default="gemini-3.1-flash-lite",
         description="LLM model name.",
     )
     source_uri: str | None = Field(

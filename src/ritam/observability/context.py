@@ -20,6 +20,22 @@ generate_ms_context_var: ContextVar[float | None] = ContextVar(
 chunks_return_context_var: ContextVar[int | None] = ContextVar(
     "chunks_returned", default=None
 )
+input_tokens_context_var: ContextVar[int | None] = ContextVar(
+    "input_tokens", default=None
+)
+output_tokens_context_var: ContextVar[int | None] = ContextVar(
+    "output_tokens", default=None
+)
+input_cost_usd_context_var: ContextVar[float | None] = ContextVar(
+    "input_cost_usd", default=None
+)
+output_cost_usd_context_var: ContextVar[float | None] = ContextVar(
+    "output_cost_usd", default=None
+)
+total_cost_usd_context_var: ContextVar[float | None] = ContextVar(
+    "total_cost_usd", default=None
+)
+model_context_var: ContextVar[str | None] = ContextVar("model", default=None)
 
 
 @contextmanager

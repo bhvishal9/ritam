@@ -3,6 +3,7 @@ import json
 import logging
 import sys
 from collections import Counter
+from contextvars import copy_context
 from json import JSONDecodeError
 from pathlib import Path
 from typing import Annotated
@@ -43,6 +44,10 @@ class EvalOutputConfig(EvalInputConfig):
     returned_docs: list[str]
     returned_scores: list[float]
     error: str | None
+    input_cost_usd: float | None = None
+    output_cost_usd: float | None = None
+    total_cost_usd: float | None = None
+    model: str | None = None
 
 
 app = typer.Typer()
@@ -158,6 +163,7 @@ def _run_example(
     doc_paths = [sc.indexed_chunk.doc_path for sc in result.chunks]
     scores = [round(sc.score, 4) for sc in result.chunks]
     matched = _is_matched(example.query_type, example.expected_docs, doc_paths)
+    cost = result.cost
     return EvalOutputConfig(
         id=example.id,
         dataset=example.dataset,
@@ -170,6 +176,10 @@ def _run_example(
         returned_scores=scores,
         top_k=top_k,
         error=None,
+        input_cost_usd=cost.input_cost_usd if cost else None,
+        output_cost_usd=cost.output_cost_usd if cost else None,
+        total_cost_usd=cost.total_cost_usd if cost else None,
+        model=result.model,
     )
 
 
@@ -313,8 +323,16 @@ def run_eval(
     eval_output_config = []
     for config in eval_input_config:
         example_top_k = config.top_k if config.top_k is not None else top_k
-        eval_output = generate_eval_output(
-            config, rag_service, example_top_k, settings.llm_embedding_model
+        # Run each example in its own copied context so per-example observability
+        # vars (cost, tokens, timings) can't leak into the next example's logs —
+        # e.g. an abstaining example inheriting the previous example's cost.
+        ctx = copy_context()
+        eval_output = ctx.run(
+            generate_eval_output,
+            config,
+            rag_service,
+            example_top_k,
+            settings.llm_embedding_model,
         )
         eval_output_config.append(eval_output)
 

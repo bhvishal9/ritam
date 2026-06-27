@@ -10,15 +10,15 @@ authors = [
 requires-python = ">=3.14"
 dependencies = [
   "contextvars>=2.4",
-  "fastapi>=0.136.3",
-  "google-genai>=2.8.0",
+  "fastapi>=0.138.0",
+  "google-genai>=2.10.0",
   "pydantic>=2.13.4",
-  "pydantic-settings>=2.14.1",
+  "pydantic-settings>=2.14.2",
   "pytest-mock>=3.15.1",
   "qdrant-client>=1.18.0",
-  "sqlalchemy>=2.0.50",
+  "sqlalchemy>=2.0.51",
   "sqlmodel>=0.0.38",
-  "starlette>=1.2.1",
+  "starlette>=1.3.1",
   "typer>=0.26.7",
   "uvicorn[standard]>=0.49.0",
 ]
@@ -109,5 +109,6 @@ layers = [
   "ritam.retrieval",
   "ritam.vector_store",
   "ritam.llm",
+  "ritam.cost",
   "ritam.observability | ritam.config",
 ]
