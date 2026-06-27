@@ -1,10 +1,10 @@
 import logging
 import time
 
+from ritam.config.settings import get_settings
 from ritam.config.variables import (
     CANDIDATE_MULTIPLIER,
     MAX_CANDIDATES,
-    SIMILARITY_SCORE_THRESHOLD,
 )
 from ritam.llm.types import LlmClient
 from ritam.observability.context import (
@@ -34,6 +34,7 @@ class Retriever:
         self, dataset: str, embedding_model: str, query: str, top_k: int
     ) -> list[ScoredChunk]:
         candidate_k = min(top_k * CANDIDATE_MULTIPLIER, MAX_CANDIDATES)
+        similarity_score = get_settings().similarity_threshold
         candidate_k_context_var.set(candidate_k)
         with stage("embed"):
             embedding_start_time = time.perf_counter()
@@ -49,9 +50,9 @@ class Retriever:
             )
             retrieve_time = round((time.perf_counter() - retrieve_start_time) * 1000, 3)
             retrieve_ms_context_var.set(retrieve_time)
-        selected_chunks = [
-            sc for sc in scored_chunks if sc.score >= SIMILARITY_SCORE_THRESHOLD
-        ][:top_k]
+        selected_chunks = [sc for sc in scored_chunks if sc.score >= similarity_score][
+            :top_k
+        ]
         chunks_return_context_var.set(len(selected_chunks))
         if scored_chunks and not selected_chunks:
             logger.info(
@@ -59,7 +60,7 @@ class Retriever:
                 extra={
                     "fields": {
                         "candidates": len(scored_chunks),
-                        "threshold": SIMILARITY_SCORE_THRESHOLD,
+                        "threshold": similarity_score,
                         "top_score": max(sc.score for sc in scored_chunks),
                     }
                 },

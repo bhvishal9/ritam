@@ -61,6 +61,10 @@ class Settings(BaseSettings):
         description="Qdrant API key",
         default=None,
     )
+    similarity_threshold: float = Field(
+        default=0.70,
+        description="Similarity threshold.",
+    )
 
     @model_validator(mode="after")
     def validate_qdrant_settings(self) -> Self:
