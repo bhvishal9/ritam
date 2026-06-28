@@ -43,7 +43,7 @@ def take_user_input() -> str:
 @app.command()
 def index(
     dataset: Annotated[str, typer.Option(help="Dataset to index")],
-    chunk_size: Annotated[int, typer.Option(help="Chunk size in characters")] = 10000,
+    chunk_size: Annotated[int, typer.Option(help="Chunk size in characters")] = 2500,
     chunk_separator: Annotated[
         str, typer.Option(help="Chunk separator string")
     ] = "\n\n",
@@ -79,7 +79,9 @@ def query(
     typer.echo("Loading the index...")
     settings = get_settings()
     llm_client = create_llm_client()
-    retriever = Retriever(llm_client, create_vector_store_client())
+    retriever = Retriever(
+        llm_client, create_vector_store_client(), settings.similarity_threshold
+    )
     rag_service = RagService(llm_client, retriever)
     query_text = take_user_input()
     result = rag_service.answer_question(

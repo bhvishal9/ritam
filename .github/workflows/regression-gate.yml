@@ -10,6 +10,23 @@ jobs:
   regression-gate:
     runs-on: ubuntu-latest
 
+    # Ephemeral Qdrant so the gate is hermetic: the index is rebuilt from the
+    # in-repo dataset every run, isolating retrieval-quality changes to the code
+    # under test rather than coupling to mutable cloud state.
+    # NOTE: pin this tag to the same Qdrant version your Cloud Run/cloud Qdrant
+    # serves, so CI fidelity tracks production.
+    services:
+      qdrant:
+        image: qdrant/qdrant:latest
+        ports:
+          - 6333:6333
+
+    env:
+      VECTOR_STORE: qdrant
+      # Loopback host → settings treats it as local and skips the API-key check,
+      # so no Qdrant secret is needed in CI.
+      QDRANT_URL: http://localhost:6333
+
     steps:
       - uses: actions/checkout@v4
 
@@ -21,17 +38,22 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
-      - name: Restore index cache
-        id: cache-index
-        uses: actions/cache@v4
-        with:
-          path: dest/
-          key: index-${{ hashFiles('assets/ducks/**') }}
+      - name: Wait for Qdrant
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:6333/readyz; then
+              echo "Qdrant ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Qdrant did not become ready in time" >&2
+          exit 1
 
       - name: Build index
-        if: steps.cache-index.outputs.cache-hit != 'true'
         env:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          SOURCE_URI: file://${{ github.workspace }}/assets
         run: uv run python src/ritam/naive_rag.py index --dataset ducks
 
       - name: Run eval

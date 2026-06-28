@@ -318,7 +318,9 @@ def run_eval(
     llm_client = create_llm_client()
     rag_service = RagService(
         llm_client,
-        Retriever(llm_client, create_vector_store_client()),
+        Retriever(
+            llm_client, create_vector_store_client(), settings.similarity_threshold
+        ),
     )
     eval_output_config = []
     for config in eval_input_config:

@@ -1,6 +1,7 @@
 from pydantic import ValidationError
 
 from ritam.api.exceptions import CustomException
+from ritam.config.settings import get_settings
 from ritam.core.factories import create_llm_client, create_vector_store_client
 from ritam.llm.types import LlmClient
 from ritam.retrieval.retriever import Retriever
@@ -39,4 +40,8 @@ def get_vector_store_client() -> VectorStoreClient:
 
 
 def get_retriever_client() -> Retriever:
-    return Retriever(get_llm_client(), get_vector_store_client())
+    try:
+        similarity_threshold = get_settings().similarity_threshold
+    except ValidationError as err:
+        raise _configuration_error(err) from err
+    return Retriever(get_llm_client(), get_vector_store_client(), similarity_threshold)

@@ -28,14 +28,19 @@ class TestRetriever:
             embedding=[0.0, 1.0],
             chunk_id=2,
         )
-        # Scores: a=1.0 (pass), b=0.707 (pass, just above 0.70 threshold), c=0.0 (fail)
+        # Scores vs. the 0.75 threshold: a=1.0 (pass), b=0.757 (pass, just above),
+        # c=0.0 (fail).
         scored_chunks = [
             ScoredChunk(score=1.0, indexed_chunk=chunk_a),
-            ScoredChunk(score=0.707, indexed_chunk=chunk_b),
+            ScoredChunk(score=0.757, indexed_chunk=chunk_b),
             ScoredChunk(score=0.0, indexed_chunk=chunk_c),
         ]
 
-        retriever = Retriever(fake_llm_client, FakeVectorStoreClient(scored_chunks))
+        retriever = Retriever(
+            fake_llm_client,
+            FakeVectorStoreClient(scored_chunks),
+            similarity_threshold=0.75,
+        )
         result = retriever.search("test_dataset", "test_model", "query", top_k=2)
 
         assert len(result) == 2

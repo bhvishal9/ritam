@@ -62,7 +62,7 @@ class Settings(BaseSettings):
         default=None,
     )
     similarity_threshold: float = Field(
-        default=0.70,
+        default=0.75,
         description="Similarity threshold.",
     )
 

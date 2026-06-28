@@ -7,7 +7,9 @@ class TestRagService:
     def test_rag_service_short_circuits_when_no_chunks(
         self, no_call_llm_client: NoCallLlmClient
     ) -> None:
-        retriever = Retriever(no_call_llm_client, FakeVectorStoreClient())
+        retriever = Retriever(
+            no_call_llm_client, FakeVectorStoreClient(), similarity_threshold=0.7
+        )
         rag_service = RagService(no_call_llm_client, retriever)
 
         result = rag_service.answer_question(

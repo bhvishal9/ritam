@@ -1,7 +1,6 @@
 import logging
 import time
 
-from ritam.config.settings import get_settings
 from ritam.config.variables import (
     CANDIDATE_MULTIPLIER,
     MAX_CANDIDATES,
@@ -26,15 +25,17 @@ class Retriever:
         self,
         llm_client: LlmClient,
         vector_store_client: VectorStoreClient,
+        similarity_threshold: float,
     ) -> None:
         self.llm_client = llm_client
         self.vector_store_client = vector_store_client
+        self.similarity_threshold = similarity_threshold
 
     def search(
         self, dataset: str, embedding_model: str, query: str, top_k: int
     ) -> list[ScoredChunk]:
         candidate_k = min(top_k * CANDIDATE_MULTIPLIER, MAX_CANDIDATES)
-        similarity_score = get_settings().similarity_threshold
+        similarity_score = self.similarity_threshold
         candidate_k_context_var.set(candidate_k)
         with stage("embed"):
             embedding_start_time = time.perf_counter()
