@@ -30,6 +30,11 @@ def _create_collection(
             field_name="dataset",
             field_schema=models.PayloadSchemaType.KEYWORD,
         )
+        client.create_payload_index(
+            collection_name,
+            field_name="doc_path",
+            field_schema=models.PayloadSchemaType.KEYWORD,
+        )
     except Exception as err:
         raise RuntimeError(
             f"Failed to create collection {collection_name}: {err}"

@@ -1,0 +1,25 @@
+=== uv run python evals/run_eval.py | env={'LLM_EMBEDDING_MODEL_NAME': 'gemini-embedding-2', 'SIMILARITY_THRESHOLD': '0.6'} | 2026-06-27T18:49:16.264273+00:00 ===
+Running eval...
+{"ts": "2026-06-27T18:49:16.883998+00:00", "level": "INFO", "logger": "__main__", "message": "eval_run_start", "dataset_file": "/Users/personal/Desktop/ritam/evals/dataset.jsonl", "examples": 78, "default_top_k": 3, "embedding_model": "gemini-embedding-2"}
+{"ts": "2026-06-27T18:49:24.003965+00:00", "level": "INFO", "logger": "ritam.retrieval.retriever", "message": "all_candidates_below_threshold", "candidates": 9, "threshold": 0.6, "top_score": 0.58604443, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 419.356, "request_id": "eval-f_easy_wave_generator", "retrieve_ms": 619.73, "top_k": 3}
+{"ts": "2026-06-27T18:49:24.004254+00:00", "level": "INFO", "logger": "ritam.core.rag_service", "message": "empty_retrieval", "abstained": true, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 419.356, "request_id": "eval-f_easy_wave_generator", "retrieve_ms": 619.73, "top_k": 3}
+{"ts": "2026-06-27T18:50:24.578046+00:00", "level": "INFO", "logger": "ritam.retrieval.retriever", "message": "all_candidates_below_threshold", "candidates": 9, "threshold": 0.6, "top_score": 0.5867577, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 526.732, "request_id": "eval-f_hard_hardshell_squeakish", "retrieve_ms": 622.994, "top_k": 3}
+{"ts": "2026-06-27T18:50:24.578224+00:00", "level": "INFO", "logger": "ritam.core.rag_service", "message": "empty_retrieval", "abstained": true, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 526.732, "request_id": "eval-f_hard_hardshell_squeakish", "retrieve_ms": 622.994, "top_k": 3}
+{"ts": "2026-06-27T18:51:37.042949+00:00", "level": "INFO", "logger": "__main__", "message": "eval_run_complete", "examples": 78, "matched": 49, "errored": 0}
+Total examples: 78
+Errored examples: 0
+
+Retrieval examples (factual + multi_hop): 63
+  Matched: 49
+  Missed: 14
+  Observed recall at 3 (matched/total): 0.778
+  Retrieval recall at 3 (matched/non-error): 0.778
+  Coverage at 3 (returned>0 among non-error): 0.968
+
+Out-of-scope examples: 15
+  Abstention rate (correctly returned nothing): 0.000
+Breakdown by query type:
+  factual: 43/45 matched (recall=0.956, errors=0)
+  multi_hop: 6/18 matched (recall=0.333, errors=0)
+  out_of_scope: 0/15 matched (recall=0.000, errors=0)
+Wrote results to results.csv and results.json

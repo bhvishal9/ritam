@@ -8,21 +8,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 2,
-    "returned_docs": [
-      "duck_technology.md",
-      "the_duck_wars.md"
-    ],
-    "returned_scores": [
-      0.6291,
-      0.6054
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0001835,
-    "output_cost_usd": 0.0001155,
-    "total_cost_usd": 0.000299,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_easy_hydro_thrusters",
@@ -34,21 +28,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "duck_technology.md",
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md"
+      "duck_technology.md"
     ],
     "returned_scores": [
-      0.8391,
-      0.7577,
-      0.7153
+      0.8382
     ],
     "error": null,
-    "input_cost_usd": 0.0007235,
-    "output_cost_usd": 7.2e-05,
-    "total_cost_usd": 0.0007955,
+    "input_cost_usd": 9.325e-05,
+    "output_cost_usd": 6.75e-05,
+    "total_cost_usd": 0.00016075,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -61,21 +51,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "duck_technology.md",
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md"
+      "duck_technology.md"
     ],
     "returned_scores": [
-      0.8307,
-      0.776,
-      0.7343
+      0.8412
     ],
     "error": null,
-    "input_cost_usd": 0.00072375,
-    "output_cost_usd": 0.0001245,
-    "total_cost_usd": 0.00084825,
+    "input_cost_usd": 9.35e-05,
+    "output_cost_usd": 8.25e-05,
+    "total_cost_usd": 0.000176,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -108,21 +94,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md",
-      "duck_technology.md"
+      "the_duck_wars.md"
     ],
     "returned_scores": [
-      0.7424,
-      0.7347,
-      0.7045
+      0.8084
     ],
     "error": null,
-    "input_cost_usd": 0.00072375,
-    "output_cost_usd": 0.0001245,
-    "total_cost_usd": 0.00084825,
+    "input_cost_usd": 0.00010225,
+    "output_cost_usd": 6.15e-05,
+    "total_cost_usd": 0.00016375,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -136,21 +118,19 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 2,
     "returned_docs": [
       "duck_wars_extended_history.md",
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md"
+      "the_duck_wars.md"
     ],
     "returned_scores": [
-      0.7581,
-      0.7456,
-      0.7441
+      0.8161,
+      0.8108
     ],
     "error": null,
-    "input_cost_usd": 0.0008955,
-    "output_cost_usd": 0.000174,
-    "total_cost_usd": 0.0010695000000000001,
+    "input_cost_usd": 0.00037575,
+    "output_cost_usd": 0.00014099999999999998,
+    "total_cost_usd": 0.00051675,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -164,21 +144,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md",
-      "duck_wars_extended_history.md"
+      "the_duck_wars.md"
     ],
     "returned_scores": [
-      0.7018,
-      0.6767,
-      0.6519
+      0.804
     ],
     "error": null,
-    "input_cost_usd": 0.00089475,
-    "output_cost_usd": 0.0003255,
-    "total_cost_usd": 0.00122025,
+    "input_cost_usd": 0.00010125,
+    "output_cost_usd": 0.00010499999999999999,
+    "total_cost_usd": 0.00020625,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -194,18 +170,18 @@
     "num_returned": 3,
     "returned_docs": [
       "galactic_gazetteer.md",
-      "isoprene_planetary_survey.md",
-      "species_compendium.md"
+      "galactic_gazetteer.md",
+      "isoprene_planetary_survey.md"
     ],
     "returned_scores": [
-      0.6763,
-      0.6538,
-      0.6294
+      0.8173,
+      0.8115,
+      0.8099
     ],
     "error": null,
-    "input_cost_usd": 0.0013485,
-    "output_cost_usd": 0.00010650000000000001,
-    "total_cost_usd": 0.0014550000000000001,
+    "input_cost_usd": 0.00081825,
+    "output_cost_usd": 6.45e-05,
+    "total_cost_usd": 0.00088275,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -218,21 +194,19 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 2,
     "returned_docs": [
       "galactic_gazetteer.md",
-      "the_duck_wars.md",
-      "quack_federation_governance.md"
+      "galactic_gazetteer.md"
     ],
     "returned_scores": [
-      0.6843,
-      0.6425,
-      0.6388
+      0.814,
+      0.8058
     ],
     "error": null,
-    "input_cost_usd": 0.00101575,
-    "output_cost_usd": 7.8e-05,
-    "total_cost_usd": 0.0010937499999999999,
+    "input_cost_usd": 0.0005545,
+    "output_cost_usd": 6.6e-05,
+    "total_cost_usd": 0.0006205,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -244,23 +218,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "galactic_gazetteer.md",
-      "species_compendium.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6291,
-      0.6281,
-      0.6258
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00134825,
-    "output_cost_usd": 0.0001155,
-    "total_cost_usd": 0.00146375,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_easy_latheria",
@@ -272,21 +238,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "the_duck_wars.md",
-      "galactic_gazetteer.md",
-      "quack_federation_governance.md"
+      "galactic_gazetteer.md"
     ],
     "returned_scores": [
-      0.7597,
-      0.7366,
-      0.7302
+      0.8007
     ],
     "error": null,
-    "input_cost_usd": 0.00101725,
-    "output_cost_usd": 0.00022349999999999998,
-    "total_cost_usd": 0.0012407499999999999,
+    "input_cost_usd": 0.00030075,
+    "output_cost_usd": 6.45e-05,
+    "total_cost_usd": 0.00036525,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -299,21 +261,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "quack_federation_governance.md",
-      "the_duck_wars.md",
-      "isoprene_planetary_survey.md"
+      "quack_federation_governance.md"
     ],
     "returned_scores": [
-      0.7719,
-      0.7031,
-      0.6918
+      0.8017
     ],
     "error": null,
-    "input_cost_usd": 0.00104775,
-    "output_cost_usd": 4.0499999999999995e-05,
-    "total_cost_usd": 0.00108825,
+    "input_cost_usd": 0.00027125,
+    "output_cost_usd": 2.7e-05,
+    "total_cost_usd": 0.00029825,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -325,21 +283,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 2,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6939,
-      0.6127
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00095425,
-    "output_cost_usd": 1.8e-05,
-    "total_cost_usd": 0.00097225,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_easy_five_departments",
@@ -350,23 +302,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6908,
-      0.6337,
-      0.6089
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00150625,
-    "output_cost_usd": 0.000165,
-    "total_cost_usd": 0.00167125,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_easy_duck_lifespan",
@@ -377,23 +321,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "species_compendium.md",
-      "isoprene_planetary_survey.md",
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.703,
-      0.6883,
-      0.6853
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.001184,
-    "output_cost_usd": 2.1e-05,
-    "total_cost_usd": 0.001205,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_easy_echo_folk_comms",
@@ -404,240 +340,20 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "species_compendium.md",
-      "isoprene_planetary_survey.md",
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6488,
-      0.621,
-      0.6201
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0011845,
-    "output_cost_usd": 4.0499999999999995e-05,
-    "total_cost_usd": 0.001225,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_easy_splashport_pop",
     "dataset": "ducks",
     "query": "What is the population of Splashport and where is the city located?",
-    "expected_docs": [
-      "isoprene_planetary_survey.md"
-    ],
-    "query_type": "factual",
-    "top_k": 3,
-    "matched": true,
-    "num_returned": 2,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6391,
-      0.6024
-    ],
-    "error": null,
-    "input_cost_usd": 0.000955,
-    "output_cost_usd": 4.2e-05,
-    "total_cost_usd": 0.000997,
-    "model": "gemini-3.1-flash-lite"
-  },
-  {
-    "id": "f_easy_polymer_share",
-    "dataset": "ducks",
-    "query": "What share of Isoprene's economy is accounted for by polymer extraction and processing?",
-    "expected_docs": [
-      "isoprene_planetary_survey.md"
-    ],
-    "query_type": "factual",
-    "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.7415,
-      0.7254,
-      0.6964
-    ],
-    "error": null,
-    "input_cost_usd": 0.00147325,
-    "output_cost_usd": 2.7e-05,
-    "total_cost_usd": 0.0015002499999999998,
-    "model": "gemini-3.1-flash-lite"
-  },
-  {
-    "id": "f_easy_buoyant_capacity",
-    "dataset": "ducks",
-    "query": "What is the sustained capital-vessel construction capacity of the Buoyant Yards per cycle?",
-    "expected_docs": [
-      "isoprene_planetary_survey.md"
-    ],
-    "query_type": "factual",
-    "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6933,
-      0.6665,
-      0.6528
-    ],
-    "error": null,
-    "input_cost_usd": 0.00150725,
-    "output_cost_usd": 3.0000000000000004e-05,
-    "total_cost_usd": 0.00153725,
-    "model": "gemini-3.1-flash-lite"
-  },
-  {
-    "id": "f_easy_way_of_tides_pct",
-    "dataset": "ducks",
-    "query": "What percentage of Isoprene's population practices the Way of the Tides?",
-    "expected_docs": [
-      "isoprene_planetary_survey.md"
-    ],
-    "query_type": "factual",
-    "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.7206,
-      0.7191,
-      0.6844
-    ],
-    "error": null,
-    "input_cost_usd": 0.001473,
-    "output_cost_usd": 3.45e-05,
-    "total_cost_usd": 0.0015075,
-    "model": "gemini-3.1-flash-lite"
-  },
-  {
-    "id": "f_med_battlebill",
-    "dataset": "ducks",
-    "query": "What was the Mark-VII Battlebill and what wartime problem did it solve?",
-    "expected_docs": [
-      "duck_wars_extended_history.md"
-    ],
-    "query_type": "factual",
-    "top_k": 3,
-    "matched": true,
-    "num_returned": 2,
-    "returned_docs": [
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.6077,
-      0.6028
-    ],
-    "error": null,
-    "input_cost_usd": 0.00064075,
-    "output_cost_usd": 9.449999999999999e-05,
-    "total_cost_usd": 0.00073525,
-    "model": "gemini-3.1-flash-lite"
-  },
-  {
-    "id": "f_med_loofah_accord_year",
-    "dataset": "ducks",
-    "query": "In what standard cycle was the Loofah Accord signed?",
-    "expected_docs": [
-      "duck_wars_extended_history.md"
-    ],
-    "query_type": "factual",
-    "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "quack_federation_governance.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.6606,
-      0.6531,
-      0.6491
-    ],
-    "error": null,
-    "input_cost_usd": 0.00117775,
-    "output_cost_usd": 2.7e-05,
-    "total_cost_usd": 0.0012047499999999999,
-    "model": "gemini-3.1-flash-lite"
-  },
-  {
-    "id": "f_med_long_withdrawal",
-    "dataset": "ducks",
-    "query": "What was the Long Withdrawal and which worlds anchored the resulting defensive arc?",
-    "expected_docs": [
-      "duck_wars_extended_history.md"
-    ],
-    "query_type": "factual",
-    "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.6451,
-      0.6359,
-      0.6293
-    ],
-    "error": null,
-    "input_cost_usd": 0.00089475,
-    "output_cost_usd": 0.0001455,
-    "total_cost_usd": 0.00104025,
-    "model": "gemini-3.1-flash-lite"
-  },
-  {
-    "id": "f_med_reedwater_act",
-    "dataset": "ducks",
-    "query": "What does the Reedwater Conservation Act protect, and roughly how many harvesting licenses are issued per cycle?",
-    "expected_docs": [
-      "isoprene_planetary_survey.md"
-    ],
-    "query_type": "factual",
-    "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.665,
-      0.6646,
-      0.6634
-    ],
-    "error": null,
-    "input_cost_usd": 0.0012975,
-    "output_cost_usd": 9.15e-05,
-    "total_cost_usd": 0.001389,
-    "model": "gemini-3.1-flash-lite"
-  },
-  {
-    "id": "f_med_stillwater_protocol",
-    "dataset": "ducks",
-    "query": "What is the Stillwater Protocol and what is the designated primary continuity-of-government site?",
     "expected_docs": [
       "isoprene_planetary_survey.md"
     ],
@@ -654,6 +370,166 @@
     "model": null
   },
   {
+    "id": "f_easy_polymer_share",
+    "dataset": "ducks",
+    "query": "What share of Isoprene's economy is accounted for by polymer extraction and processing?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8011
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002725,
+    "output_cost_usd": 2.7e-05,
+    "total_cost_usd": 0.0002995,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_buoyant_capacity",
+    "dataset": "ducks",
+    "query": "What is the sustained capital-vessel construction capacity of the Buoyant Yards per cycle?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "f_easy_way_of_tides_pct",
+    "dataset": "ducks",
+    "query": "What percentage of Isoprene's population practices the Way of the Tides?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "f_med_battlebill",
+    "dataset": "ducks",
+    "query": "What was the Mark-VII Battlebill and what wartime problem did it solve?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "f_med_loofah_accord_year",
+    "dataset": "ducks",
+    "query": "In what standard cycle was the Loofah Accord signed?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "f_med_long_withdrawal",
+    "dataset": "ducks",
+    "query": "What was the Long Withdrawal and which worlds anchored the resulting defensive arc?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "f_med_reedwater_act",
+    "dataset": "ducks",
+    "query": "What does the Reedwater Conservation Act protect, and roughly how many harvesting licenses are issued per cycle?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "f_med_stillwater_protocol",
+    "dataset": "ducks",
+    "query": "What is the Stillwater Protocol and what is the designated primary continuity-of-government site?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8105
+    ],
+    "error": null,
+    "input_cost_usd": 0.00013975,
+    "output_cost_usd": 7.35e-05,
+    "total_cost_usd": 0.00021325,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
     "id": "f_med_trans_continental_canal",
     "dataset": "ducks",
     "query": "How long is the Trans-Continental Canal and what does it connect?",
@@ -662,23 +538,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md",
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6423,
-      0.6145,
-      0.6041
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00150625,
-    "output_cost_usd": 4.8e-05,
-    "total_cost_usd": 0.00155425,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_med_first_paddler",
@@ -689,19 +557,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 1,
-    "returned_docs": [
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6361
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00038525,
-    "output_cost_usd": 3.7500000000000003e-05,
-    "total_cost_usd": 0.00042275,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_med_hydromarch_term",
@@ -712,21 +576,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 2,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6794,
-      0.6098
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0009565,
-    "output_cost_usd": 2.7e-05,
-    "total_cost_usd": 0.0009835,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_med_ripple_protocol",
@@ -737,23 +595,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6796,
-      0.6202,
-      0.6073
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00129625,
-    "output_cost_usd": 6.9e-05,
-    "total_cost_usd": 0.0013652500000000001,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_med_reedwater_league",
@@ -765,21 +615,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md",
       "isoprene_planetary_survey.md"
     ],
     "returned_scores": [
-      0.7048,
-      0.6606,
-      0.6599
+      0.8282
     ],
     "error": null,
-    "input_cost_usd": 0.00129775,
-    "output_cost_usd": 5.1e-05,
-    "total_cost_usd": 0.0013487500000000001,
+    "input_cost_usd": 0.0002965,
+    "output_cost_usd": 8.25e-05,
+    "total_cost_usd": 0.000379,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -791,19 +637,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 1,
-    "returned_docs": [
-      "species_compendium.md"
-    ],
-    "returned_scores": [
-      0.6259
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00024,
-    "output_cost_usd": 0.000138,
-    "total_cost_usd": 0.00037799999999999997,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_med_precursor_tier",
@@ -814,19 +656,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 1,
-    "returned_docs": [
-      "species_compendium.md"
-    ],
-    "returned_scores": [
-      0.6564
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00024125,
-    "output_cost_usd": 4.9500000000000004e-05,
-    "total_cost_usd": 0.00029075,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_med_pondreader_framework",
@@ -837,23 +675,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "duck_wars_extended_history.md",
-      "species_compendium.md"
-    ],
-    "returned_scores": [
-      0.7011,
-      0.6468,
-      0.6399
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00103425,
-    "output_cost_usd": 9.300000000000001e-05,
-    "total_cost_usd": 0.00112725,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_med_first_splish_splash",
@@ -865,21 +695,19 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 2,
     "returned_docs": [
       "duck_wars_extended_history.md",
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md"
+      "the_duck_wars.md"
     ],
     "returned_scores": [
-      0.7286,
-      0.726,
-      0.7033
+      0.8552,
+      0.8191
     ],
     "error": null,
-    "input_cost_usd": 0.00089675,
-    "output_cost_usd": 7.950000000000001e-05,
-    "total_cost_usd": 0.00097625,
+    "input_cost_usd": 0.000377,
+    "output_cost_usd": 8.099999999999999e-05,
+    "total_cost_usd": 0.00045799999999999997,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -891,21 +719,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 2,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6207,
-      0.6
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00095425,
-    "output_cost_usd": 2.7e-05,
-    "total_cost_usd": 0.00098125,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_hard_squeak_minor_vs_others",
@@ -916,23 +738,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "galactic_gazetteer.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.66,
-      0.653,
-      0.6511
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00146175,
-    "output_cost_usd": 3.9e-05,
-    "total_cost_usd": 0.00150075,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_hard_bubble_disambiguation",
@@ -944,21 +758,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "duck_technology.md",
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md"
+      "duck_technology.md"
     ],
     "returned_scores": [
-      0.6772,
-      0.6395,
-      0.6057
+      0.8241
     ],
     "error": null,
-    "input_cost_usd": 0.000724,
+    "input_cost_usd": 9.375e-05,
     "output_cost_usd": 6e-06,
-    "total_cost_usd": 0.0007300000000000001,
+    "total_cost_usd": 9.975e-05,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -970,19 +780,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 1,
-    "returned_docs": [
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6024
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.000581,
-    "output_cost_usd": 2.55e-05,
-    "total_cost_usd": 0.0006065,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_hard_bristlers_reclassified",
@@ -994,21 +800,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "species_compendium.md",
-      "duck_wars_extended_history.md",
-      "isoprene_planetary_survey.md"
+      "species_compendium.md"
     ],
     "returned_scores": [
-      0.6726,
-      0.6497,
-      0.615
+      0.8084
     ],
     "error": null,
-    "input_cost_usd": 0.001351,
+    "input_cost_usd": 0.00024175,
     "output_cost_usd": 4.6500000000000005e-05,
-    "total_cost_usd": 0.0013975,
+    "total_cost_usd": 0.00028825,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1020,23 +822,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md",
-      "species_compendium.md"
-    ],
-    "returned_scores": [
-      0.6618,
-      0.6391,
-      0.6347
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00118525,
-    "output_cost_usd": 0.0001005,
-    "total_cost_usd": 0.00128575,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_hard_first_year_losses",
@@ -1052,17 +846,17 @@
     "returned_docs": [
       "the_duck_wars.md",
       "duck_wars_extended_history.md",
-      "duck_technology.md"
+      "duck_wars_extended_history.md"
     ],
     "returned_scores": [
-      0.8074,
-      0.76,
-      0.7378
+      0.8239,
+      0.8221,
+      0.8158
     ],
     "error": null,
-    "input_cost_usd": 0.000724,
+    "input_cost_usd": 0.000634,
     "output_cost_usd": 2.4e-05,
-    "total_cost_usd": 0.0007480000000000001,
+    "total_cost_usd": 0.0006580000000000001,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1075,21 +869,17 @@
     "query_type": "factual",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "duck_wars_extended_history.md",
-      "species_compendium.md",
-      "the_duck_wars.md"
+      "duck_wars_extended_history.md"
     ],
     "returned_scores": [
-      0.6782,
-      0.663,
-      0.6372
+      0.802
     ],
     "error": null,
-    "input_cost_usd": 0.000873,
-    "output_cost_usd": 4.8e-05,
-    "total_cost_usd": 0.0009209999999999999,
+    "input_cost_usd": 0.0002645,
+    "output_cost_usd": 4.9500000000000004e-05,
+    "total_cost_usd": 0.000314,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1102,21 +892,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 2,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6753,
-      0.6175
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0009535,
-    "output_cost_usd": 3.15e-05,
-    "total_cost_usd": 0.000985,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_hard_squeak_grass",
@@ -1127,23 +911,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6927,
-      0.677,
-      0.6149
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00147325,
-    "output_cost_usd": 4.6500000000000005e-05,
-    "total_cost_usd": 0.00151975,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "f_hard_golden_ripple",
@@ -1154,23 +930,15 @@
     ],
     "query_type": "factual",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md",
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6715,
-      0.6377,
-      0.635
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.001297,
-    "output_cost_usd": 6.45e-05,
-    "total_cost_usd": 0.0013614999999999999,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_waddles_birth_and_role",
@@ -1183,21 +951,17 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "duck_wars_extended_history.md",
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md"
+      "the_duck_wars.md"
     ],
     "returned_scores": [
-      0.7667,
-      0.7595,
-      0.7245
+      0.8048
     ],
     "error": null,
-    "input_cost_usd": 0.000897,
-    "output_cost_usd": 0.0001575,
-    "total_cost_usd": 0.0010545,
+    "input_cost_usd": 0.0001035,
+    "output_cost_usd": 9.900000000000001e-05,
+    "total_cost_usd": 0.0002025,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1210,23 +974,15 @@
     ],
     "query_type": "multi_hop",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "species_compendium.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.6931,
-      0.6417,
-      0.6378
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0010345,
-    "output_cost_usd": 0.0001845,
-    "total_cost_usd": 0.001219,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_polymer_industry_and_compact",
@@ -1239,22 +995,14 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.7373,
-      0.7259,
-      0.6802
-    ],
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0014755,
-    "output_cost_usd": 7.500000000000001e-05,
-    "total_cost_usd": 0.0015505,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_wave_rider_post_war",
@@ -1266,23 +1014,15 @@
     ],
     "query_type": "multi_hop",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "duck_wars_extended_history.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.7275,
-      0.7054,
-      0.6849
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00118275,
-    "output_cost_usd": 0.000102,
-    "total_cost_usd": 0.00128475,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_battlebill_lineage",
@@ -1295,22 +1035,14 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.6502,
-      0.6474,
-      0.6473
-    ],
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.001019,
-    "output_cost_usd": 0.000135,
-    "total_cost_usd": 0.0011539999999999999,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_echo_folk_collective_seat",
@@ -1322,23 +1054,15 @@
     ],
     "query_type": "multi_hop",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "species_compendium.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6941,
-      0.6528,
-      0.6229
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00118675,
-    "output_cost_usd": 0.0001185,
-    "total_cost_usd": 0.00130525,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_squeak_drive_origin",
@@ -1350,22 +1074,18 @@
     ],
     "query_type": "multi_hop",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
+    "matched": false,
+    "num_returned": 1,
     "returned_docs": [
-      "duck_technology.md",
-      "galactic_gazetteer.md",
-      "isoprene_planetary_survey.md"
+      "duck_technology.md"
     ],
     "returned_scores": [
-      0.7013,
-      0.6684,
-      0.6603
+      0.8095
     ],
     "error": null,
-    "input_cost_usd": 0.0012065,
-    "output_cost_usd": 0.0001215,
-    "total_cost_usd": 0.0013280000000000002,
+    "input_cost_usd": 9.725e-05,
+    "output_cost_usd": 0.00010499999999999999,
+    "total_cost_usd": 0.00020225,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1379,21 +1099,17 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "duck_wars_extended_history.md",
-      "duck_wars_extended_history.md",
       "the_duck_wars.md"
     ],
     "returned_scores": [
-      0.7808,
-      0.7752,
-      0.7683
+      0.8132
     ],
     "error": null,
-    "input_cost_usd": 0.00089775,
-    "output_cost_usd": 0.0002325,
-    "total_cost_usd": 0.00113025,
+    "input_cost_usd": 0.00010425,
+    "output_cost_usd": 6.9e-05,
+    "total_cost_usd": 0.00017325,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1407,21 +1123,19 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
+    "num_returned": 2,
     "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md",
       "isoprene_planetary_survey.md"
     ],
     "returned_scores": [
-      0.7374,
-      0.702,
-      0.692
+      0.8153,
+      0.81
     ],
     "error": null,
-    "input_cost_usd": 0.001475,
-    "output_cost_usd": 0.000123,
-    "total_cost_usd": 0.001598,
+    "input_cost_usd": 0.00039475,
+    "output_cost_usd": 5.5499999999999994e-05,
+    "total_cost_usd": 0.00045025,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1435,22 +1149,14 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.7375,
-      0.6699,
-      0.6525
-    ],
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00149475,
-    "output_cost_usd": 2.4e-05,
-    "total_cost_usd": 0.00151875,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_drainer_against_spong_biology",
@@ -1463,22 +1169,14 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "the_duck_wars.md",
-      "duck_technology.md"
-    ],
-    "returned_scores": [
-      0.7133,
-      0.7068,
-      0.6735
-    ],
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00072525,
-    "output_cost_usd": 0.0001395,
-    "total_cost_usd": 0.00086475,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_bar_precursor",
@@ -1490,23 +1188,15 @@
     ],
     "query_type": "multi_hop",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "species_compendium.md",
-      "galactic_gazetteer.md",
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6878,
-      0.6199,
-      0.6148
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.001155,
-    "output_cost_usd": 0.0001275,
-    "total_cost_usd": 0.0012825,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_reedwater_league_ancestry",
@@ -1519,21 +1209,19 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": true,
-    "num_returned": 3,
+    "num_returned": 2,
     "returned_docs": [
       "quack_federation_governance.md",
-      "isoprene_planetary_survey.md",
-      "species_compendium.md"
+      "isoprene_planetary_survey.md"
     ],
     "returned_scores": [
-      0.7425,
-      0.6597,
-      0.6574
+      0.8051,
+      0.805
     ],
     "error": null,
-    "input_cost_usd": 0.00118675,
-    "output_cost_usd": 0.000309,
-    "total_cost_usd": 0.0014957500000000001,
+    "input_cost_usd": 0.00055675,
+    "output_cost_usd": 0.0002745,
+    "total_cost_usd": 0.00083125,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1547,22 +1235,14 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "quack_federation_governance.md",
-      "species_compendium.md"
-    ],
-    "returned_scores": [
-      0.6618,
-      0.6506,
-      0.6471
-    ],
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00115475,
-    "output_cost_usd": 0.0001095,
-    "total_cost_usd": 0.00126425,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_sap_drinker_polymer",
@@ -1575,21 +1255,17 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md",
       "isoprene_planetary_survey.md"
     ],
     "returned_scores": [
-      0.7508,
-      0.7259,
-      0.6928
+      0.8146
     ],
     "error": null,
-    "input_cost_usd": 0.00147575,
-    "output_cost_usd": 6.6e-05,
-    "total_cost_usd": 0.0015417500000000002,
+    "input_cost_usd": 0.00031,
+    "output_cost_usd": 8.55e-05,
+    "total_cost_usd": 0.0003955,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1603,22 +1279,14 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "duck_wars_extended_history.md",
-      "the_duck_wars.md"
-    ],
-    "returned_scores": [
-      0.6935,
-      0.6819,
-      0.6806
-    ],
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.000898,
-    "output_cost_usd": 0.00014849999999999998,
-    "total_cost_usd": 0.0010465000000000001,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_waddles_legacy",
@@ -1631,22 +1299,14 @@
     "query_type": "multi_hop",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "the_duck_wars.md",
-      "duck_technology.md"
-    ],
-    "returned_scores": [
-      0.6951,
-      0.6777,
-      0.6689
-    ],
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0007235,
-    "output_cost_usd": 3.45e-05,
-    "total_cost_usd": 0.000758,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "m_stillwater_lineage",
@@ -1658,23 +1318,15 @@
     ],
     "query_type": "multi_hop",
     "top_k": 3,
-    "matched": true,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "the_duck_wars.md",
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.7133,
-      0.6935,
-      0.6819
-    ],
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00101775,
-    "output_cost_usd": 4.8e-05,
-    "total_cost_usd": 0.00106575,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_hydromarch_salary",
@@ -1683,19 +1335,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 1,
-    "returned_docs": [
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6389
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0003845,
-    "output_cost_usd": 2.55e-05,
-    "total_cost_usd": 0.00041000000000000005,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_spong_population",
@@ -1704,23 +1352,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "quack_federation_governance.md",
-      "the_duck_wars.md"
-    ],
-    "returned_scores": [
-      0.6506,
-      0.6438,
-      0.6436
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00101525,
-    "output_cost_usd": 3.15e-05,
-    "total_cost_usd": 0.0010467500000000002,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_precursor_morphology",
@@ -1729,21 +1369,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 2,
-    "returned_docs": [
-      "species_compendium.md",
-      "the_duck_wars.md"
-    ],
-    "returned_scores": [
-      0.6841,
-      0.6075
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0003295,
-    "output_cost_usd": 1.35e-05,
-    "total_cost_usd": 0.000343,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_wisp_memory_mechanism",
@@ -1752,19 +1386,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 1,
-    "returned_docs": [
-      "species_compendium.md"
-    ],
-    "returned_scores": [
-      0.6283
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0002405,
-    "output_cost_usd": 4.9500000000000004e-05,
-    "total_cost_usd": 0.00029,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_suds_post_armistice",
@@ -1773,23 +1403,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "duck_wars_extended_history.md",
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.7478,
-      0.7327,
-      0.7226
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0008965,
-    "output_cost_usd": 6.9e-05,
-    "total_cost_usd": 0.0009655,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_vice_hydromarch",
@@ -1799,21 +1421,17 @@
     "query_type": "out_of_scope",
     "top_k": 3,
     "matched": false,
-    "num_returned": 3,
+    "num_returned": 1,
     "returned_docs": [
-      "quack_federation_governance.md",
-      "the_duck_wars.md",
-      "duck_technology.md"
+      "quack_federation_governance.md"
     ],
     "returned_scores": [
-      0.7489,
-      0.7058,
-      0.6706
+      0.8076
     ],
     "error": null,
-    "input_cost_usd": 0.00055975,
-    "output_cost_usd": 7.049999999999999e-05,
-    "total_cost_usd": 0.0006302500000000001,
+    "input_cost_usd": 0.000271,
+    "output_cost_usd": 5.5499999999999994e-05,
+    "total_cost_usd": 0.00032649999999999997,
     "model": "gemini-3.1-flash-lite"
   },
   {
@@ -1823,23 +1441,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "the_duck_wars.md",
-      "duck_wars_extended_history.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.6793,
-      0.6715,
-      0.6544
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00089525,
-    "output_cost_usd": 0.000138,
-    "total_cost_usd": 0.0010332499999999999,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_splashport_uni_year",
@@ -1848,23 +1458,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md",
-      "duck_wars_extended_history.md"
-    ],
-    "returned_scores": [
-      0.6421,
-      0.6321,
-      0.6247
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00149325,
-    "output_cost_usd": 6.3e-05,
-    "total_cost_usd": 0.00155625,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_riverdrake_population",
@@ -1873,23 +1475,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.7266,
-      0.678,
-      0.6508
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.001473,
-    "output_cost_usd": 3.45e-05,
-    "total_cost_usd": 0.0015075,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_paddle_populations",
@@ -1898,21 +1492,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 2,
-    "returned_docs": [
-      "isoprene_planetary_survey.md",
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6356,
-      0.6263
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0009545,
-    "output_cost_usd": 5.4e-05,
-    "total_cost_usd": 0.0010085,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_hydromarch_age",
@@ -1921,23 +1509,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "isoprene_planetary_survey.md",
-      "species_compendium.md"
-    ],
-    "returned_scores": [
-      0.6605,
-      0.6313,
-      0.6069
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0011845,
-    "output_cost_usd": 3.0000000000000004e-05,
-    "total_cost_usd": 0.0012145,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_mark_v_failure_rate",
@@ -1963,19 +1543,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 1,
-    "returned_docs": [
-      "quack_federation_governance.md"
-    ],
-    "returned_scores": [
-      0.6405
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.00038425,
-    "output_cost_usd": 4.6500000000000005e-05,
-    "total_cost_usd": 0.00043075,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_federation_total_population",
@@ -1984,23 +1560,15 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "quack_federation_governance.md",
-      "the_duck_wars.md",
-      "species_compendium.md"
-    ],
-    "returned_scores": [
-      0.7269,
-      0.7185,
-      0.7113
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0007065,
-    "output_cost_usd": 0.0001035,
-    "total_cost_usd": 0.00081,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   },
   {
     "id": "o_glossy_feather_fate",
@@ -2009,22 +1577,14 @@
     "expected_docs": [],
     "query_type": "out_of_scope",
     "top_k": 3,
-    "matched": false,
-    "num_returned": 3,
-    "returned_docs": [
-      "species_compendium.md",
-      "duck_wars_extended_history.md",
-      "isoprene_planetary_survey.md"
-    ],
-    "returned_scores": [
-      0.6562,
-      0.655,
-      0.6546
-    ],
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
     "error": null,
-    "input_cost_usd": 0.0013495,
-    "output_cost_usd": 8.25e-05,
-    "total_cost_usd": 0.0014320000000000001,
-    "model": "gemini-3.1-flash-lite"
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
   }
 ]

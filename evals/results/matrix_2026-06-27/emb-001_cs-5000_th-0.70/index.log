@@ -1,0 +1,9 @@
+=== uv run python -m ritam.naive_rag index --dataset ducks --chunk-size 5000 | env={'LLM_EMBEDDING_MODEL_NAME': 'gemini-embedding-001'} | 2026-06-27T17:47:25.400484+00:00 ===
+Indexing dataset 'ducks' with chunk size 5000 and separator '
+
+'...
+{"ts": "2026-06-27T17:47:26.140455+00:00", "level": "INFO", "logger": "ritam.core.ingestion_service", "message": "ingest_start", "dataset": "ducks", "embedding_model": "gemini-embedding-001", "request_id": "cli-5f9637d0-37bb-44f8-87d6-3470a10f631d"}
+{"ts": "2026-06-27T17:47:26.142441+00:00", "level": "INFO", "logger": "ritam.document_source.local_document_source", "message": "Loading /Users/personal/Desktop/ritam/assets/ducks", "request_id": "cli-5f9637d0-37bb-44f8-87d6-3470a10f631d"}
+{"ts": "2026-06-27T17:47:26.144230+00:00", "level": "INFO", "logger": "ritam.core.ingestion_service", "message": "ingest_diff", "new": 0, "updated": 7, "unchanged": 0, "deleted": 0, "request_id": "cli-5f9637d0-37bb-44f8-87d6-3470a10f631d"}
+{"ts": "2026-06-27T17:47:37.454660+00:00", "level": "INFO", "logger": "ritam.core.ingestion_service", "message": "ingest_complete", "dataset": "ducks", "embedding_model": "gemini-embedding-001", "new_docs": 0, "updated_docs": 7, "unchanged_docs": 0, "deleted_docs": 0, "embedded_chunks": 17, "request_id": "cli-5f9637d0-37bb-44f8-87d6-3470a10f631d"}
+Ingestion complete: 0 new, 7 updated, 0 unchanged, 0 deleted, 17 chunks embedded.

@@ -1,0 +1,21 @@
+=== uv run python evals/run_eval.py | env={'LLM_EMBEDDING_MODEL_NAME': 'gemini-embedding-001', 'SIMILARITY_THRESHOLD': '0.7'} | 2026-06-27T17:54:52.097752+00:00 ===
+Running eval...
+{"ts": "2026-06-27T17:54:52.697439+00:00", "level": "INFO", "logger": "__main__", "message": "eval_run_start", "dataset_file": "/Users/personal/Desktop/ritam/evals/dataset.jsonl", "examples": 78, "default_top_k": 3, "embedding_model": "gemini-embedding-001"}
+{"ts": "2026-06-27T17:57:21.166014+00:00", "level": "INFO", "logger": "__main__", "message": "eval_run_complete", "examples": 78, "matched": 44, "errored": 0}
+Total examples: 78
+Errored examples: 0
+
+Retrieval examples (factual + multi_hop): 63
+  Matched: 44
+  Missed: 19
+  Observed recall at 3 (matched/total): 0.698
+  Retrieval recall at 3 (matched/non-error): 0.698
+  Coverage at 3 (returned>0 among non-error): 1.000
+
+Out-of-scope examples: 15
+  Abstention rate (correctly returned nothing): 0.000
+Breakdown by query type:
+  factual: 40/45 matched (recall=0.889, errors=0)
+  multi_hop: 4/18 matched (recall=0.222, errors=0)
+  out_of_scope: 0/15 matched (recall=0.000, errors=0)
+Wrote results to results.csv and results.json

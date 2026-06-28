@@ -1,0 +1,66 @@
+{
+  "embedding_model": "gemini-embedding-001",
+  "chunk_size": 10000,
+  "similarity_threshold": 0.75,
+  "top_k_default": 3,
+  "dataset": "ducks",
+  "llm_model": "gemini-3.1-flash-lite",
+  "git_sha": "5e91b8f",
+  "timestamp_utc": "2026-06-27T17:59:29.131881+00:00",
+  "eval_exit_code": 0,
+  "eval_elapsed_s": 127.8,
+  "index": {
+    "new_docs": 0,
+    "updated_docs": 7,
+    "unchanged_docs": 0,
+    "deleted_docs": 0,
+    "embedded_chunks": 10,
+    "index_elapsed_s": 8.3
+  },
+  "metrics": {
+    "buckets": {
+      "f_easy": {
+        "matched": 19,
+        "total": 20,
+        "errored": 0,
+        "recall": 0.95
+      },
+      "f_med": {
+        "matched": 7,
+        "total": 15,
+        "errored": 0,
+        "recall": 0.4667
+      },
+      "f_hard": {
+        "matched": 6,
+        "total": 10,
+        "errored": 0,
+        "recall": 0.6
+      },
+      "multi_hop": {
+        "matched": 2,
+        "total": 18,
+        "errored": 0,
+        "recall": 0.1111
+      },
+      "out_of_scope": {
+        "matched": 6,
+        "total": 15,
+        "errored": 0,
+        "recall": 0.4
+      }
+    },
+    "observed_recall": 0.5397,
+    "retrieval_recall": 0.5397,
+    "coverage": 0.8571,
+    "abstention_rate": 0.4,
+    "errored": 0,
+    "total": 78,
+    "cost": {
+      "total_usd": 0.041117,
+      "input_usd": 0.036064,
+      "output_usd": 0.005052,
+      "per_query_usd": 0.000527
+    }
+  }
+}

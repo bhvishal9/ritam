@@ -1,0 +1,31 @@
+=== uv run python evals/run_eval.py | env={'LLM_EMBEDDING_MODEL_NAME': 'gemini-embedding-001', 'SIMILARITY_THRESHOLD': '0.75'} | 2026-06-27T17:49:58.440476+00:00 ===
+Running eval...
+{"ts": "2026-06-27T17:49:59.054948+00:00", "level": "INFO", "logger": "__main__", "message": "eval_run_start", "dataset_file": "/Users/personal/Desktop/ritam/evals/dataset.jsonl", "examples": 78, "default_top_k": 3, "embedding_model": "gemini-embedding-001"}
+{"ts": "2026-06-27T17:50:46.088226+00:00", "level": "INFO", "logger": "ritam.retrieval.retriever", "message": "all_candidates_below_threshold", "candidates": 9, "threshold": 0.75, "top_score": 0.7370593, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 371.216, "request_id": "eval-f_med_trans_continental_canal", "retrieve_ms": 607.565, "top_k": 3}
+{"ts": "2026-06-27T17:50:46.088644+00:00", "level": "INFO", "logger": "ritam.core.rag_service", "message": "empty_retrieval", "abstained": true, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 371.216, "request_id": "eval-f_med_trans_continental_canal", "retrieve_ms": 607.565, "top_k": 3}
+{"ts": "2026-06-27T17:51:00.809786+00:00", "level": "INFO", "logger": "ritam.retrieval.retriever", "message": "all_candidates_below_threshold", "candidates": 9, "threshold": 0.75, "top_score": 0.74940795, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 391.505, "request_id": "eval-f_med_glassine_uni_year", "retrieve_ms": 615.748, "top_k": 3}
+{"ts": "2026-06-27T17:51:00.812334+00:00", "level": "INFO", "logger": "ritam.core.rag_service", "message": "empty_retrieval", "abstained": true, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 391.505, "request_id": "eval-f_med_glassine_uni_year", "retrieve_ms": 615.748, "top_k": 3}
+{"ts": "2026-06-27T17:51:04.654757+00:00", "level": "INFO", "logger": "ritam.retrieval.retriever", "message": "all_candidates_below_threshold", "candidates": 9, "threshold": 0.75, "top_score": 0.74629986, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 377.799, "request_id": "eval-f_hard_hardshell_squeakish", "retrieve_ms": 499.483, "top_k": 3}
+{"ts": "2026-06-27T17:51:04.655042+00:00", "level": "INFO", "logger": "ritam.core.rag_service", "message": "empty_retrieval", "abstained": true, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 377.799, "request_id": "eval-f_hard_hardshell_squeakish", "retrieve_ms": 499.483, "top_k": 3}
+{"ts": "2026-06-27T17:51:49.769995+00:00", "level": "INFO", "logger": "ritam.retrieval.retriever", "message": "all_candidates_below_threshold", "candidates": 9, "threshold": 0.75, "top_score": 0.7438241, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 448.504, "request_id": "eval-o_hydromarch_salary", "retrieve_ms": 611.504, "top_k": 3}
+{"ts": "2026-06-27T17:51:49.770395+00:00", "level": "INFO", "logger": "ritam.core.rag_service", "message": "empty_retrieval", "abstained": true, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 448.504, "request_id": "eval-o_hydromarch_salary", "retrieve_ms": 611.504, "top_k": 3}
+{"ts": "2026-06-27T17:51:50.572923+00:00", "level": "INFO", "logger": "ritam.retrieval.retriever", "message": "all_candidates_below_threshold", "candidates": 9, "threshold": 0.75, "top_score": 0.74769396, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 424.278, "request_id": "eval-o_spong_population", "retrieve_ms": 378.072, "top_k": 3}
+{"ts": "2026-06-27T17:51:50.573338+00:00", "level": "INFO", "logger": "ritam.core.rag_service", "message": "empty_retrieval", "abstained": true, "candidate_k": 9, "chunks_returned": 0, "dataset": "ducks", "embed_ms": 424.278, "request_id": "eval-o_spong_population", "retrieve_ms": 378.072, "top_k": 3}
+{"ts": "2026-06-27T17:52:11.818747+00:00", "level": "INFO", "logger": "__main__", "message": "eval_run_complete", "examples": 78, "matched": 50, "errored": 0}
+Total examples: 78
+Errored examples: 0
+
+Retrieval examples (factual + multi_hop): 63
+  Matched: 48
+  Missed: 15
+  Observed recall at 3 (matched/total): 0.762
+  Retrieval recall at 3 (matched/non-error): 0.762
+  Coverage at 3 (returned>0 among non-error): 0.952
+
+Out-of-scope examples: 15
+  Abstention rate (correctly returned nothing): 0.133
+Breakdown by query type:
+  factual: 41/45 matched (recall=0.911, errors=0)
+  multi_hop: 7/18 matched (recall=0.389, errors=0)
+  out_of_scope: 2/15 matched (recall=0.133, errors=0)
+Wrote results to results.csv and results.json

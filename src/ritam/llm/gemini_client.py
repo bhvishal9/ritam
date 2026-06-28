@@ -2,7 +2,7 @@ import logging
 
 from google import genai
 from google.genai import types
-from google.genai.errors import ClientError
+from google.genai.errors import ClientError, ServerError
 
 from ritam.cost.types import TokenUsage
 from ritam.llm.errors import (
@@ -17,7 +17,7 @@ from ritam.llm.types import LlmClient, Response
 logger = logging.getLogger(__name__)
 
 
-def _map_gemini_error(err: ClientError) -> LlmError:
+def _map_gemini_error(err: ClientError | ServerError) -> LlmError:
     """Map Google Gemini ClientError to custom LlmError."""
     error_code = int(err.code)
     if error_code == 400:
@@ -60,7 +60,7 @@ class GeminiClient(LlmClient):
                 contents=text,
                 config=types.EmbedContentConfig(task_type="SEMANTIC_SIMILARITY"),
             )
-        except ClientError as err:
+        except (ClientError, ServerError) as err:
             raise _map_gemini_error(err) from err
         if not embedding.embeddings:
             raise LlmError("Received empty embedding from Gemini")
@@ -78,7 +78,7 @@ class GeminiClient(LlmClient):
                 contents=prompt,
             )
             response_text = response.text
-        except ClientError as err:
+        except (ClientError, ServerError) as err:
             raise _map_gemini_error(err) from err
         if response_text is None:
             raise LlmError("Received empty response from Gemini")
