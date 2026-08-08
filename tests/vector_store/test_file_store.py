@@ -10,11 +10,13 @@ from ritam.vector_store.file.file_store import (
 from ritam.vector_store.types import IndexedChunk
 
 
-def _make_chunk(chunk_id: int, embedding: list[float]) -> IndexedChunk:
+def _make_chunk(
+    chunk_id: int, embedding: list[float], doc_path: str = "docs/test.md"
+) -> IndexedChunk:
     return IndexedChunk(
         text=f"chunk text {chunk_id}",
-        doc_path="docs/test.md",
-        source=f"docs/test.md#chunk-{chunk_id}",
+        doc_path=doc_path,
+        source=f"{doc_path}#chunk-{chunk_id}",
         chunk_id=chunk_id,
         embedding=embedding,
     )
@@ -22,14 +24,19 @@ def _make_chunk(chunk_id: int, embedding: list[float]) -> IndexedChunk:
 
 class TestFileStoreClientStore:
     def test_store_creates_manifest_with_correct_metadata(self, tmp_path: Path) -> None:
-        chunks = [_make_chunk(i, [1.0, 0.0]) for i in range(3)]
+        # Three chunks spread over two documents, so total_docs and total_chunks
+        # can't be satisfied by the same number.
+        chunks = [
+            _make_chunk(0, [1.0, 0.0], doc_path="docs/a.md"),
+            _make_chunk(1, [1.0, 0.0], doc_path="docs/a.md"),
+            _make_chunk(0, [1.0, 0.0], doc_path="docs/b.md"),
+        ]
         client = FileStoreClient(dest_dir=tmp_path)
 
         client.store(
             chunks,
             dataset="my_ds",
             embedding_model="gemini-embedding-001",
-            docs_count=2,
         )
 
         manifest_path = tmp_path / "my_ds" / "manifest.json"
@@ -51,7 +58,6 @@ class TestFileStoreClientStore:
             chunks,
             dataset="my_ds",
             embedding_model="gemini-embedding-001",
-            docs_count=1,
         )
 
         index_files = list((tmp_path / "my_ds" / "indexes").glob("*.json"))
@@ -68,14 +74,12 @@ class TestFileStoreClientStore:
             [_make_chunk(0, [1.0, 0.0])],
             dataset="my_ds",
             embedding_model="gemini-embedding-001",
-            docs_count=1,
         )
 
         client.store(
             [_make_chunk(0, [1.0, 0.0]), _make_chunk(1, [0.0, 1.0])],
             dataset="my_ds",
             embedding_model="gemini-embedding-001",
-            docs_count=2,
         )
 
         manifest = json.loads((tmp_path / "my_ds" / "manifest.json").read_text())
@@ -95,14 +99,16 @@ class TestFileStoreClientQuery:
             chunks,
             dataset="my_ds",
             embedding_model="gemini-embedding-001",
-            docs_count=1,
         )
 
         results = client.query(
             dataset="my_ds",
             embedding_model="gemini-embedding-001",
+            query="find the chunk",
             query_embedding=[1.0, 0.0],
             limit=2,
+            top_k=2,
+            reranking_threshold=-1_000.0,
         )
 
         assert len(results) == 2
@@ -116,14 +122,16 @@ class TestFileStoreClientQuery:
             chunks,
             dataset="my_ds",
             embedding_model="gemini-embedding-001",
-            docs_count=1,
         )
 
         results = client.query(
             dataset="my_ds",
             embedding_model="gemini-embedding-001",
+            query="find the chunk",
             query_embedding=[1.0, 0.0],
             limit=2,
+            top_k=2,
+            reranking_threshold=-1_000.0,
         )
 
         assert len(results) == 2
@@ -134,8 +142,11 @@ class TestFileStoreClientQuery:
             client.query(
                 dataset="nonexistent",
                 embedding_model="gemini-embedding-001",
+                query="find the chunk",
                 query_embedding=[1.0, 0.0],
                 limit=3,
+                top_k=3,
+                reranking_threshold=-1_000.0,
             )
 
     def test_query_raises_when_manifest_malformed(self, tmp_path: Path) -> None:
@@ -148,6 +159,9 @@ class TestFileStoreClientQuery:
             client.query(
                 dataset="my_ds",
                 embedding_model="gemini-embedding-001",
+                query="find the chunk",
                 query_embedding=[1.0, 0.0],
                 limit=3,
+                top_k=3,
+                reranking_threshold=-1_000.0,
             )

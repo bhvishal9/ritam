@@ -61,9 +61,13 @@ class Settings(BaseSettings):
         description="Qdrant API key",
         default=None,
     )
-    similarity_threshold: float = Field(
-        default=0.75,
-        description="Similarity threshold.",
+    reranking_threshold: float = Field(
+        default=-0.5,
+        description="Re-ranking threshold.",
+    )
+    reranking_model: str = Field(
+        default="jinaai/jina-reranker-v1-turbo-en",
+        description="Re-ranking model name.",
     )
 
     @model_validator(mode="after")

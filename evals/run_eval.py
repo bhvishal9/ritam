@@ -319,7 +319,7 @@ def run_eval(
     rag_service = RagService(
         llm_client,
         Retriever(
-            llm_client, create_vector_store_client(), settings.similarity_threshold
+            llm_client, create_vector_store_client(), settings.reranking_threshold
         ),
     )
     eval_output_config = []

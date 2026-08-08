@@ -1,4 +1,5 @@
-from typing import Protocol
+from collections.abc import Iterable
+from typing import Any, Protocol
 
 from pydantic import BaseModel, Field
 
@@ -12,7 +13,13 @@ class Chunk(BaseModel):
 
 class IndexedChunk(Chunk):
     source: str = Field(description="The source of the chunk (e.g., 'document').")
-    embedding: list[float] = Field(description="The embedding vector of the chunk.")
+    embedding: list[float] | None = Field(
+        default=None,
+        description=(
+            "The embedding vector of the chunk. Populated at index time; left "
+            "unset on query results, which do not fetch vectors back."
+        ),
+    )
     chunk_id: int = Field(
         description="A unique identifier for the chunk within its index."
     )
@@ -23,6 +30,18 @@ class ScoredChunk(BaseModel):
     indexed_chunk: IndexedChunk = Field()
 
 
+class TextReranker(Protocol):
+    """Scores each document against the query. Higher means more relevant.
+
+    Structural, so the store depends on the capability rather than on a
+    particular reranker library, and tests can substitute a deterministic stub.
+    """
+
+    def rerank(
+        self, query: str, documents: list[str], **kwargs: Any
+    ) -> Iterable[float]: ...
+
+
 class VectorStoreClient(Protocol):
     """Protocol describing the interface for Vector Store clients."""
 
@@ -31,7 +50,6 @@ class VectorStoreClient(Protocol):
         indexed_chunks: list[IndexedChunk],
         dataset: str,
         embedding_model: str,
-        docs_count: int,
     ) -> None:
         """Store the indexed chunks into a vector store."""
         ...
@@ -40,8 +58,11 @@ class VectorStoreClient(Protocol):
         self,
         dataset: str,
         embedding_model: str,
+        query: str,
         query_embedding: list[float],
         limit: int,
+        top_k: int,
+        reranking_threshold: float,
     ) -> list[ScoredChunk]:
         """Query the vector store and return a list of the top_k most relevant IndexedChunks."""
         ...

@@ -171,9 +171,7 @@ class IngestionService:
         for doc in ingestion_plan.updated_docs + ingestion_plan.deleted_docs:
             vector_store_client.delete(self.dataset, self.embedding_model, str(doc))
         if len(chunks) > 0:
-            vector_store_client.store(
-                chunks, self.dataset, self.embedding_model, len(chunks)
-            )
+            vector_store_client.store(chunks, self.dataset, self.embedding_model)
         with Session(self.engine) as session:
             for doc in ingestion_plan.new_docs:
                 session.add(ingestion_plan.source_by_path[doc])

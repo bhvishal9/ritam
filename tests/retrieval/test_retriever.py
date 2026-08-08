@@ -39,7 +39,7 @@ class TestRetriever:
         retriever = Retriever(
             fake_llm_client,
             FakeVectorStoreClient(scored_chunks),
-            similarity_threshold=0.75,
+            reranking_threshold=0.75,
         )
         result = retriever.search("test_dataset", "test_model", "query", top_k=2)
 

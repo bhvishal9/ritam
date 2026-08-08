@@ -1,4 +1,7 @@
+from functools import lru_cache
 from urllib.parse import urlparse
+
+from fastembed.rerank.cross_encoder import TextCrossEncoder
 
 from ritam.config.settings import VectorStoreType, get_settings
 from ritam.document_source.local_document_source import LocalDocumentSource
@@ -10,6 +13,7 @@ from ritam.vector_store.qdrant import QdrantStoreClient
 from ritam.vector_store.types import VectorStoreClient
 
 
+@lru_cache
 def create_llm_client() -> LlmClient:
     settings = get_settings()
     return GeminiClient(
@@ -19,6 +23,7 @@ def create_llm_client() -> LlmClient:
     )
 
 
+@lru_cache
 def create_vector_store_client() -> VectorStoreClient:
     settings = get_settings()
     if settings.vector_store == VectorStoreType.FILE:
@@ -26,10 +31,15 @@ def create_vector_store_client() -> VectorStoreClient:
     elif settings.vector_store == VectorStoreType.QDRANT:
         if settings.qdrant_client_url is None:
             raise ValueError("QDRANT_URL is required for the Qdrant vector store")
-        return QdrantStoreClient(settings.qdrant_client_url, settings.qdrant_api_key)
+        return QdrantStoreClient(
+            settings.qdrant_client_url,
+            settings.qdrant_api_key,
+            TextCrossEncoder(model_name=settings.reranking_model),
+        )
     raise NotImplementedError(f"Unsupported vector store type: {settings.vector_store}")
 
 
+@lru_cache
 def create_document_source_client() -> DocumentSource:
     settings = get_settings()
     source_uri = settings.source_uri

@@ -67,15 +67,22 @@ class FakeVectorStoreClient(VectorStoreClient):
         indexed_chunks: list[IndexedChunk],
         dataset: str,
         embedding_model: str,
-        docs_count: int,
     ) -> None:
-        pass
+        return None
 
     def query(
         self,
         dataset: str,
         embedding_model: str,
+        query: str,
         query_embedding: list[float],
         limit: int,
+        top_k: int,
+        reranking_threshold: float,
     ) -> list[ScoredChunk]:
-        return self._scored_chunks
+        """Mirrors the real stores: filter by threshold, then truncate to top_k."""
+        selected = [sc for sc in self._scored_chunks if sc.score >= reranking_threshold]
+        return selected[:top_k]
+
+    def delete(self, dataset: str, embedding_model: str, doc_path: str) -> None:
+        return None

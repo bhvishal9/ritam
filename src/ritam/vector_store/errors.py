@@ -15,3 +15,13 @@ class VectorStorePayloadError(VectorStoreError):
 
     This indicates corrupt or incomplete index state — a server-side fault.
     """
+
+
+class IndexSchemaMismatchError(VectorStoreError):
+    """Raised when an existing collection does not match the expected schema.
+
+    Creating a collection is idempotent, which silently becomes a no-op when the
+    desired schema has changed since the collection was built. Writing the new
+    shape into the old collection would fail later with an opaque error, so
+    detect the mismatch up front and tell the operator what to do.
+    """

@@ -8,7 +8,7 @@ class TestRagService:
         self, no_call_llm_client: NoCallLlmClient
     ) -> None:
         retriever = Retriever(
-            no_call_llm_client, FakeVectorStoreClient(), similarity_threshold=0.7
+            no_call_llm_client, FakeVectorStoreClient(), reranking_threshold=0.7
         )
         rag_service = RagService(no_call_llm_client, retriever)
 

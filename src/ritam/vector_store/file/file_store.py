@@ -7,6 +7,7 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from ritam.config.paths import DEFAULT_DESTINATION_DIR
+from ritam.vector_store.errors import VectorStorePayloadError
 from ritam.vector_store.file.types import IndexFile, ManifestFile, ManifestIndexFile
 from ritam.vector_store.types import IndexedChunk, ScoredChunk, VectorStoreClient
 
@@ -95,7 +96,6 @@ class FileStoreClient(VectorStoreClient):
         indexed_chunks: list[IndexedChunk],
         dataset: str,
         embedding_model: str,
-        docs_count: int,
     ) -> None:
         """Store the indexed chunks into a file based indexed chunk store."""
         manifest_file = self.dest_dir / dataset / "manifest.json"
@@ -126,7 +126,9 @@ class FileStoreClient(VectorStoreClient):
             dataset=dataset,
             embedding_model=embedding_model,
             created_at=timestamp,
-            total_docs=docs_count,
+            # Derived from the chunks themselves — the caller used to pass a
+            # count, but it passed the chunk count, so total_docs was wrong.
+            total_docs=len({chunk.doc_path for chunk in indexed_chunks}),
             total_chunks=len(indexed_chunks),
             index_files=manifest_index_files,
         )
@@ -136,8 +138,11 @@ class FileStoreClient(VectorStoreClient):
         self,
         dataset: str,
         embedding_model: str,
+        query: str,
         query_embedding: list[float],
         limit: int,
+        top_k: int,
+        reranking_threshold: float,
     ) -> list[ScoredChunk]:
         """Query the vector store and return a list of the top_k most relevant chunks."""
         manifest_file = self.dest_dir / dataset / "manifest.json"
@@ -145,6 +150,10 @@ class FileStoreClient(VectorStoreClient):
         scored_chunks = []
         indexed_chunks = _load_indexed_chunks(index_creation_dir, manifest_file)
         for chunk in indexed_chunks:
+            if chunk.embedding is None:
+                raise VectorStorePayloadError(
+                    f"Indexed chunk '{chunk.source}' has no embedding; re-index the dataset."
+                )
             score = _cosine_similarity(query_embedding, chunk.embedding)
             scored_chunks.append(
                 ScoredChunk(

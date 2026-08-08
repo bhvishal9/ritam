@@ -1,10 +1,12 @@
 import uuid
+from collections.abc import Iterable
+from typing import Any
 from unittest.mock import patch
 
 import pytest
-from qdrant_client import QdrantClient
+from qdrant_client import QdrantClient, models
 
-from ritam.vector_store.errors import IndexNotFoundError
+from ritam.vector_store.errors import IndexNotFoundError, IndexSchemaMismatchError
 from ritam.vector_store.qdrant import (
     QdrantStoreClient,
     _build_collection_name,
@@ -12,8 +14,25 @@ from ritam.vector_store.qdrant import (
 )
 from ritam.vector_store.types import IndexedChunk
 
+# A threshold low enough that the fake reranker never filters anything out, so
+# tests that are about retrieval aren't accidentally testing the threshold.
+KEEP_ALL = -1_000.0
+
 # Helpers
 # ---------------------------------------------------------------------------
+
+
+class FakeCrossEncoder:
+    """Deterministic reranker: 'chunk text N' scores -N, so lower N ranks higher.
+
+    Keeps the tests free of a real model download and makes the expected
+    ordering explicit rather than dependent on a neural network.
+    """
+
+    def rerank(
+        self, query: str, documents: list[str], **kwargs: Any
+    ) -> Iterable[float]:
+        return [-float(document.rsplit(" ", 1)[-1]) for document in documents]
 
 
 def _make_chunk(
@@ -45,7 +64,11 @@ def in_memory_qdrant() -> QdrantClient:
 def store_client(in_memory_qdrant: QdrantClient) -> QdrantStoreClient:
     """QdrantStoreClient wired to the in-memory QdrantClient."""
     with patch("ritam.vector_store.qdrant.QdrantClient", return_value=in_memory_qdrant):
-        client = QdrantStoreClient(client_url="http://unused", api_key="api_key")
+        client = QdrantStoreClient(
+            client_url="http://unused",
+            api_key="api_key",
+            text_encoder=FakeCrossEncoder(),
+        )
     return client
 
 
@@ -74,13 +97,16 @@ class TestBuildCollectionName:
 
 
 class TestCreateCollection:
-    def test_creates_collection_with_correct_vector_size(
+    def test_creates_named_dense_and_sparse_vectors(
         self, in_memory_qdrant: QdrantClient
     ) -> None:
         _create_collection(in_memory_qdrant, "test-collection", embedding_size=4)
 
-        info = in_memory_qdrant.get_collection("test-collection")
-        assert info.config.params.vectors.size == 4
+        params = in_memory_qdrant.get_collection("test-collection").config.params
+        assert isinstance(params.vectors, dict)
+        assert params.vectors["dense"].size == 4
+        assert params.sparse_vectors is not None
+        assert "sparse" in params.sparse_vectors
 
     def test_is_idempotent(self, in_memory_qdrant: QdrantClient) -> None:
         _create_collection(in_memory_qdrant, "test-collection", embedding_size=4)
@@ -88,6 +114,18 @@ class TestCreateCollection:
         _create_collection(in_memory_qdrant, "test-collection", embedding_size=4)
 
         assert in_memory_qdrant.collection_exists("test-collection")
+
+    def test_rejects_pre_hybrid_collection(
+        self, in_memory_qdrant: QdrantClient
+    ) -> None:
+        # A collection built the old way: one unnamed vector, no sparse config.
+        in_memory_qdrant.create_collection(
+            "legacy-collection",
+            vectors_config=models.VectorParams(size=4, distance=models.Distance.COSINE),
+        )
+
+        with pytest.raises(IndexSchemaMismatchError, match="predates hybrid search"):
+            _create_collection(in_memory_qdrant, "legacy-collection", embedding_size=4)
 
 
 # ---------------------------------------------------------------------------
@@ -100,9 +138,7 @@ class TestQdrantStoreClientStore:
         self, store_client: QdrantStoreClient
     ) -> None:
         chunks = [_make_chunk(0, [1.0, 0.0])]
-        store_client.store(
-            chunks, dataset="ds", embedding_model="test-model", docs_count=1
-        )
+        store_client.store(chunks, dataset="ds", embedding_model="test-model")
 
         assert store_client.client.collection_exists("test-model")
 
@@ -114,7 +150,6 @@ class TestQdrantStoreClientStore:
             chunks,
             dataset="ds",
             embedding_model="gemini-embedding/001",
-            docs_count=1,
         )
 
         assert store_client.client.collection_exists("gemini-embedding-001")
@@ -126,9 +161,7 @@ class TestQdrantStoreClientStore:
         chunk = _make_chunk(
             0, [1.0, 0.0], source="docs/a.md#chunk-0", doc_path="docs/a.md"
         )
-        store_client.store(
-            [chunk], dataset="my_ds", embedding_model="test-model", docs_count=1
-        )
+        store_client.store([chunk], dataset="my_ds", embedding_model="test-model")
 
         results = store_client.client.scroll(
             "test-model", with_payload=True, with_vectors=True
@@ -136,6 +169,7 @@ class TestQdrantStoreClientStore:
         points = results[0]
         assert len(points) == 1
         payload = points[0].payload
+        assert payload is not None
         assert payload["dataset"] == "my_ds"
         assert payload["text"] == "chunk text 0"
         assert payload["source"] == "docs/a.md#chunk-0"
@@ -146,9 +180,7 @@ class TestQdrantStoreClientStore:
         self, store_client: QdrantStoreClient
     ) -> None:
         chunk = _make_chunk(0, [1.0, 0.0], source="docs/a.md#chunk-0")
-        store_client.store(
-            [chunk], dataset="ds", embedding_model="test-model", docs_count=1
-        )
+        store_client.store([chunk], dataset="ds", embedding_model="test-model")
 
         expected_id = uuid.uuid5(
             namespace=uuid.NAMESPACE_DNS, name="ds-test-model-docs/a.md#chunk-0"
@@ -161,12 +193,8 @@ class TestQdrantStoreClientStore:
         self, store_client: QdrantStoreClient
     ) -> None:
         chunk = _make_chunk(0, [1.0, 0.0])
-        store_client.store(
-            [chunk], dataset="ds", embedding_model="test-model", docs_count=1
-        )
-        store_client.store(
-            [chunk], dataset="ds", embedding_model="test-model", docs_count=1
-        )
+        store_client.store([chunk], dataset="ds", embedding_model="test-model")
+        store_client.store([chunk], dataset="ds", embedding_model="test-model")
 
         count = store_client.client.count("test-model").count
         assert count == 1
@@ -185,8 +213,11 @@ class TestQdrantStoreClientQuery:
             store_client.query(
                 dataset="ds",
                 embedding_model="nonexistent-model",
+                query="find the chunk",
                 query_embedding=[1.0, 0.0],
                 limit=5,
+                top_k=5,
+                reranking_threshold=KEEP_ALL,
             )
 
     def test_query_raises_when_dataset_not_indexed(
@@ -198,15 +229,17 @@ class TestQdrantStoreClientQuery:
             [_make_chunk(0, [1.0, 0.0])],
             dataset="dataset_a",
             embedding_model="test-model",
-            docs_count=1,
         )
 
         with pytest.raises(IndexNotFoundError, match="has not been indexed"):
             store_client.query(
                 dataset="dataset_b",
                 embedding_model="test-model",
+                query="find the chunk",
                 query_embedding=[1.0, 0.0],
                 limit=5,
+                top_k=5,
+                reranking_threshold=KEEP_ALL,
             )
 
     def test_query_returns_results_sorted_by_score(
@@ -218,15 +251,16 @@ class TestQdrantStoreClientQuery:
             _make_chunk(0, [1.0, 0.0]),
             _make_chunk(1, [0.0, 1.0]),
         ]
-        store_client.store(
-            chunks, dataset="ds", embedding_model="test-model", docs_count=1
-        )
+        store_client.store(chunks, dataset="ds", embedding_model="test-model")
 
         results = store_client.query(
             dataset="ds",
             embedding_model="test-model",
+            query="find the chunk",
             query_embedding=[1.0, 0.0],
             limit=2,
+            top_k=2,
+            reranking_threshold=KEEP_ALL,
         )
 
         assert len(results) == 2
@@ -235,15 +269,16 @@ class TestQdrantStoreClientQuery:
 
     def test_query_respects_limit(self, store_client: QdrantStoreClient) -> None:
         chunks = [_make_chunk(i, [1.0, 0.0]) for i in range(5)]
-        store_client.store(
-            chunks, dataset="ds", embedding_model="test-model", docs_count=1
-        )
+        store_client.store(chunks, dataset="ds", embedding_model="test-model")
 
         results = store_client.query(
             dataset="ds",
             embedding_model="test-model",
+            query="find the chunk",
             query_embedding=[1.0, 0.0],
             limit=2,
+            top_k=2,
+            reranking_threshold=KEEP_ALL,
         )
 
         assert len(results) == 2
@@ -251,18 +286,17 @@ class TestQdrantStoreClientQuery:
     def test_query_filters_by_dataset(self, store_client: QdrantStoreClient) -> None:
         chunk_a = _make_chunk(0, [1.0, 0.0], source="a.md#0")
         chunk_b = _make_chunk(1, [1.0, 0.0], source="b.md#0")
-        store_client.store(
-            [chunk_a], dataset="dataset_a", embedding_model="test-model", docs_count=1
-        )
-        store_client.store(
-            [chunk_b], dataset="dataset_b", embedding_model="test-model", docs_count=1
-        )
+        store_client.store([chunk_a], dataset="dataset_a", embedding_model="test-model")
+        store_client.store([chunk_b], dataset="dataset_b", embedding_model="test-model")
 
         results = store_client.query(
             dataset="dataset_a",
             embedding_model="test-model",
+            query="find the chunk",
             query_embedding=[1.0, 0.0],
             limit=10,
+            top_k=10,
+            reranking_threshold=KEEP_ALL,
         )
 
         assert len(results) == 1
@@ -274,15 +308,16 @@ class TestQdrantStoreClientQuery:
         chunk = _make_chunk(
             7, [1.0, 0.0], source="docs/k8s.md#chunk-7", doc_path="docs/k8s.md"
         )
-        store_client.store(
-            [chunk], dataset="ds", embedding_model="test-model", docs_count=1
-        )
+        store_client.store([chunk], dataset="ds", embedding_model="test-model")
 
         results = store_client.query(
             dataset="ds",
             embedding_model="test-model",
+            query="find the chunk",
             query_embedding=[1.0, 0.0],
             limit=1,
+            top_k=1,
+            reranking_threshold=KEEP_ALL,
         )
 
         assert len(results) == 1

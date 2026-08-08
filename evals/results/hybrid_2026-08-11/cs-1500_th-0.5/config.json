@@ -1,0 +1,61 @@
+{
+  "embedding_model": "gemini-embedding-001",
+  "chunk_size": 1500,
+  "reranking_threshold": -0.5,
+  "reranking_model": "jinaai/jina-reranker-v1-turbo-en",
+  "retrieval": "hybrid (dense + BM25 sparse, RRF fusion) + cross-encoder rerank",
+  "top_k_default": 3,
+  "candidate_k": 9,
+  "dataset": "ducks",
+  "llm_model": "gemini-3.1-flash-lite",
+  "git_sha": "5557303",
+  "git_dirty": true,
+  "timestamp_utc": "2026-08-11T01:33:51.314844+00:00",
+  "eval_exit_code": 0,
+  "metrics": {
+    "buckets": {
+      "f_easy": {
+        "matched": 20,
+        "total": 20,
+        "errored": 0,
+        "recall": 1.0
+      },
+      "f_med": {
+        "matched": 13,
+        "total": 15,
+        "errored": 0,
+        "recall": 0.8667
+      },
+      "f_hard": {
+        "matched": 10,
+        "total": 10,
+        "errored": 0,
+        "recall": 1.0
+      },
+      "multi_hop": {
+        "matched": 3,
+        "total": 18,
+        "errored": 0,
+        "recall": 0.1667
+      },
+      "out_of_scope": {
+        "matched": 6,
+        "total": 15,
+        "errored": 0,
+        "recall": 0.4
+      }
+    },
+    "observed_recall": 0.7302,
+    "retrieval_recall": 0.7302,
+    "coverage": 0.9683,
+    "abstention_rate": 0.4,
+    "errored": 0,
+    "total": 78,
+    "cost": {
+      "total_usd": 0.015874,
+      "input_usd": 0.010391,
+      "output_usd": 0.005484,
+      "per_query_usd": 0.000204
+    }
+  }
+}

@@ -25,17 +25,16 @@ class Retriever:
         self,
         llm_client: LlmClient,
         vector_store_client: VectorStoreClient,
-        similarity_threshold: float,
+        reranking_threshold: float,
     ) -> None:
         self.llm_client = llm_client
         self.vector_store_client = vector_store_client
-        self.similarity_threshold = similarity_threshold
+        self.reranking_threshold = reranking_threshold
 
     def search(
         self, dataset: str, embedding_model: str, query: str, top_k: int
     ) -> list[ScoredChunk]:
         candidate_k = min(top_k * CANDIDATE_MULTIPLIER, MAX_CANDIDATES)
-        similarity_score = self.similarity_threshold
         candidate_k_context_var.set(candidate_k)
         with stage("embed"):
             embedding_start_time = time.perf_counter()
@@ -47,23 +46,28 @@ class Retriever:
         with stage("retrieve"):
             retrieve_start_time = time.perf_counter()
             scored_chunks = self.vector_store_client.query(
-                dataset, embedding_model, query_embedding, candidate_k
+                dataset,
+                embedding_model,
+                query,
+                query_embedding,
+                candidate_k,
+                top_k,
+                self.reranking_threshold,
             )
             retrieve_time = round((time.perf_counter() - retrieve_start_time) * 1000, 3)
             retrieve_ms_context_var.set(retrieve_time)
-        selected_chunks = [sc for sc in scored_chunks if sc.score >= similarity_score][
-            :top_k
-        ]
-        chunks_return_context_var.set(len(selected_chunks))
-        if scored_chunks and not selected_chunks:
+        chunks_return_context_var.set(len(scored_chunks))
+        if len(scored_chunks) == 0:
             logger.info(
                 "all_candidates_below_threshold",
                 extra={
                     "fields": {
                         "candidates": len(scored_chunks),
-                        "threshold": similarity_score,
-                        "top_score": max(sc.score for sc in scored_chunks),
+                        "threshold": self.reranking_threshold,
+                        "top_score": max(sc.score for sc in scored_chunks)
+                        if scored_chunks
+                        else 0,
                     }
                 },
             )
-        return selected_chunks
+        return scored_chunks
