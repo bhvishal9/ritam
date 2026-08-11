@@ -1,5 +1,19 @@
 # Hybrid search + reranking — first eval runs, 2026-08-11
 
+> **SUPERSEDED IN PART — read `../ablation_dense_cs1500_2026-08-11/` first.**
+>
+> These runs compared hybrid + reranking against a baseline that used a *different
+> chunk size*, so pipeline effects and chunk-size effects were confounded. The
+> controlled ablation (dense-only at the same chunk size 1500) shows that hybrid
+> retrieval and reranking contributed **nothing** — identical recall, factual and
+> multi-hop scores at the unfiltered ceiling, and slightly worse across the
+> abstention frontier. Every gain and every regression recorded below is a
+> chunk-size effect.
+>
+> Findings 2, 3 and 4 below are **wrong as written** and are annotated inline.
+> Finding 1 stands. The raw data and per-run metrics are all valid; only the
+> attribution was wrong.
+
 First evals of the hybrid-retrieval milestone: dense + BM25 sparse vectors fused
 with Reciprocal Rank Fusion, followed by a cross-encoder rerank. The global cosine
 `similarity_threshold` is replaced by a `reranking_threshold` applied to
@@ -70,6 +84,15 @@ on the threshold.
 
 ### 2. Multi-hop is broken by ranking, not by filtering
 
+> **Correction.** The conclusion that multi-hop is a *ranking* problem is right;
+> the implication that the reranker caused it is wrong. Dense-only at cs-1500
+> scores multi-hop 0.444 — identical to hybrid. The regression from the cs-2500
+> baseline's 0.611 is entirely a chunk-size effect: smaller chunks mean more
+> chunks per document, so an undiversified `top_k=3` fills more often from a
+> single document. The diagnosis below is sound; the culprit is not. In
+> particular, the claim that reranking "removes" a diversity accident of dense
+> retrieval is false — dense-only has the identical problem at this chunk size.
+
 Multi-hop recall is bad at every setting tried: 0.111–0.444 against a baseline of
 0.611. Two independent pieces of evidence show the threshold is not the cause.
 
@@ -103,6 +126,13 @@ and reranking removes that accident. The lever is diversity-aware selection
 
 ### 3. The threshold traces a frontier that crosses the baseline curve
 
+> **Correction.** The claim that reranking "opened" the abstention > 0.3 region is
+> **false**. Dense-only at cs-1500 reaches abstention 0.200 at recall 0.825 and
+> abstention 0.600 at recall 0.698 — it opens that region on its own, and sits
+> slightly *above* the hybrid curve at every abstention level. The dominance
+> analysis below is correct as arithmetic but compares against the wrong
+> baseline: it uses the cs-2500 curve, so it measures chunk size, not pipeline.
+
 At cs-1500, lowering the threshold trades abstention for recall monotonically.
 Compared against the baseline curve:
 
@@ -122,6 +152,12 @@ cosine threshold reached recall > 0.8 with abstention > 0.3; factual recall of
 is what reranking was added to buy.
 
 ### 4. Cost per query is down across the whole frontier
+
+> **Correction.** The cost reduction is real but is **entirely a chunk-size
+> effect** — the caveat below guessed this and the ablation confirmed it.
+> Dense-only at cs-1500 costs $0.000312/query at recall 0.841, indistinguishable
+> from hybrid's $0.000304 at the same recall. Halving the chunk size buys the 26%
+> saving; the pipeline buys none of it.
 
 Generation cost scales with how much chunk text reaches the prompt, so halving
 chunk size cuts input tokens even when the same number of chunks is returned:
@@ -152,9 +188,22 @@ the abstention gain.
 The outstanding ablation is **dense-only at cs-1500**, which isolates the reranker.
 No claim of the form "hybrid search improved X" is defensible until it has run.
 
+**It has now run** — see `../ablation_dense_cs1500_2026-08-11/`. Hybrid retrieval
+and reranking contributed nothing: identical recall, factual and multi-hop at the
+unfiltered ceiling, and marginally worse across the abstention frontier. Every
+effect recorded above belongs to chunk size.
+
 ## Next
 
 1. Record pre-threshold candidate scores in the eval output, so a threshold sweep
    becomes an offline recompute over one run rather than N full runs.
-2. Run the dense-only cs-1500 ablation.
-3. Fix multi-hop with diversity-aware selection; re-sweep the threshold after.
+2. ~~Run the dense-only cs-1500 ablation.~~ Done —
+   `../ablation_dense_cs1500_2026-08-11/`.
+3. Fix multi-hop with diversity-aware selection (per-document cap, MMR, or Qdrant
+   `query_points_groups`); re-sweep the threshold after. This is now the live
+   problem — chunk size trades factual against multi-hop, and diversity is what
+   breaks that trade-off rather than sliding along it.
+4. Decide the fate of the hybrid pipeline: it does not pay for itself on a
+   7-document corpus where `candidate_k=9` is ~17% of the index. Either retire
+   it, keep it behind a flag as a documented experiment, or test it on a corpus
+   large enough to exhibit the failure mode it is designed to fix.

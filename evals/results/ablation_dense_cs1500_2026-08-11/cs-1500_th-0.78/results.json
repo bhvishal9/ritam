@@ -1,0 +1,1988 @@
+[
+  {
+    "id": "f_easy_bubble_shield",
+    "dataset": "ducks",
+    "query": "What is the Bubble Shield and how does it dissipate enemy fire?",
+    "expected_docs": [
+      "duck_technology.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "duck_technology.md"
+    ],
+    "returned_scores": [
+      0.793
+    ],
+    "error": null,
+    "input_cost_usd": 7.7e-05,
+    "output_cost_usd": 0.000117,
+    "total_cost_usd": 0.000194,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_hydro_thrusters",
+    "dataset": "ducks",
+    "query": "How do Duck starships generate thrust and what is the visible signature of their drives?",
+    "expected_docs": [
+      "duck_technology.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_technology.md",
+      "duck_technology.md",
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.8441,
+      0.8039,
+      0.7894
+    ],
+    "error": null,
+    "input_cost_usd": 0.000176,
+    "output_cost_usd": 6.9e-05,
+    "total_cost_usd": 0.000245,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_squeak_drive",
+    "dataset": "ducks",
+    "query": "What is the Squeak Drive and how does it give Duck ships their maneuverability?",
+    "expected_docs": [
+      "duck_technology.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_technology.md",
+      "duck_technology.md",
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.8479,
+      0.8001,
+      0.799
+    ],
+    "error": null,
+    "input_cost_usd": 0.00017625,
+    "output_cost_usd": 9.749999999999998e-05,
+    "total_cost_usd": 0.00027375,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_wave_generator",
+    "dataset": "ducks",
+    "query": "What is the Wave Generator and what does it do?",
+    "expected_docs": [
+      "duck_technology.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "duck_technology.md"
+    ],
+    "returned_scores": [
+      0.8192
+    ],
+    "error": null,
+    "input_cost_usd": 2.875e-05,
+    "output_cost_usd": 3.45e-05,
+    "total_cost_usd": 6.324999999999999e-05,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_drainer_weapon",
+    "dataset": "ducks",
+    "query": "What was the Spong Drainer weapon and what threat did it pose to Duck hulls?",
+    "expected_docs": [
+      "the_duck_wars.md",
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_technology.md",
+      "the_duck_wars.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8094,
+      0.8084,
+      0.7959
+    ],
+    "error": null,
+    "input_cost_usd": 0.000201,
+    "output_cost_usd": 0.00010499999999999999,
+    "total_cost_usd": 0.000306,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_loofah_outcome",
+    "dataset": "ducks",
+    "query": "What happened to the Spong fleet at the Battle of the Loofah Line?",
+    "expected_docs": [
+      "the_duck_wars.md",
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md",
+      "the_duck_wars.md"
+    ],
+    "returned_scores": [
+      0.8435,
+      0.8114,
+      0.8108
+    ],
+    "error": null,
+    "input_cost_usd": 0.00026925,
+    "output_cost_usd": 0.0001665,
+    "total_cost_usd": 0.00043575000000000005,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_admiral_suds",
+    "dataset": "ducks",
+    "query": "Who was Admiral Suds and what was his role in the war?",
+    "expected_docs": [
+      "the_duck_wars.md",
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "the_duck_wars.md",
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.804,
+      0.7937,
+      0.7871
+    ],
+    "error": null,
+    "input_cost_usd": 0.000263,
+    "output_cost_usd": 0.00030000000000000003,
+    "total_cost_usd": 0.000563,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_soapstone",
+    "dataset": "ducks",
+    "query": "What is the planet Soapstone and what is its atmosphere like?",
+    "expected_docs": [
+      "galactic_gazetteer.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "galactic_gazetteer.md",
+      "galactic_gazetteer.md",
+      "galactic_gazetteer.md"
+    ],
+    "returned_scores": [
+      0.8377,
+      0.8375,
+      0.8372
+    ],
+    "error": null,
+    "input_cost_usd": 0.00019075,
+    "output_cost_usd": 4.6500000000000005e-05,
+    "total_cost_usd": 0.00023725,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_whirlpoolia",
+    "dataset": "ducks",
+    "query": "What is unusual about the planet Whirlpoolia and where is the Federation outpost there?",
+    "expected_docs": [
+      "galactic_gazetteer.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "galactic_gazetteer.md",
+      "galactic_gazetteer.md",
+      "galactic_gazetteer.md"
+    ],
+    "returned_scores": [
+      0.8617,
+      0.8284,
+      0.8271
+    ],
+    "error": null,
+    "input_cost_usd": 0.00026125,
+    "output_cost_usd": 7.8e-05,
+    "total_cost_usd": 0.00033925,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_bristle",
+    "dataset": "ducks",
+    "query": "What is unusual about the flora on the planet Bristle?",
+    "expected_docs": [
+      "galactic_gazetteer.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "species_compendium.md",
+      "galactic_gazetteer.md",
+      "galactic_gazetteer.md"
+    ],
+    "returned_scores": [
+      0.8547,
+      0.8394,
+      0.8289
+    ],
+    "error": null,
+    "input_cost_usd": 0.000218,
+    "output_cost_usd": 0.00010499999999999999,
+    "total_cost_usd": 0.000323,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_latheria",
+    "dataset": "ducks",
+    "query": "What kind of world is Latheria and why is it important to the Quack-Federa-tion?",
+    "expected_docs": [
+      "galactic_gazetteer.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "galactic_gazetteer.md",
+      "galactic_gazetteer.md",
+      "galactic_gazetteer.md"
+    ],
+    "returned_scores": [
+      0.8508,
+      0.8093,
+      0.8061
+    ],
+    "error": null,
+    "input_cost_usd": 0.00022175,
+    "output_cost_usd": 9.15e-05,
+    "total_cost_usd": 0.00031325,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_currency",
+    "dataset": "ducks",
+    "query": "What is the basic currency of the Quack-Federa-tion and how is it subdivided?",
+    "expected_docs": [
+      "quack_federation_governance.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "species_compendium.md",
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.816,
+      0.8085,
+      0.8034
+    ],
+    "error": null,
+    "input_cost_usd": 0.00022325,
+    "output_cost_usd": 4.0499999999999995e-05,
+    "total_cost_usd": 0.00026375,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_council_size",
+    "dataset": "ducks",
+    "query": "How many seats does the Tide Council have in total?",
+    "expected_docs": [
+      "quack_federation_governance.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8055
+    ],
+    "error": null,
+    "input_cost_usd": 9.55e-05,
+    "output_cost_usd": 1.95e-05,
+    "total_cost_usd": 0.000115,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_five_departments",
+    "dataset": "ducks",
+    "query": "What are the five Departments that the Hydromarch presides over?",
+    "expected_docs": [
+      "quack_federation_governance.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "quack_federation_governance.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8287,
+      0.8085,
+      0.792
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002055,
+    "output_cost_usd": 9.15e-05,
+    "total_cost_usd": 0.000297,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_duck_lifespan",
+    "dataset": "ducks",
+    "query": "What is the average lifespan of a Duck in standard cycles?",
+    "expected_docs": [
+      "species_compendium.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.808
+    ],
+    "error": null,
+    "input_cost_usd": 8.8e-05,
+    "output_cost_usd": 2.1e-05,
+    "total_cost_usd": 0.00010899999999999999,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_echo_folk_comms",
+    "dataset": "ducks",
+    "query": "How do the Echo-Folk communicate and where do they live?",
+    "expected_docs": [
+      "species_compendium.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.8063
+    ],
+    "error": null,
+    "input_cost_usd": 8.875e-05,
+    "output_cost_usd": 4.2e-05,
+    "total_cost_usd": 0.00013075,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_splashport_pop",
+    "dataset": "ducks",
+    "query": "What is the population of Splashport and where is the city located?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8385,
+      0.782,
+      0.7803
+    ],
+    "error": null,
+    "input_cost_usd": 0.00026075,
+    "output_cost_usd": 4.9500000000000004e-05,
+    "total_cost_usd": 0.00031025000000000003,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_polymer_share",
+    "dataset": "ducks",
+    "query": "What share of Isoprene's economy is accounted for by polymer extraction and processing?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8186,
+      0.8121,
+      0.8086
+    ],
+    "error": null,
+    "input_cost_usd": 0.00024475,
+    "output_cost_usd": 3.45e-05,
+    "total_cost_usd": 0.00027925,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_buoyant_capacity",
+    "dataset": "ducks",
+    "query": "What is the sustained capital-vessel construction capacity of the Buoyant Yards per cycle?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md",
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8199,
+      0.7844,
+      0.7814
+    ],
+    "error": null,
+    "input_cost_usd": 0.00021525,
+    "output_cost_usd": 3.0000000000000004e-05,
+    "total_cost_usd": 0.00024525,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_easy_way_of_tides_pct",
+    "dataset": "ducks",
+    "query": "What percentage of Isoprene's population practices the Way of the Tides?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8656,
+      0.8055,
+      0.7865
+    ],
+    "error": null,
+    "input_cost_usd": 0.00023025,
+    "output_cost_usd": 3.45e-05,
+    "total_cost_usd": 0.00026475,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_battlebill",
+    "dataset": "ducks",
+    "query": "What was the Mark-VII Battlebill and what wartime problem did it solve?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.7837
+    ],
+    "error": null,
+    "input_cost_usd": 7.25e-05,
+    "output_cost_usd": 4.2e-05,
+    "total_cost_usd": 0.00011449999999999999,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_loofah_accord_year",
+    "dataset": "ducks",
+    "query": "In what standard cycle was the Loofah Accord signed?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8183,
+      0.8073,
+      0.7953
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002175,
+    "output_cost_usd": 2.7e-05,
+    "total_cost_usd": 0.0002445,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_long_withdrawal",
+    "dataset": "ducks",
+    "query": "What was the Long Withdrawal and which worlds anchored the resulting defensive arc?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md",
+      "galactic_gazetteer.md"
+    ],
+    "returned_scores": [
+      0.8168,
+      0.7957,
+      0.785
+    ],
+    "error": null,
+    "input_cost_usd": 0.00024075,
+    "output_cost_usd": 0.00015900000000000002,
+    "total_cost_usd": 0.00039975000000000004,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_reedwater_act",
+    "dataset": "ducks",
+    "query": "What does the Reedwater Conservation Act protect, and roughly how many harvesting licenses are issued per cycle?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8432,
+      0.7971,
+      0.7838
+    ],
+    "error": null,
+    "input_cost_usd": 0.00023075,
+    "output_cost_usd": 7.950000000000001e-05,
+    "total_cost_usd": 0.00031025,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_stillwater_protocol",
+    "dataset": "ducks",
+    "query": "What is the Stillwater Protocol and what is the designated primary continuity-of-government site?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.808
+    ],
+    "error": null,
+    "input_cost_usd": 8.85e-05,
+    "output_cost_usd": 5.2499999999999995e-05,
+    "total_cost_usd": 0.00014099999999999998,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_trans_continental_canal",
+    "dataset": "ducks",
+    "query": "How long is the Trans-Continental Canal and what does it connect?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.7807
+    ],
+    "error": null,
+    "input_cost_usd": 9.525e-05,
+    "output_cost_usd": 4.2e-05,
+    "total_cost_usd": 0.00013725,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_first_paddler",
+    "dataset": "ducks",
+    "query": "Who currently holds the office of First Paddler and which Paddle is she from?",
+    "expected_docs": [
+      "quack_federation_governance.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "quack_federation_governance.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8096,
+      0.7942,
+      0.7933
+    ],
+    "error": null,
+    "input_cost_usd": 0.00023875,
+    "output_cost_usd": 3.6e-05,
+    "total_cost_usd": 0.00027475,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_hydromarch_term",
+    "dataset": "ducks",
+    "query": "How long is the Hydromarch's term of office, and may they be reappointed?",
+    "expected_docs": [
+      "quack_federation_governance.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 2,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8112,
+      0.7838
+    ],
+    "error": null,
+    "input_cost_usd": 0.0001585,
+    "output_cost_usd": 2.7e-05,
+    "total_cost_usd": 0.0001855,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_ripple_protocol",
+    "dataset": "ducks",
+    "query": "What is the Ripple Protocol and how many readings does a Council proposal require?",
+    "expected_docs": [
+      "quack_federation_governance.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8434
+    ],
+    "error": null,
+    "input_cost_usd": 7.525e-05,
+    "output_cost_usd": 6.3e-05,
+    "total_cost_usd": 0.00013825,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_reedwater_league",
+    "dataset": "ducks",
+    "query": "What was the Reedwater League and which modern Federation institution traces direct descent from its Council of Reedmasters?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.869,
+      0.8071,
+      0.8055
+    ],
+    "error": null,
+    "input_cost_usd": 0.00026675,
+    "output_cost_usd": 8.099999999999999e-05,
+    "total_cost_usd": 0.00034774999999999997,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_mistral_wisps",
+    "dataset": "ducks",
+    "query": "What are Mistral Wisps and how does their emergent cognition arise and persist?",
+    "expected_docs": [
+      "species_compendium.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 2,
+    "returned_docs": [
+      "species_compendium.md",
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.827,
+      0.7806
+    ],
+    "error": null,
+    "input_cost_usd": 0.00017025,
+    "output_cost_usd": 0.0001395,
+    "total_cost_usd": 0.00030975,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_precursor_tier",
+    "dataset": "ducks",
+    "query": "How does the Office of Xenology classify Precursor artifacts and what must be done when one is recovered?",
+    "expected_docs": [
+      "species_compendium.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 2,
+    "returned_docs": [
+      "species_compendium.md",
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.8234,
+      0.7841
+    ],
+    "error": null,
+    "input_cost_usd": 0.0001715,
+    "output_cost_usd": 5.1e-05,
+    "total_cost_usd": 0.0002225,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_pondreader_framework",
+    "dataset": "ducks",
+    "query": "What did Doctora-Hen Pondreader argue was the true nature of Spong chemical signaling?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "species_compendium.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8503,
+      0.8166,
+      0.7934
+    ],
+    "error": null,
+    "input_cost_usd": 0.000221,
+    "output_cost_usd": 0.00010650000000000001,
+    "total_cost_usd": 0.0003275,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_first_splish_splash",
+    "dataset": "ducks",
+    "query": "When did open war begin between the Federation and the Spong, and what was lost in the initial engagement?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8449,
+      0.8244,
+      0.8236
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002585,
+    "output_cost_usd": 9.6e-05,
+    "total_cost_usd": 0.0003545,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_med_glassine_uni_year",
+    "dataset": "ducks",
+    "query": "In what cycle was the University of Glassine founded?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "f_hard_squeak_minor_vs_others",
+    "dataset": "ducks",
+    "query": "Why does any movement on the surface of Squeak Minor generate high-pitched squeaking sounds?",
+    "expected_docs": [
+      "galactic_gazetteer.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "duck_technology.md",
+      "galactic_gazetteer.md"
+    ],
+    "returned_scores": [
+      0.7933,
+      0.7819,
+      0.7807
+    ],
+    "error": null,
+    "input_cost_usd": 0.00024,
+    "output_cost_usd": 0.000144,
+    "total_cost_usd": 0.000384,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_hard_bubble_disambiguation",
+    "dataset": "ducks",
+    "query": "Which Federation defensive technology works by absorbing energy in a layered field that 'pops' on impact?",
+    "expected_docs": [
+      "duck_technology.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_technology.md",
+      "isoprene_planetary_survey.md",
+      "duck_technology.md"
+    ],
+    "returned_scores": [
+      0.8292,
+      0.8108,
+      0.7915
+    ],
+    "error": null,
+    "input_cost_usd": 0.00017525,
+    "output_cost_usd": 6e-06,
+    "total_cost_usd": 0.00018125000000000001,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_hard_hardshell_squeakish",
+    "dataset": "ducks",
+    "query": "Which Paddle dialect is so divergent that some linguists classify it as a separate language?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.7827
+    ],
+    "error": null,
+    "input_cost_usd": 8.775e-05,
+    "output_cost_usd": 2.85e-05,
+    "total_cost_usd": 0.00011625,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_hard_bristlers_reclassified",
+    "dataset": "ducks",
+    "query": "In what cycle were the Bristlers of Bristle reclassified as potentially sapient, and who led the work?",
+    "expected_docs": [
+      "species_compendium.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "species_compendium.md",
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8612,
+      0.8126,
+      0.8121
+    ],
+    "error": null,
+    "input_cost_usd": 0.00023075,
+    "output_cost_usd": 3.9e-05,
+    "total_cost_usd": 0.00026975,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_hard_treaty_long_hum",
+    "dataset": "ducks",
+    "query": "What is the Treaty of the Long Hum and what unique citizenship arrangement did it establish?",
+    "expected_docs": [
+      "quack_federation_governance.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8377
+    ],
+    "error": null,
+    "input_cost_usd": 5.775e-05,
+    "output_cost_usd": 8.25e-05,
+    "total_cost_usd": 0.00014025,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_hard_first_year_losses",
+    "dataset": "ducks",
+    "query": "Approximately how many capital vessels did the Federation lose in the first cycle of the Great Duck Wars?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "the_duck_wars.md",
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8348,
+      0.8239,
+      0.8197
+    ],
+    "error": null,
+    "input_cost_usd": 0.00022925,
+    "output_cost_usd": 2.25e-05,
+    "total_cost_usd": 0.00025174999999999997,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_hard_glossy_feather",
+    "dataset": "ducks",
+    "query": "Which survey vessel produced the first hint that the Sudsy Reaches contained intelligence, and how long did the report sit in the archive?",
+    "expected_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8229,
+      0.8207,
+      0.7896
+    ],
+    "error": null,
+    "input_cost_usd": 0.00023,
+    "output_cost_usd": 4.9500000000000004e-05,
+    "total_cost_usd": 0.0002795,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_hard_council_platform",
+    "dataset": "ducks",
+    "query": "Where does the Tide Council physically convene?",
+    "expected_docs": [
+      "quack_federation_governance.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "quack_federation_governance.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8097,
+      0.7992,
+      0.7886
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002115,
+    "output_cost_usd": 3.0000000000000004e-05,
+    "total_cost_usd": 0.0002415,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_hard_squeak_grass",
+    "dataset": "ducks",
+    "query": "Which species of Isoprene grass produces audible high-frequency tones when disturbed by wind?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8224
+    ],
+    "error": null,
+    "input_cost_usd": 8.45e-05,
+    "output_cost_usd": 3.45e-05,
+    "total_cost_usd": 0.00011899999999999999,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "f_hard_golden_ripple",
+    "dataset": "ducks",
+    "query": "What is the Golden Ripple and what role does it play in Squeakish architecture?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "factual",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 1,
+    "returned_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8372
+    ],
+    "error": null,
+    "input_cost_usd": 7.45e-05,
+    "output_cost_usd": 6.000000000000001e-05,
+    "total_cost_usd": 0.00013450000000000002,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_waddles_birth_and_role",
+    "dataset": "ducks",
+    "query": "Where was Commodore Waddles born, and what was his decisive contribution to the Battle of the Loofah Line?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md",
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "the_duck_wars.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.82,
+      0.8048,
+      0.7974
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002705,
+    "output_cost_usd": 0.00016350000000000002,
+    "total_cost_usd": 0.00043400000000000003,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_pondreader_and_spong_biology",
+    "dataset": "ducks",
+    "query": "How does Spong chemical signaling actually work biologically, and how did Pondreader reinterpret what it meant?",
+    "expected_docs": [
+      "species_compendium.md",
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "species_compendium.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8095,
+      0.806,
+      0.7924
+    ],
+    "error": null,
+    "input_cost_usd": 0.00022125,
+    "output_cost_usd": 0.00015000000000000001,
+    "total_cost_usd": 0.00037125000000000005,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_polymer_industry_and_compact",
+    "dataset": "ducks",
+    "query": "How large is Isoprene's polymer industry as a share of its economy, and what compact regulates harvesting to ensure forest sustainability?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8563,
+      0.8459,
+      0.8144
+    ],
+    "error": null,
+    "input_cost_usd": 0.000247,
+    "output_cost_usd": 8.7e-05,
+    "total_cost_usd": 0.000334,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_wave_rider_post_war",
+    "dataset": "ducks",
+    "query": "What political status do the Wave-Rider city-states hold within the Federation, and what diplomatic role do they play between the Federation and the Spong?",
+    "expected_docs": [
+      "quack_federation_governance.md",
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8095,
+      0.805,
+      0.8048
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002335,
+    "output_cost_usd": 0.000108,
+    "total_cost_usd": 0.0003415,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_battlebill_lineage",
+    "dataset": "ducks",
+    "query": "What wartime need produced the Mark-VII Battlebill, and what heavy capital vessel program is currently being built by its successors at the Buoyant Yards?",
+    "expected_docs": [
+      "duck_wars_extended_history.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "duck_wars_extended_history.md",
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8252,
+      0.7927,
+      0.784
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002535,
+    "output_cost_usd": 0.0001545,
+    "total_cost_usd": 0.00040799999999999994,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_echo_folk_collective_seat",
+    "dataset": "ducks",
+    "query": "How are the Echo-Folk represented in the Tide Council, and what does their collective citizenship arrangement mean biologically?",
+    "expected_docs": [
+      "quack_federation_governance.md",
+      "species_compendium.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "quack_federation_governance.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8425,
+      0.8154,
+      0.8003
+    ],
+    "error": null,
+    "input_cost_usd": 0.00019725,
+    "output_cost_usd": 9e-05,
+    "total_cost_usd": 0.00028725,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_squeak_drive_origin",
+    "dataset": "ducks",
+    "query": "Which moon's natural acoustic phenomenon inspired the Squeak Drive, and what does the Squeak Drive itself do to a starship's water exhaust?",
+    "expected_docs": [
+      "galactic_gazetteer.md",
+      "duck_technology.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_technology.md",
+      "galactic_gazetteer.md",
+      "galactic_gazetteer.md"
+    ],
+    "returned_scores": [
+      0.8114,
+      0.8057,
+      0.7994
+    ],
+    "error": null,
+    "input_cost_usd": 0.00023875,
+    "output_cost_usd": 0.0001095,
+    "total_cost_usd": 0.00034825000000000004,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_loofah_geography_battle",
+    "dataset": "ducks",
+    "query": "What kind of material makes up the Loofah Line, and why was driving the Spong fleet into it militarily decisive?",
+    "expected_docs": [
+      "galactic_gazetteer.md",
+      "duck_wars_extended_history.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "the_duck_wars.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8337,
+      0.8132,
+      0.8093
+    ],
+    "error": null,
+    "input_cost_usd": 0.00027675,
+    "output_cost_usd": 0.0001515,
+    "total_cost_usd": 0.00042825,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_elastos_processing",
+    "dataset": "ducks",
+    "query": "What material does the Federation harvest on Elastos, and where on Isoprene is that material further compounded for industrial use?",
+    "expected_docs": [
+      "galactic_gazetteer.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md",
+      "galactic_gazetteer.md"
+    ],
+    "returned_scores": [
+      0.8454,
+      0.829,
+      0.8131
+    ],
+    "error": null,
+    "input_cost_usd": 0.00025325,
+    "output_cost_usd": 0.000117,
+    "total_cost_usd": 0.00037025000000000003,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_paddles_council_voting",
+    "dataset": "ducks",
+    "query": "How many Paddles exist and how many seats does each hold in the Tide Council?",
+    "expected_docs": [
+      "species_compendium.md",
+      "quack_federation_governance.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "quack_federation_governance.md",
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8209,
+      0.7978,
+      0.7889
+    ],
+    "error": null,
+    "input_cost_usd": 0.00024,
+    "output_cost_usd": 2.55e-05,
+    "total_cost_usd": 0.0002655,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_drainer_against_spong_biology",
+    "dataset": "ducks",
+    "query": "Why was the Drainer weapon initially so effective against Federation ships, given the colonial body structure of the Spong themselves?",
+    "expected_docs": [
+      "duck_wars_extended_history.md",
+      "species_compendium.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "the_duck_wars.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.803,
+      0.793,
+      0.785
+    ],
+    "error": null,
+    "input_cost_usd": 0.000264,
+    "output_cost_usd": 0.0001275,
+    "total_cost_usd": 0.00039150000000000003,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_bar_precursor",
+    "dataset": "ducks",
+    "query": "What is the Bar, and how is it classified under the Office of Xenology's significance tiers?",
+    "expected_docs": [
+      "galactic_gazetteer.md",
+      "species_compendium.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "species_compendium.md",
+      "galactic_gazetteer.md",
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.8004,
+      0.7857,
+      0.7815
+    ],
+    "error": null,
+    "input_cost_usd": 0.00025375,
+    "output_cost_usd": 0.000147,
+    "total_cost_usd": 0.00040075,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_reedwater_league_ancestry",
+    "dataset": "ducks",
+    "query": "Which pre-Federation polity is the institutional ancestor of the Tide Council, and how is the modern Council composed?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md",
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.8406,
+      0.8235,
+      0.8023
+    ],
+    "error": null,
+    "input_cost_usd": 0.00024675,
+    "output_cost_usd": 0.00029549999999999997,
+    "total_cost_usd": 0.00054225,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_bristlers_pendweather",
+    "dataset": "ducks",
+    "query": "What protocol governs Federation contact with Bristle, and what underlying behavior of the Bristlers prompted it?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md",
+      "species_compendium.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "species_compendium.md",
+      "species_compendium.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8509,
+      0.8111,
+      0.8081
+    ],
+    "error": null,
+    "input_cost_usd": 0.00022325,
+    "output_cost_usd": 9e-05,
+    "total_cost_usd": 0.00031325,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_sap_drinker_polymer",
+    "dataset": "ducks",
+    "query": "What is the dominant tree species of the Isoprene polymer forests, and what is its sap used for at a Federation-wide level?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8375,
+      0.8343,
+      0.81
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002175,
+    "output_cost_usd": 0.000117,
+    "total_cost_usd": 0.0003345,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_first_squadron_doctrine",
+    "dataset": "ducks",
+    "query": "Where is the First Squadron based, and what has been the Fleet's standing doctrine since the Battle of the Loofah Line?",
+    "expected_docs": [
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.7973,
+      0.7936,
+      0.7891
+    ],
+    "error": null,
+    "input_cost_usd": 0.00022625,
+    "output_cost_usd": 8.25e-05,
+    "total_cost_usd": 0.00030875,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_waddles_legacy",
+    "dataset": "ducks",
+    "query": "What did Commodore Waddles do after retiring, and what is his canonical written work?",
+    "expected_docs": [
+      "duck_wars_extended_history.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 2,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.821,
+      0.7891
+    ],
+    "error": null,
+    "input_cost_usd": 0.00015975,
+    "output_cost_usd": 6.000000000000001e-05,
+    "total_cost_usd": 0.00021975,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "m_stillwater_lineage",
+    "dataset": "ducks",
+    "query": "Which Hydromarch promoted Waddles to operational command during the war, and which current Hydromarch shares his Paddle name?",
+    "expected_docs": [
+      "duck_wars_extended_history.md",
+      "quack_federation_governance.md"
+    ],
+    "query_type": "multi_hop",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "quack_federation_governance.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.8233,
+      0.7983,
+      0.7981
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002405,
+    "output_cost_usd": 6.9e-05,
+    "total_cost_usd": 0.0003095,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_hydromarch_salary",
+    "dataset": "ducks",
+    "query": "What is the annual salary of the Hydromarch in Drops?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "o_spong_population",
+    "dataset": "ducks",
+    "query": "What is the total population of the Absorbant Empire of Spong?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "o_precursor_morphology",
+    "dataset": "ducks",
+    "query": "What did the Precursors look like physically?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "species_compendium.md",
+      "species_compendium.md",
+      "galactic_gazetteer.md"
+    ],
+    "returned_scores": [
+      0.8058,
+      0.7882,
+      0.787
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002475,
+    "output_cost_usd": 4.6500000000000005e-05,
+    "total_cost_usd": 0.000294,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_wisp_memory_mechanism",
+    "dataset": "ducks",
+    "query": "By what biological mechanism do Mistral Wisps retain memory across dispersal and re-formation?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 1,
+    "returned_docs": [
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.7999
+    ],
+    "error": null,
+    "input_cost_usd": 9.225e-05,
+    "output_cost_usd": 3.0000000000000004e-05,
+    "total_cost_usd": 0.00012225000000000002,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_suds_post_armistice",
+    "dataset": "ducks",
+    "query": "What happened to Admiral Suds after he was returned to Spong custody under the Loofah Accord?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 2,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "the_duck_wars.md"
+    ],
+    "returned_scores": [
+      0.8471,
+      0.7845
+    ],
+    "error": null,
+    "input_cost_usd": 0.00018925,
+    "output_cost_usd": 6.45e-05,
+    "total_cost_usd": 0.00025374999999999996,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_vice_hydromarch",
+    "dataset": "ducks",
+    "query": "Who is the current Vice-Hydromarch of the Quack-Federa-tion?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "quack_federation_governance.md",
+      "quack_federation_governance.md",
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.8148,
+      0.8116,
+      0.8035
+    ],
+    "error": null,
+    "input_cost_usd": 0.000241,
+    "output_cost_usd": 5.5499999999999994e-05,
+    "total_cost_usd": 0.0002965,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_current_spong_leaders",
+    "dataset": "ducks",
+    "query": "Who currently leads the Absorbant Empire of Spong's military forces?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 2,
+    "returned_docs": [
+      "the_duck_wars.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.7824,
+      0.7809
+    ],
+    "error": null,
+    "input_cost_usd": 0.00015425,
+    "output_cost_usd": 6.15e-05,
+    "total_cost_usd": 0.00021575,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_splashport_uni_year",
+    "dataset": "ducks",
+    "query": "In what cycle was the University of Splashport founded?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 1,
+    "returned_docs": [
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.7951
+    ],
+    "error": null,
+    "input_cost_usd": 9.4e-05,
+    "output_cost_usd": 6.000000000000001e-05,
+    "total_cost_usd": 0.000154,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_riverdrake_population",
+    "dataset": "ducks",
+    "query": "How many Riverdrakes are estimated to remain in the wild on Isoprene?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md",
+      "isoprene_planetary_survey.md"
+    ],
+    "returned_scores": [
+      0.8004,
+      0.7867,
+      0.7844
+    ],
+    "error": null,
+    "input_cost_usd": 0.0002375,
+    "output_cost_usd": 3.0000000000000004e-05,
+    "total_cost_usd": 0.0002675,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_paddle_populations",
+    "dataset": "ducks",
+    "query": "What is the population of each of the thirteen Paddles?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md",
+      "species_compendium.md"
+    ],
+    "returned_scores": [
+      0.8622,
+      0.8011,
+      0.795
+    ],
+    "error": null,
+    "input_cost_usd": 0.00025125,
+    "output_cost_usd": 3.0000000000000004e-05,
+    "total_cost_usd": 0.00028125000000000003,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_hydromarch_age",
+    "dataset": "ducks",
+    "query": "How old is the current Hydromarch, Plumage Stillwater?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": true,
+    "num_returned": 0,
+    "returned_docs": [],
+    "returned_scores": [],
+    "error": null,
+    "input_cost_usd": null,
+    "output_cost_usd": null,
+    "total_cost_usd": null,
+    "model": null
+  },
+  {
+    "id": "o_mark_v_failure_rate",
+    "dataset": "ducks",
+    "query": "What is the operational failure rate of the Mark-V Bubble Shield?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 1,
+    "returned_docs": [
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.7894
+    ],
+    "error": null,
+    "input_cost_usd": 7.2e-05,
+    "output_cost_usd": 5.4e-05,
+    "total_cost_usd": 0.000126,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_next_council_election",
+    "dataset": "ducks",
+    "query": "What is the date of the next Tide Council general election?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 1,
+    "returned_docs": [
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.7833
+    ],
+    "error": null,
+    "input_cost_usd": 7.45e-05,
+    "output_cost_usd": 2.7e-05,
+    "total_cost_usd": 0.0001015,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_federation_total_population",
+    "dataset": "ducks",
+    "query": "What is the total population of the Quack-Federa-tion across all worlds?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "species_compendium.md",
+      "isoprene_planetary_survey.md",
+      "quack_federation_governance.md"
+    ],
+    "returned_scores": [
+      0.811,
+      0.8017,
+      0.7964
+    ],
+    "error": null,
+    "input_cost_usd": 0.00025275,
+    "output_cost_usd": 7.950000000000001e-05,
+    "total_cost_usd": 0.00033224999999999997,
+    "model": "gemini-3.1-flash-lite"
+  },
+  {
+    "id": "o_glossy_feather_fate",
+    "dataset": "ducks",
+    "query": "What ultimately became of the survey vessel Glossy Feather after it filed its curiosity report?",
+    "expected_docs": [],
+    "query_type": "out_of_scope",
+    "top_k": 3,
+    "matched": false,
+    "num_returned": 3,
+    "returned_docs": [
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md",
+      "duck_wars_extended_history.md"
+    ],
+    "returned_scores": [
+      0.7941,
+      0.7827,
+      0.7803
+    ],
+    "error": null,
+    "input_cost_usd": 0.00025775,
+    "output_cost_usd": 7.500000000000001e-05,
+    "total_cost_usd": 0.00033275000000000004,
+    "model": "gemini-3.1-flash-lite"
+  }
+]

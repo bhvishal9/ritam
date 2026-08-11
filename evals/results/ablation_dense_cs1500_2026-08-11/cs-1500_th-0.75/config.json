@@ -1,0 +1,60 @@
+{
+  "embedding_model": "gemini-embedding-001",
+  "chunk_size": 1500,
+  "similarity_threshold": 0.75,
+  "retrieval": "dense only (cosine), no sparse, no rerank -- pre-hybrid ablation",
+  "top_k_default": 3,
+  "candidate_k": 9,
+  "dataset": "ducks",
+  "llm_model": "gemini-3.1-flash-lite",
+  "git_sha": "a969592",
+  "git_note": "detached HEAD at pre-hybrid commit; naive_rag.py chunk_size default 1500",
+  "timestamp_utc": "2026-08-11T01:50:37.569298+00:00",
+  "eval_exit_code": 0,
+  "metrics": {
+    "buckets": {
+      "f_easy": {
+        "matched": 20,
+        "total": 20,
+        "errored": 0,
+        "recall": 1.0
+      },
+      "f_med": {
+        "matched": 15,
+        "total": 15,
+        "errored": 0,
+        "recall": 1.0
+      },
+      "f_hard": {
+        "matched": 10,
+        "total": 10,
+        "errored": 0,
+        "recall": 1.0
+      },
+      "multi_hop": {
+        "matched": 8,
+        "total": 18,
+        "errored": 0,
+        "recall": 0.4444
+      },
+      "out_of_scope": {
+        "matched": 0,
+        "total": 15,
+        "errored": 0,
+        "recall": 0.0
+      }
+    },
+    "observed_recall": 0.8413,
+    "retrieval_recall": 0.8413,
+    "coverage": 1.0,
+    "abstention_rate": 0.0,
+    "errored": 0,
+    "total": 78,
+    "cost": {
+      "total_usd": 0.024243,
+      "input_usd": 0.018024,
+      "output_usd": 0.006219,
+      "per_query_usd": 0.000311
+    }
+  }
+}
