@@ -61,7 +61,7 @@ def build_response(
 
 
 @router.post("/query")
-async def query(
+def query(
     body: QueryRequest,
     llm_client: LlmClient = Depends(get_llm_client),
     retriever: Retriever = Depends(get_retriever_client),

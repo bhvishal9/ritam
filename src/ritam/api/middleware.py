@@ -5,7 +5,7 @@ import uuid
 
 from starlette.types import ASGIApp, Message, Receive, Scope, Send
 
-from ritam.observability.context import request_id_context_var
+from ritam.observability.context import bind_request_fields, request_id_context_var
 
 
 class LoggingMiddleware:
@@ -17,6 +17,14 @@ class LoggingMiddleware:
         if scope["type"] != "http":
             await self.app(scope, receive, send)
             return
+        # Bind the field store here, on the event loop, before the handler runs.
+        # A plain `def` endpoint executes on a worker thread with a *copy* of
+        # this context; because the copy points at the same dict, fields written
+        # inside the handler are still visible to the summary log below.
+        with bind_request_fields():
+            await self._handle_http(scope, receive, send)
+
+    async def _handle_http(self, scope: Scope, receive: Receive, send: Send) -> None:
         start_time = time.perf_counter()
         request_token = request_id_context_var.set(str(uuid.uuid4()))
         result: dict[str, object] = {}
