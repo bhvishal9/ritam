@@ -12,7 +12,10 @@ From the repository root:
 uv run python evals/run_eval.py
 ```
 
-Prerequisite: set `LLM_API_KEY` in your environment.
+Prerequisites: the dataset must already be indexed, and the environment must carry
+`LLM_API_KEY`, `VECTOR_STORE`, and `QDRANT_URL` (plus `QDRANT_API_KEY` for a non-loopback URL).
+The runner queries whatever collection `LLM_EMBEDDING_MODEL_NAME` resolves to — run the index
+command with the same embedding model first, or every row errors.
 
 Options:
 
@@ -39,7 +42,10 @@ Required fields:
 - `id` (string) — see ID convention below.
 - `dataset` (string) — currently always `"ducks"`.
 - `query` (string) — the user-facing query.
-- `expected_docs` (list of strings) — zero or more doc paths. Empty for `out_of_scope`.
+- `expected_docs` (list of strings) — zero or more doc paths, **relative to the dataset
+  directory** (`duck_technology.md`, not `assets/ducks/duck_technology.md`). Matching is exact
+  string comparison against what the retriever returns, so a prefixed path silently never
+  matches and looks like a retrieval failure. Empty for `out_of_scope`.
 - `query_type` (string) — one of `factual`, `multi_hop`, `out_of_scope`.
 
 Optional field:
@@ -71,9 +77,9 @@ The `id` is the only place difficulty is encoded. The script does not parse it, 
 Example rows:
 
 ```json
-{"id":"f_easy_bubble_shield","dataset":"ducks","query":"What is the Bubble Shield?","expected_docs":["assets/ducks/duck_technology.md"],"query_type":"factual","top_k":3}
-{"id":"m_waddles_birth_and_role","dataset":"ducks","query":"Where was Commodore Waddles born, and what was his decisive contribution at the Loofah Line?","expected_docs":["assets/ducks/isoprene_planetary_survey.md","assets/ducks/duck_wars_extended_history.md"],"query_type":"multi_hop","top_k":3}
-{"id":"o_hydromarch_salary","dataset":"ducks","query":"What is the annual salary of the Hydromarch?","expected_docs":[],"query_type":"out_of_scope","top_k":3}
+{"id":"f_easy_bubble_shield","dataset":"ducks","query":"What is the Bubble Shield and how does it dissipate enemy fire?","expected_docs":["duck_technology.md"],"query_type":"factual","top_k":3}
+{"id":"m_waddles_birth_and_role","dataset":"ducks","query":"Where was Commodore Waddles born, and what was his decisive contribution to the Battle of the Loofah Line?","expected_docs":["isoprene_planetary_survey.md","duck_wars_extended_history.md"],"query_type":"multi_hop","top_k":3}
+{"id":"o_hydromarch_salary","dataset":"ducks","query":"What is the annual salary of the Hydromarch in Drops?","expected_docs":[],"query_type":"out_of_scope","top_k":3}
 ```
 
 ## Current distribution
@@ -87,7 +93,7 @@ Example rows:
 | `o_*` | 15 |
 | **Total** | **78** |
 
-All seven docs in `assets/docs/` are covered, weighted toward the larger and more cross-referenced docs (`isoprene_planetary_survey.md` and `duck_wars_extended_history.md`).
+All seven docs in `assets/ducks/` are covered, weighted toward the larger and more cross-referenced docs (`isoprene_planetary_survey.md` and `duck_wars_extended_history.md`).
 
 ## Corpus
 
@@ -114,20 +120,31 @@ Per row, output includes:
 
 - `matched` — boolean, per the type-specific match semantics above
 - `returned_docs` — list of returned doc paths
+- `returned_scores` — cross-encoder score per returned chunk, rounded to 4 dp
 - `num_returned` — count of returned docs
 - `error` — `null` on success, or an error label (e.g. `rate_limit`)
+- `input_cost_usd` / `output_cost_usd` / `total_cost_usd` — generation cost for the row, or `null` when the run couldn't be priced
+- `model` — generation model that answered the row
+
+Cost is per-row, so `results.json` supports a cost-per-query figure alongside the quality metrics — that's the point of carrying it here rather than only in the logs. Note it covers generation only; embedding cost is not tracked.
 
 ## Summary metrics
 
-The CLI prints aggregate metrics:
+The CLI prints, in this order:
 
-- `Matched examples` / `Missed examples` / `Errored examples`
-- `Observed recall` = `matched / total`
-- `Retrieval recall` = `matched / non-error`
-- `Coverage` = fraction of non-error rows where `num_returned > 0`
+- `Total examples` and `Errored examples`
+- A retrieval block over **factual + multi_hop rows only**:
+  - `Matched` / `Missed`
+  - `Observed recall` = `matched / retrieval total` — errors count against you
+  - `Retrieval recall` = `matched / non-error retrieval rows`
+  - `Coverage` = fraction of non-error retrieval rows where `num_returned > 0`
+- `Abstention rate` over `out_of_scope` rows = fraction where the system correctly returned nothing
+- A per-`query_type` breakdown (factual / multi_hop / out_of_scope), when more than one type is present
 - `Error breakdown` by error class
 
-Per-bucket metrics (factual easy/med/hard, multi-hop, out-of-scope) are not yet emitted by the script. Until they are, the recommended workflow is to post-process `results.json` by grouping on the `id` prefix. A summary global score that hides bucket-level regressions is the failure mode this dataset is designed to expose; don't rely only on it.
+The two recall figures differ only when rows errored, and the gap between them is the signal: a healthy run has them equal. Observed recall is the honest number to quote, because it refuses to hide rate-limited rows.
+
+What the script still does *not* emit is the difficulty tiers — `f_easy` / `f_med` / `f_hard` are encoded only in the `id`, and the breakdown groups by `query_type`, so all three collapse into one `factual` number. For tier-level reporting, post-process `results.json` by grouping on the `id` prefix. A factual score that holds steady while the hard tier quietly collapses is exactly the failure this dataset is built to expose, and the aggregate will not show it to you.
 
 ## Interpreting changes
 
@@ -136,7 +153,7 @@ A few rules of thumb when comparing a run against a baseline:
 - A drop in `f_easy_*` recall is a real problem — these queries should always succeed.
 - A drop in `f_hard_*` while `f_easy_*` holds usually points at the embedding model, chunking strategy, or top-k.
 - A drop in `m_*` while `f_*` holds usually points at chunk overlap or top-k being too low.
-- A drop in `o_*` (i.e. the retriever started returning docs for unanswerable queries) is a calibration regression — usually a similarity threshold change.
+- A drop in `o_*` (i.e. the retriever started returning docs for unanswerable queries) is a calibration regression — usually a `RERANKING_THRESHOLD` change. That threshold is now an unbounded cross-encoder logit, not the old 0–1 cosine similarity; the two scales are not comparable, so a value carried over from a pre-hybrid config will behave nothing like its old self.
 - An across-the-board drop with high error rate is an infrastructure or rate-limit issue, not a retrieval issue.
 
 ## Output streams and exit codes
@@ -146,4 +163,14 @@ A few rules of thumb when comparing a run against a baseline:
 
 ## Baseline and regression checks
 
-`baseline.json` is the reference run that `check_regression.py` compares new results against. Regenerate the baseline only when the dataset changes (as it has just done) or after a deliberate improvement you want to anchor at.
+`baseline.json` is the reference run that `check_regression.py` compares new results against. Regenerate it only when the dataset changes, or after a deliberate improvement you want to anchor at — a baseline refreshed to make a red gate go green is worse than no gate.
+
+```bash
+uv run python evals/check_regression.py
+```
+
+It gates on three metrics — `retrieval_recall`, `coverage`, `abstention_rate` — and fails on *any* decrease, with no tolerance band. That strictness is intentional at this corpus size: with 78 rows a single flipped query is a real movement, not noise.
+
+The gate runs in CI on every push and PR to `main` (`.github/workflows/regression-gate.yml`) against an ephemeral Qdrant service container, rebuilding the index from the in-repo corpus each run. That's what makes it hermetic — the gate measures the code under test rather than the drifting state of a long-lived cloud collection. Results are uploaded as a build artifact even when the gate fails.
+
+Note that the gate reads `results.json`, so `run_eval.py` must have run first; it compares whatever is on disk and has no way to tell a fresh run from a stale one.
