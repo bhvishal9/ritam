@@ -8,14 +8,12 @@ The RAG part is deliberately unremarkable. The interesting part is the surroundi
 a stratified eval set, a regression gate in CI, per-request cost accounting, and a set of
 write-ups recording what actually moved the numbers (including the changes that didn't).
 
-## Blog post (walkthrough)
+## Write-ups
 
-I wrote up the v1 architecture, trade-offs, and what I learned here:
-
-- https://vbhargava.org/writing/llm-lab-rag-v1/
-
-The repo has moved on since that post — hybrid retrieval, incremental ingestion, and cost
-accounting all landed afterwards.
+- [Building a RAG service end to end](https://vbhargava.org/writing/llm-lab-rag-v1/) — the v1
+  architecture and trade-offs. Incremental ingestion and cost accounting landed after it.
+- [Hybrid search didn't help. It still fixed my retrieval.](https://vbhargava.org/writing/hybrid-search-ablation/)
+  — the ablation that killed three of my four findings, and why the pipeline stayed anyway.
 
 ## How a query flows
 
@@ -27,6 +25,13 @@ query → embed (Gemini) → Qdrant: dense + BM25 sparse, fused with RRF
 `candidate_k` is `top_k × 3`, capped at 10. Anything scoring below `RERANKING_THRESHOLD` is
 dropped, and if nothing survives the service abstains rather than answering from an empty
 context — abstention is a measured metric, not an accident.
+
+The hybrid and reranking stages are a retained bet, not a proven win. A controlled ablation
+found they matched plain dense retrieval on this corpus — same recall, same factual and
+multi-hop scores — while adding latency, memory, and cold-start cost. They stayed because the
+reranker's token window is what forced the chunk-size work that did move the numbers, and because
+the hypothesis is untested at a scale where dense retrieval genuinely misses. The write-up above
+states the test that would settle it.
 
 Indexing is a separate, local path. `IngestionService` fingerprints each document
 (`sha256(chunk_size + separator + content)`), keeps the state in a SQLite ledger keyed on
